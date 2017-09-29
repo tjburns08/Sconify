@@ -1,0 +1,19 @@
+Package: fcsProcess
+Type: Package
+Title: A toolkit for processing and manipulating data contained in fcs files.
+Version: 0.99.1
+Author: Tyler J Burns
+Maintainer: Tyler J Burns <burns.tyler@gmail.com>
+Description: This package reads in fcs files as input. The primary goal is to
+    prepare these files for R-based manipulations, like unsupervised learning. 
+    This includes converting the files into data matricies with markers of
+    interest, transformations, and normalizations. Included are functions to 
+    output these matricies as csv files and fcs files. 
+License: Artistic-2.0
+Encoding: UTF-8
+LazyData: true
+Imports: tidyverse, flowCore
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

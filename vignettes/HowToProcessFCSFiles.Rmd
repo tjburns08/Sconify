@@ -1,0 +1,118 @@
+---
+title: "How to process FCS files for downstream use in R"
+author: "Tyler J Burns"
+date: September 29, 2017
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to process FCS files for downstream use in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Introduction: 
+Fluorescence and mass cytometry data are routinely processed by an increasing array of software platforms. Many of these contain graphical user interfaces, and many of these are R packages. However, no two analyses are the same, and many cases may involve direct processing of files in R. The fcsProcess package provides a suite of functions to make this process simpler and more user-friendly. In essence, these functions convert fcs files into data matrices, process these matrices, and can output said matrices into fcs files readable by additional software. 
+
+Getting the right markers out of your file: 
+Flow and mass cytometry experiments can have their parameters listed in different ways. If processing data directly within R, one needs to have vectors of strings containing these markers exactly as they are written in the fcs file. Thus, I provide a function to get these names in a spreadsheet and organize them accoringly. 
+
+Marker selection is performed using the get.marker.names() function. This function takes in an fcs file of interest and returns a list of markers, which is downloaded to your computer as markers.csv where the markers show up as a single column. If you want to filter out markers that will exist in the data matrix, you can modify the column in a program like excel. If you want to organize the markers into categories, with the primary example being static (eg. surface) and functional (eg. phospho), then you can create two columns with the respective markers of interest and label them "static" and "functional" accordingly. Save the spreadsheet as a csv file, and you're ready to use this downstream in the computational pipelines of interest. 
+
+```
+# Example fcs file
+basal <- system.file('extdata',
+    'Bendall et al Cell Sample C_basal.fcs',
+     package = "fcsProcess")
+
+# Run this, and check your directory for "markers.csv"
+get.marker.names(basal)
+
+```
+
+From fcs file to data matrix:
+Now that the markers have been properly organized, it's time to convert the fcs into a data matrix. In particular, we will be using tibbles whenever possible. The basic function for doing this using this package is fcs.to.tibble(). This function was actually used in the previous section to get the marker names out of the fcs file. In essence, this function takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. 
+
+```{r}
+# FCS file
+library(fcsProcess)
+basal <- system.file('extdata',
+    'Bendall et al Cell Sample C_basal.fcs',
+    package = "fcsProcess")
+
+# No transformation
+basal.raw <- fcs.to.tibble(basal, transform = "none")
+basal.raw
+
+# Asinh transformation with a scale argument of 5
+basal.asinh <- fcs.to.tibble(basal, transform = "asinh")
+basal.asinh
+
+```
+
+There are other instances in data analysis where one will want to 1) subsample the data, and 2) process multiple files at the same time for downstream analysis, and 3) normalize the data in the files to each other. I therefore include a more robust function process.mulitiple.files() which does just this. One can include a vector of one or more files as input. If multiple files are used, the data will be conatenated into a single labeled tibble with an additional column containing "condition" information for each cell (which file it came from). If multiple donors as used, an additional column can be added with this information as well. Per marker, the files can be quantile normalized (across files), or z score transformed. If one only wants a subsample for downstream analysis (given space and time constrains), then random subsampling will occur per file, returning an even number of cells per file in the concatenated tibble.
+
+```{r}
+# The FCS files
+basal <- system.file('extdata',
+    'Bendall et al Cell Sample C_basal.fcs',
+     package = "fcsProcess")
+il7 <- system.file('extdata',
+    'Bendall et al Cell Sample C_IL7.fcs',
+    package = "fcsProcess")
+
+# The markers
+markers <- system.file('extdata',
+    'markers.csv',
+    package = "fcsProcess")
+markers <- read.csv(markers, stringsAsFactors = FALSE)
+surface <- markers$surface
+
+# Combining these. Note that default is sub-sampling to 10,000 cells, not normalizing, and not scaling
+combined <- process.multiple.files(files = c(basal, il7), input = surface)
+combined
+unique(combined$condition)
+
+# We can do this on a single file as well. Notice I allow for scaling and I change the number of cells
+basal.data <- process.multiple.files(files = basal, numcells = 6000, scale = TRUE, input = surface)
+basal.data
+unique(basal.data$condition)
+
+```
+
+For the type of condition versus basal analysis shown above, it may behoove the user to have a control containing two basal files being compared to each other (eg. with phospho-protein shifts across clusters). To this end, I developed a function called splitFile() that takes in a single file as input and splits it into two sub-matricies such that one group of cells can be the "treated" condition. 
+
+```{r}
+# The FCS files
+basal <- system.file('extdata',
+    'Bendall et al Cell Sample C_basal.fcs',
+    package = "fcsProcess")
+markers <- system.file('extdata',
+    'markers.csv',
+    package = "fcsProcess")
+
+# The markers
+markers <- read.csv(markers, stringsAsFactors = FALSE)
+surface <- markers$surface
+
+# The function
+split <- splitFile(file = basal, input.markers = surface)
+split
+unique(split$condition)
+
+```
+
+
+From data matrix to fcs file:
+After processing fcs files with the functions included here, and additional downstream analysis, one may want to convert the data back into fcs files to be read into fcs processing software, such as FlowJo or Cytobank. As such, I include a wrapper for FlowCore functionality, called data.to.fcs, that does just this. I also include the option to "un-transform" the data, if it has been asinh transformed with a co-factor of 5 initially. You specify the name of the output file, and it gets saved to your working directory accordingly.
+
+```
+basal <- system.file('extdata',
+    'Bendall et al Cell Sample C_basal.fcs',
+    package = "fcsProcess")
+basal <- fcs.to.tibble(basal, transform = "asinh")
+data.to.fcs(basal, "basal.output.FCS", untransform = TRUE)
+
+```
+
+Conclusions: 
+The suite of functions I have provided here will allow for more complex fluorescence and mass cytometry analysis. This ranges from modifications of the data prior to reading it into a program like Cytobank, trying novel machine learning algorithms on the raw data, or developing entirely new algoirthms for this type of analysis. Subsequent versions of this package will have added functionality depending on the requests of the users. I hope this package will lower the barriers to entry for raw analysis of the data through R or other programming languages. It's not as hard as it looks. I promise. 
+
