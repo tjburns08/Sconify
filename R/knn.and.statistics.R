@@ -154,8 +154,8 @@ multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
 #' step is important given that there is an increased likelihood that some
 #' statistically significant differences will occur by chance.
 #' @param cells: tibble of change values, p values, and fraction condition 2
-#' @param threshold: a p value below which the change values will be reported
-#' for that cell for that param
+#' @param threshold: a q value below which the change values will be reported
+#' for that cell for that param. If no change is desired, this is set to 1.
 #' @return inputted p values, adjusted and therefore described as "q values"
 q.correction.thresholding <- function(cells, threshold) {
     # Break apart the result
@@ -185,23 +185,6 @@ q.correction.thresholding <- function(cells, threshold) {
     return(result)
 }
 
-# Reports the raw change only if the p value is below a certain number
-# Args:
-#   fc: vector of fold change values
-#   p: vector of p values
-#   threshold: number the p value should be below in order for thresholding to take place
-# Returns:
-#   result: the thresholded raw changes
-apply.threshold <- function(fc, p, threshold) {
-
-    # The loop (old school)
-    result <- c()
-    for(i in 1:length(fc)) {
-        fc <- ifelse(p < threshold, fc, 0)
-        result <- c(result, fc)
-    }
-    return(result)
-}
 
 # Makes list of all cells within knn, for each knn
 # Args:
