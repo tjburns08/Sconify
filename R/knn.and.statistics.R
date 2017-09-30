@@ -92,22 +92,31 @@ run.statistics <- function(basal,
 }
 
 
-# Runs a t test on the medians or means of multiple donors for the same condition
-# Args:
-#   basal: tibble that contains unstim for a knn including donor identity
-#   stim: tibble that contains stim for a knn including donor identity
-#   stim.name: string of the name of the current stim being tested
-#   donors: vector of strings corresponding to the designated names of the donors
-# Returns:
-#   result: a named vector of p values (soon to be q values) from the t test done on each marker
+#' @title Runs a t test on the medians or means of multiple donors for the
+#' same condition
+#'
+#' @description This function is for the instance that multiple donors are
+#' being compared against each other within the k-nearest neighborhood of
+#' interest. The mean value of the markers of interest is calculated across
+#' the donors, such that each data point for the subsequent t-test represents
+#' a marker for a danor.
+#' @param basal: tibble that contains unstim for a knn including donor identity
+#' @param stim: tibble that contains stim for a knn including donor identity
+#' @param stim.name: string of the name of the current stim being tested
+#' @param donors: vector of strings corresponding to the designated names
+#' of the donors
+#' @return result: a named vector of p values (soon to be q values) from the
+#' t test done on each marker
 multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
     # get the means of all the donors
 
     basal.stats <- tibble()
     stim.stats <- tibble()
     for(i in donors) {
-        basal.curr <- basal[basal$donor == i,] %>% .[!(colnames(.) %in% "donor")]
-        stim.curr <- stim[stim$donor == i,] %>% .[!(colnames(.) %in% "donor")]
+        basal.curr <- basal[basal$donor == i,] %>%
+            .[!(colnames(.) %in% "donor")]
+        stim.curr <- stim[stim$donor == i,] %>%
+            .[!(colnames(.) %in% "donor")]
 
         basal.mean <- apply(basal.curr, 2, mean)
         stim.mean <- apply(stim.curr, 2, mean)
@@ -115,11 +124,13 @@ multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
         basal.stats <- rbind(basal.stats, basal.mean)
         stim.stats <- rbind(stim.stats, stim.mean)
     }
-    colnames(basal.stats) <- colnames(basal)[-ncol(basal)] # assumes "donor" always placed at end!
+    # assumes "donor" always placed at end!
+    colnames(basal.stats) <- colnames(basal)[-ncol(basal)]
     colnames(stim.stats) <- colnames(stim)[-ncol(basal)]
 
     # T testing (only if there's no NA in the dataset)
-    if(nrow(na.omit(basal.stats)) == length(donors) & nrow(na.omit(stim.stats)) == length(donors)) {
+    if(nrow(na.omit(basal.stats)) == length(donors) & # Watch the newline here
+       nrow(na.omit(stim.stats)) == length(donors)) {
         result <- sapply(1:ncol(basal.stats), function(i) {
             t.test(basal.stats[[i]], stim.stats[[i]])$p.value
         })
@@ -128,7 +139,10 @@ multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
     }
 
 
-    names(result) <- paste(colnames(basal.stats), stim.name, "replicate.qvalue", sep = ".")
+    names(result) <- paste(colnames(basal.stats),
+                           stim.name,
+                           "replicate.qvalue",
+                           sep = ".")
     return(result)
 }
 
