@@ -2,10 +2,12 @@
 
 export(data.to.fcs)
 export(fcs.to.tibble)
+export(fnn)
 export(get.marker.names)
 export(meaning.of.life)
 export(process.multiple.files)
 export(splitFile)
+import(FNN)
 import(dplyr)
 import(flowCore)
 import(tibble)

@@ -17,3 +17,8 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+Collate: 
+    'k.selection.R'
+    'process.files.R'
+    'knn.and.statistics.R'
+    'post.processing.R'
