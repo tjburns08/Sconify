@@ -1,4 +1,4 @@
-Package: fcsProcess
+Package: Sconify
 Type: Package
 Title: A toolkit for processing and manipulating data contained in fcs files.
 Version: 0.99.1

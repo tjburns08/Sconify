@@ -48,7 +48,7 @@ basal.asinh
 
 ```
 
-There are other instances in data analysis where one will want to 1) subsample the data, and 2) process multiple files at the same time for downstream analysis, and 3) normalize the data in the files to each other. I therefore include a more robust function process.mulitiple.files() which does just this. One can include a vector of one or more files as input. If multiple files are used, the data will be conatenated into a single labeled tibble with an additional column containing "condition" information for each cell (which file it came from). If multiple donors as used, an additional column can be added with this information as well. Per marker, the files can be quantile normalized (across files), or z score transformed. If one only wants a subsample for downstream analysis (given space and time constrains), then random subsampling will occur per file, returning an even number of cells per file in the concatenated tibble.
+There are other instances in data analysis where one will want to 1) subsample the data, and 2) process multiple files at the same time for downstream analysis, and 3) normalize the data in the files to each other. I therefore include a more robust function process.mulitiple.files() which does just this. One can include a vector of one or more markers as input, which is used for quantile normalization and downstream processing. If multiple files are used, the data will be conatenated into a single labeled tibble with an additional column containing "condition" information for each cell (which file it came from). If multiple donors as used, an additional column can be added with this information as well. Per marker, the files can be quantile normalized (across files), or z score transformed. If one only wants a subsample for downstream analysis (given space and time constrains), then random subsampling will occur per file, returning an even number of cells per file in the concatenated tibble.
 
 ```{r}
 # The FCS files
@@ -70,6 +70,10 @@ surface <- markers$surface
 combined <- process.multiple.files(files = c(basal, il7), input = surface)
 combined
 unique(combined$condition)
+
+# Limit your matrix to surface markers, if just using those downstream
+combined.input <- combined[,surface]
+combined.input
 
 # We can do this on a single file as well. Notice I allow for scaling and I change the number of cells
 basal.data <- process.multiple.files(files = basal, numcells = 6000, scale = TRUE, input = surface)
