@@ -17,7 +17,7 @@ NULL
 #' @examples
 #' basal <- system.file('extdata',
 #'     'Bendall et al Cell Sample C_basal.fcs',
-#'      package = "fcsProcess")
+#'      package = "Sconify")
 #' get.marker.names(basal)
 #' @export
 get.marker.names <- function(file) {
@@ -35,7 +35,7 @@ get.marker.names <- function(file) {
 #' @examples
 #' basal <- system.file('extdata',
 #'     'Bendall et al Cell Sample C_basal.fcs',
-#'     package = "fcsProcess")
+#'     package = "Sconify")
 #' fcs.to.tibble(basal, transform = "none")
 #' fcs.to.tibble(basal, transform = "asinh")
 #' @export
@@ -129,13 +129,13 @@ quant.normalize.elements <- function(dat.list) {
 #' @examples
 #' basal <- system.file('extdata',
 #'     'Bendall et al Cell Sample C_basal.fcs',
-#'      package = "fcsProcess")
+#'      package = "Sconify")
 #' il7 <- system.file('extdata',
 #'     'Bendall et al Cell Sample C_IL7.fcs',
-#'     package = "fcsProcess")
+#'     package = "Sconify")
 #' markers <- system.file('extdata',
 #'     'markers.csv',
-#'     package = "fcsProcess")
+#'     package = "Sconify")
 #' markers <- read.csv(markers, stringsAsFactors = FALSE)
 #' surface <- markers$surface
 #' combined <- process.multiple.files(files = c(basal, il7), input = surface)
@@ -235,10 +235,10 @@ process.multiple.files <- function(files,
 #' @examples
 #' basal <- system.file('extdata',
 #'     'Bendall et al Cell Sample C_basal.fcs',
-#'     package = "fcsProcess")
+#'     package = "Sconify")
 #' markers <- system.file('extdata',
 #'     'markers.csv',
-#'     package = "fcsProcess")
+#'     package = "Sconify")
 #' markers <- read.csv(markers, stringsAsFactors = FALSE)
 #' surface <- markers$surface
 #' split <- splitFile(file = basal, input.markers = surface)
@@ -297,7 +297,7 @@ splitFile <- function(file,
 #' @examples
 #' basal <- system.file('extdata',
 #'     'Bendall et al Cell Sample C_basal.fcs',
-#'     package = "fcsProcess")
+#'     package = "Sconify")
 #' basal <- fcs.to.tibble(basal, transform = "asinh")
 #' data.to.fcs(basal, "basal.output.FCS")
 #' @export

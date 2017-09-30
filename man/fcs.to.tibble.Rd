@@ -17,7 +17,7 @@ tibble of info contained within the fcs file
 \examples{
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-    package = "fcsProcess")
+    package = "Sconify")
 fcs.to.tibble(basal, transform = "none")
 fcs.to.tibble(basal, transform = "asinh")
 }

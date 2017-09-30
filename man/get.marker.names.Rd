@@ -25,6 +25,6 @@ and functional markers, produce two columns, naming them respectively.
 \examples{
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-     package = "fcsProcess")
+     package = "Sconify")
 get.marker.names(basal)
 }

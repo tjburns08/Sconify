@@ -32,10 +32,10 @@ and compare the two halves.
 \examples{
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-    package = "fcsProcess")
+    package = "Sconify")
 markers <- system.file('extdata',
     'markers.csv',
-    package = "fcsProcess")
+    package = "Sconify")
 markers <- read.csv(markers, stringsAsFactors = FALSE)
 surface <- markers$surface
 split <- splitFile(file = basal, input.markers = surface)

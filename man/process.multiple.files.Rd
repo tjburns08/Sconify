@@ -31,13 +31,13 @@ Files where you want to name the patients need the following convention:
 \examples{
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-     package = "fcsProcess")
+     package = "Sconify")
 il7 <- system.file('extdata',
     'Bendall et al Cell Sample C_IL7.fcs',
-    package = "fcsProcess")
+    package = "Sconify")
 markers <- system.file('extdata',
     'markers.csv',
-    package = "fcsProcess")
+    package = "Sconify")
 markers <- read.csv(markers, stringsAsFactors = FALSE)
 surface <- markers$surface
 combined <- process.multiple.files(files = c(basal, il7), input = surface)
