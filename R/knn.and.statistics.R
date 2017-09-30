@@ -146,11 +146,17 @@ multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
     return(result)
 }
 
-# Corrects all p values for multiple hypotheses, sets threshold for which change values
-#   should be reported
-# Args:
-#   cells: tibble of change values, p values, and fraction condition 2
-#   threshold: a p value below which the change values will be reported for that cell for that param
+#' @title Corrects all p values for multiple hypotheses, sets threshold for
+#' which change values should be reported
+#'
+#' @description Given the number of comparisons we make across k-nearest
+#' neighborhoods, which is far more than that of disjoint subsetting, this
+#' step is important given that there is an increased likelihood that some
+#' statistically significant differences will occur by chance.
+#' @param cells: tibble of change values, p values, and fraction condition 2
+#' @param threshold: a p value below which the change values will be reported
+#' for that cell for that param
+#' @return inputted p values, adjusted and therefore described as "q values"
 q.correction.thresholding <- function(cells, threshold) {
     # Break apart the result
     fold <- cells[,grep("change$", colnames(cells))]
@@ -160,7 +166,8 @@ q.correction.thresholding <- function(cells, threshold) {
     # rest <- cells[,!(colnames(cells) %in% colnames(qvalues))]
 
     # P value correction
-    qvalues <- apply(qvalues, 2, function(x) p.adjust(x, method = "BH")) %>% as.tibble
+    qvalues <- apply(qvalues, 2, function(x) p.adjust(x, method = "BH")) %>%
+        as.tibble
 
     # Thresholding the raw change
     if(threshold < 1) {
