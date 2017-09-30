@@ -321,6 +321,6 @@ data.to.fcs <- function(dta, outfile, untransform) {
 
 #' @export
 meaning.of.life <- function() {
-    print("Ah. Distracted by existential questions when you really should be processing fcs files with my package. That's ok. Apparently the author is as well. If you're using this package, then you have the gift and desire to understand organismal biology, which will hopefully lead to the end of human suffering down the line. So our purpose must be along those lines. But will we ever live to see the day? I think so. How many years after two millenia will the fruits of our hard labor pay off? I'm guessing 42.")
+    exist
 }
 
