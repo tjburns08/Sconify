@@ -10,8 +10,8 @@ q.correction.thresholding(cells, threshold)
 \arguments{
 \item{cells:}{tibble of change values, p values, and fraction condition 2}
 
-\item{threshold:}{a p value below which the change values will be reported
-for that cell for that param}
+\item{threshold:}{a q value below which the change values will be reported
+for that cell for that param. If no change is desired, this is set to 1.}
 }
 \value{
 inputted p values, adjusted and therefore described as "q values"
