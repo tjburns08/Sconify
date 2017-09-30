@@ -1,15 +1,21 @@
-############################### KNN AND STATISTICS ###############################
+#' @import FNN
+NULL
 
-
-# compute knn using the fnn algorithm
-# Args:
-#   cell.df: the cell data frame used as input
-#   input.markers: markers to be used as input for knn
-#   k: the number of nearest neighbors to identify
-# Returns:
-#   nn: list of 2
-#     nn.index: index of knn (columns) for each cell (rows)
-#     nn.dist: euclidean distance of each k-nearest neighbor
+#' @title Compute knn using the fnn algorithm
+#'
+#' @description This function is a wrapper around FNN package
+#' functionality to speed up the KNN process. It uses KD trees as default,
+#' along with k set to 100. Selection of K will vary based on the dataset.
+#' See k.selection.R.
+#' @param cell.df: the cell data frame used as input
+#' @param input.markers: markers to be used as input for knn
+#' @param k: the number of nearest neighbors to identify
+#' @return nn: list of 2, nn.index: index of knn (columns) for each cell (rows)
+#' nn.dist: euclidean distance of each k-nearest neighbor
+#' @examples
+#' surface <- markers$surface
+#' nn <- fnn(combined, input.markers = surface, k = 100)
+#' @export
 fnn <- function(cell.df, input.markers, k = 100) {
     print("finding k-nearest neighbors")
     input <- cell.df[,input.markers]
@@ -29,7 +35,11 @@ fnn <- function(cell.df, input.markers, k = 100) {
 #   stim.name: a string corresponding to the name of the stim being tested compared to basal
 # Returns:
 #   result: a named vector corresponding to the results of the "fold change" and mann-whitney u test
-run.statistics <- function(basal, stim, fold, stat.test, stim.name) {
+run.statistics <- function(basal,
+                           stim,
+                           fold = "median",
+                           stat.test = "mwu",
+                           stim.name) {
     # Edge case of a knn consisting of only one of the two conditions
     # More common in messier datasets
     if(nrow(basal) == 0 | nrow(stim) == 0) {
