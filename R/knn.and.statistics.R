@@ -186,19 +186,44 @@ q.correction.thresholding <- function(cells, threshold) {
 }
 
 
-# Makes list of all cells within knn, for each knn
-# Args:
-#   nn.matrix: a matrix of cell index by nearest neighbor index, with values being cell index of the nth nearest neighbor
-#   cell.data: tibble of cells by features
-#   scone.markers: vector of all markers to be interrogated via statistical testing
-#   unstim: an object (used so far: string, number) specifying the "basal" condition
-#   threshold: a number indicating the p value the raw change should be thresholded by.
-#   fold: a string that specifies the use of "median" or "mean" when calculating fold change
-#   stat.test: string denoting Mann Whitney U test ("mwu") or T test ("t)
-#   multiple.donor.compare: a boolean that indicates whether t test across multiple donors should be done
-# Returns:
-#   result: tibble of raw changes and p values for each feature of interest, and fraction of cells with condition 2
-scone.values <- function(nn.matrix, cell.data, scone.markers, unstim, threshold = 0.05, fold = "median", stat.test = "mwu", multiple.donor.compare = FALSE) {
+#' @title Master function for per-knn statistics functionality, integrating the
+#' other non-exported functions within this script.
+#'
+#' @description This function is run following the KNN computation
+#' and respective cell grouping. The function also contains a progress bar
+#' that allows one to determine how much time left in this function.
+#' @param nn.matrix a matrix of cell index by nearest neighbor index, with
+#' values being cell index of the nth nearest neighbor
+#' @param cell.data tibble of cells by features
+#' @param scone.markers vector of all markers to be interrogated via
+#' statistical testing
+#' @param unstim an object (used so far: string, number)
+#' specifying the "basal" condition
+#' @param threshold a number indicating the p value the raw change should
+#' be thresholded by.
+#' @param fold a string that specifies the use of "median" or "mean" when
+#' calculating fold change
+#' @param stat.test string denoting Mann Whitney U test ("mwu") or T test ("t)
+#' @param multiple.donor.compare: a boolean that indicates whether t test
+#' across multiple donors should be done
+#' @return result: tibble of raw changes and p values for each feature of
+#' interest, and fraction of cells with condition 2
+#' @examples
+#' surface <- markers$surface
+#' scone <- markers$functional
+#' scone <- scone[scone != ""]
+#' conditions <- unique(combined$condition) # get name of basal
+#' nn <- fnn(combined, input.markers = surface, k = 100)
+#' scone <- scone.values(nn, combined, scone, "basal")
+#' @export
+scone.values <- function(nn.matrix,
+                         cell.data,
+                         scone.markers,
+                         unstim,
+                         threshold = 0.05,
+                         fold = "median",
+                         stat.test = "mwu",
+                         multiple.donor.compare = FALSE) {
 
     print("running per-knn statistics")
 
