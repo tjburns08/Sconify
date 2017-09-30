@@ -25,16 +25,23 @@ fnn <- function(cell.df, input.markers, k = 100) {
 }
 
 
-# Performs a series of statistical tests on the batch of cells of interest
-# Args:
-#   basal: tibble of cells corresponding to the unstimulated condition
-#   stim: a tibble of cells corresponding to the stimulated condition
-#   tests: a vector of strings that the user would like to output (min = statistical test + fold)
-#   fold: a string that specifies the use of "median" or "mean" when calculating fold change
-#   stat.test: a string that specifies Mann-Whitney U test (mwu) or T test (t) for q value calculation
-#   stim.name: a string corresponding to the name of the stim being tested compared to basal
-# Returns:
-#   result: a named vector corresponding to the results of the "fold change" and mann-whitney u test
+#' @title Performs a series of statistical tests on the batch of cells
+#' of interest.
+#'
+#' @description This function performs the statistics across the nearest
+#' neighborhoods, and is one of the main workhorses within the scone.values
+#' function
+#'
+#' @param basal tibble of cells corresponding to the unstimulated condition
+#' @param stim a tibble of cells corresponding to the stimulated condition
+#' @param fold: a string that specifies the use of "median" or "mean" when
+#' calculating fold change
+#' @param stat.test: a string that specifies Mann-Whitney U test (mwu) or T test (t)
+#' for q value calculation
+#' @param stim.name: a string corresponding to the name of the stim being tested
+#' compared to basal
+#' @return result: a named vector corresponding to the results of the
+#' "fold change" and mann-whitney u test
 run.statistics <- function(basal,
                            stim,
                            fold = "median",
@@ -52,7 +59,8 @@ run.statistics <- function(basal,
     } else if (fold == "mean") {
         fold <- apply(stim, 2, mean) - apply(basal, 2, mean)
     } else {
-        stop("please select median or mean to be used as input for raw change calculation")
+        stop("please select median or mean to be used as input for raw
+             change calculation")
     }
 
     # Mann-Whitney U test or T test
