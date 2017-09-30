@@ -1,4 +1,4 @@
-#' @import dplyr tibble flowCore
+#' @import magrittr tibble flowCore
 NULL
 
 #' @title Takes in an example file as input and returns all markers
