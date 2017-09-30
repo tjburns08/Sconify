@@ -10,7 +10,7 @@ vignette: >
 ---
 
 Introduction: 
-Fluorescence and mass cytometry data are routinely processed by an increasing array of software platforms. Many of these contain graphical user interfaces, and many of these are R packages. However, no two analyses are the same, and many cases may involve direct processing of files in R. The fcsProcess package provides a suite of functions to make this process simpler and more user-friendly. In essence, these functions convert fcs files into data matrices, process these matrices, and can output said matrices into fcs files readable by additional software. Although the primary intent of these functions is to pre-process fcs files for use of k-nearest neighbor statistics and visualizations in the remainder of this package, they are intended also to be general use functions. 
+Fluorescence and mass cytometry data are routinely processed by an increasing array of software platforms. Many of these contain graphical user interfaces, and many of these are R packages. However, no two analyses are the same, and many cases may involve direct processing of files in R. The Sconify package provides a suite of functions to make this process simpler and more user-friendly, prior to the knn-centric analysis occurring downstream. In essence, these functions convert fcs files into data matrices, process these matrices, and can output said matrices into fcs files readable by additional software. Although the primary intent of these functions is to pre-process fcs files for use of k-nearest neighbor statistics and visualizations in the remainder of this package, they are intended also to be general use functions. 
 
 Getting the right markers out of your file: 
 Flow and mass cytometry experiments can have their parameters listed in different ways. If processing data directly within R, one needs to have vectors of strings containing these markers exactly as they are written in the fcs file. Thus, I provide a function to get these names in a spreadsheet and organize them accoringly. 
@@ -21,7 +21,7 @@ Marker selection is performed using the get.marker.names() function. This functi
 # Example fcs file
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-     package = "fcsProcess")
+     package = "Sconify")
 
 # Run this, and check your directory for "markers.csv"
 get.marker.names(basal)
@@ -33,10 +33,10 @@ Now that the markers have been properly organized, it's time to convert the fcs 
 
 ```{r}
 # FCS file
-library(fcsProcess)
+library(Sconify)
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-    package = "fcsProcess")
+    package = "Sconify")
 
 # No transformation
 basal.raw <- fcs.to.tibble(basal, transform = "none")
@@ -54,15 +54,15 @@ There are other instances in data analysis where one will want to 1) subsample t
 # The FCS files
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-     package = "fcsProcess")
+     package = "Sconify")
 il7 <- system.file('extdata',
     'Bendall et al Cell Sample C_IL7.fcs',
-    package = "fcsProcess")
+    package = "Sconify")
 
 # The markers
 markers <- system.file('extdata',
     'markers.csv',
-    package = "fcsProcess")
+    package = "Sconify")
 markers <- read.csv(markers, stringsAsFactors = FALSE)
 surface <- markers$surface
 
@@ -88,10 +88,10 @@ For the type of condition versus basal analysis shown above, it may behoove the 
 # The FCS files
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-    package = "fcsProcess")
+    package = "Sconify")
 markers <- system.file('extdata',
     'markers.csv',
-    package = "fcsProcess")
+    package = "Sconify")
 
 # The markers
 markers <- read.csv(markers, stringsAsFactors = FALSE)
@@ -111,12 +111,12 @@ After processing fcs files with the functions included here, and additional down
 ```
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
-    package = "fcsProcess")
+    package = "Sconify")
 basal <- fcs.to.tibble(basal, transform = "asinh")
 data.to.fcs(basal, "basal.output.FCS", untransform = TRUE)
 
 ```
 
 Conclusions: 
-The suite of functions I have provided here will allow for more complex fluorescence and mass cytometry analysis. This ranges from modifications of the data prior to reading it into a program like Cytobank, trying novel machine learning algorithms on the raw data, or developing entirely new algoirthms for this type of analysis. Subsequent versions of this package will have added functionality depending on the requests of the users. I hope this package will lower the barriers to entry for raw analysis of the data through R or other programming languages. It's not as hard as it looks. I promise. 
+The suite of functions I have provided here will allow for more complex fluorescence and mass cytometry analysis, with the particular focus on the downstream analyses in this package. Outside of knn statistics, this ranges from modifications of the data prior to reading it into a program like Cytobank, trying novel machine learning algorithms on the raw data, or developing entirely new algoirthms for this type of analysis. Subsequent versions of this package will have added functionality depending on the requests of the users. I hope these pre-processing functions will lower the barriers to entry for raw analysis of the data through R or other programming languages. It's not as hard as it looks. I promise. 
 
