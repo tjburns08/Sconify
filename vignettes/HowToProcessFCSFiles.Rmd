@@ -63,7 +63,7 @@ il7 <- system.file('extdata',
     'Bendall et al Cell Sample C_IL7.fcs',
     package = "Sconify")
 
-# The markers
+# The markers (after they were modified by hand as instructed above)
 markers <- system.file('extdata',
     'markers.csv',
     package = "Sconify")
