@@ -190,7 +190,7 @@ q.correction.thresholding <- function(cells, threshold) {
 #' other non-exported functions within this script.
 #'
 #' @description This function is run following the KNN computation
-#' and respective cell grouping. The function also contains a progress bar
+#' and respective cell grouping. The function also contains a progress ticker
 #' that allows one to determine how much time left in this function.
 #' @param nn.matrix a matrix of cell index by nearest neighbor index, with
 #' values being cell index of the nth nearest neighbor
