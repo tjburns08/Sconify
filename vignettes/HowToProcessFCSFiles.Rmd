@@ -32,6 +32,10 @@ basal <- system.file('extdata',
 # Run this, and check your directory for "markers.csv"
 get.marker.names(basal)
 
+# Turn this into two columns, one for surface markers, and one for phosphos
+# Label the two columns accoridngly. Save to csv. You'll read this modified
+# file in next.  
+
 ```
 
 From fcs file to data matrix:
