@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
+```
+
 Introduction: 
 Fluorescence and mass cytometry data are routinely processed by an increasing array of software platforms. Many of these contain graphical user interfaces, and many of these are R packages. However, no two analyses are the same, and many cases may involve direct processing of files in R. The Sconify package provides a suite of functions to make this process simpler and more user-friendly, prior to the knn-centric analysis occurring downstream. In essence, these functions convert fcs files into data matrices, process these matrices, and can output said matrices into fcs files readable by additional software. Although the primary intent of these functions is to pre-process fcs files for use of k-nearest neighbor statistics and visualizations in the remainder of this package, they are intended also to be general use functions. 
 
