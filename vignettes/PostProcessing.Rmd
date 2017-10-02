@@ -1,0 +1,35 @@
+---
+title: "Final Post-Processing Steps for Scone"
+author: "Tyler J Burns"
+date: "October 2, 2017"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Final Post-Processing Steps for Scone}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
+```
+
+This vignette covers what takes place following the generation of SCONE output detailed in TheSconeWorkflow.Rmd. The obvious step that needs to take place is the Scone generated columns being merged into the original input data. The user gets the option of log base 10 transforming q values, which is easier to visualize. The user also gets the option to run t-SNE on the data, such that said maps can be colored by SCONE generated values. In this case, t-SNE is run utilizing the Rtsne package, using the same markers that were used as input for the KNN generation. 
+
+```{r}
+library(Sconify)
+library(ggplot2)
+final <- post.processing(scone.output = scone.output,
+                         cell.data = combined,
+                         input = input.markers)
+
+combined # input data
+scone.output # scone-generated data
+final # the data after post-processing
+
+# tSNE map shows highly responsive population of interest
+qplot(final$`bh-SNE1`, final$`bh-SNE2`, color = final$`pSTAT5(Nd150)Di.IL7.change`)
+plot(final$`bh-SNE1`, final$`bh-SNE2`)
+```
+
+For more extensive visualizations, you can output these results as an fcs file using the data.to.fcs wrapper I provided in the pre-processing functions. I would recommend this option, as Cytobank and FlowJo (among other tools) are more accessable than ggplot2 (although it is a great tool if you have learned it).
+
