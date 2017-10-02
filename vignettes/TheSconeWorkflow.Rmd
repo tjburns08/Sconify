@@ -33,7 +33,7 @@ This vignette continues from where HowToProcessFCSFiles.Rmd leaves off. Here, we
 
 
 K-nearest neighbors:
-We read in input.scone.csv. The K-nearest neighbor generation is derived from the Fast Nearest Neighbors (FNN) R package, within our function f.nn(), which takes as input the “input markers” to be used, along with the concatenated data previously generated, and the desired k. We advise the default selection to the total number of cells in the dataset divided by 100, as has been optimized on existing mass cytometry datasets. The output of this function is a matrix of each cell and the identity of its k-nearest neighbors, in terms of its row number in the dataset used here as input. 
+We read in input.scone.csv, which is our file modified (and renamed) from the get.marker.names() function. The K-nearest neighbor generation is derived from the Fast Nearest Neighbors (FNN) R package, within our function f.nn(), which takes as input the “input markers” to be used, along with the concatenated data previously generated, and the desired k. We advise the default selection to the total number of cells in the dataset divided by 100, as has been optimized on existing mass cytometry datasets. The output of this function is a matrix of each cell and the identity of its k-nearest neighbors, in terms of its row number in the dataset used here as input. 
 
 ```
 # Markers from the user-generated excel file
