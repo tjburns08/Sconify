@@ -14,8 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning 
 ```
 
 TL:DR: 
-You will use get.marker.names() to obtain properly named markers as a column in a csv saved to your computer. You will make two columns, one for markers you want as input for knn, and one for markers you want to make
-your scone comparisons on. You will read this back into R to access these markers as vectors of strings. You'll then run process.multiple.files() to get your subsampled, concatenated matrix ready for KNN computation. 
+You will use get.marker.names() to obtain properly named markers as a column in a csv saved to your computer. In this csv, you will make two columns, one for markers you want as input for knn, and one for markers you want to make your scone comparisons on. You will read this back into R to access these markers as vectors of strings. You'll then run process.multiple.files() to get your subsampled, concatenated matrix ready for KNN computation. 
 
 Introduction: 
 Fluorescence and mass cytometry data are routinely processed by an increasing array of software platforms. Many of these contain graphical user interfaces, and many of these are R packages. However, no two analyses are the same, and many cases may involve direct processing of files in R. The Sconify package provides a suite of functions to make this process simpler and more user-friendly, prior to the knn-centric analysis occurring downstream. In essence, these functions convert fcs files into data matrices, process these matrices, and can output said matrices into fcs files readable by additional software. Although the primary intent of these functions is to pre-process fcs files for use of k-nearest neighbor statistics and visualizations in the remainder of this package, they are intended also to be general use functions. 
@@ -44,7 +43,7 @@ get.marker.names(basal)
 
 From fcs file to data matrix (a general function).
 
-Now that the markers have been properly organized, it's time to convert the fcs into a data matrix. In particular, we will be using tibbles whenever possible. The basic function for doing this using this package is fcs.to.tibble(). This function was actually used in the previous section to get the marker names out of the fcs file. In essence, this function takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. 
+I provide here a general function that takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. For SCONE, you'll use process.multiple.files(), which has this function embedded inside it. I provide it as well for any instance where you simply want to read a fcs file into R. 
 
 ```{r}
 
