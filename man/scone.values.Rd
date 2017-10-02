@@ -37,7 +37,7 @@ interest, and fraction of cells with condition 2
 }
 \description{
 This function is run following the KNN computation
-and respective cell grouping. The function also contains a progress bar
+and respective cell grouping. The function also contains a progress ticker
 that allows one to determine how much time left in this function.
 }
 \examples{
