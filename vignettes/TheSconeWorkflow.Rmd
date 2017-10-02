@@ -1,5 +1,5 @@
 ---
-title: "Sconify Quickstart Guide"
+title: "General Scone Analysis"
 author: "Tyler J Burns"
 date: "9/30/2017"
 output: html_document
