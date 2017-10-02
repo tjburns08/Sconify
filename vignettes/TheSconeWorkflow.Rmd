@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
 ```
 
-###################################### ABOUT SCONE ###################################### 
+ABOUT SCONE
 
 Abstract:
 High-dimensional single-cell data is routinely visualized in two dimensions using manifold embedding algorithms such as t-SNE. However, comparison of functional responses across biological conditions typically requires partitioning of cell populations (clustering or gating), which can be a cumbersome and error-prone process. To address that problem, we developed Smooth Comparison of NEighbors (SCONE), an algorithm for direct statistical comparisons in continuously overlapping phenotypic neighborhoods. SCONE output can be displayed as a lower-dimensional embedding (eg. a t-SNE map) or a heatmap describing local changes within immune cell subsets across biological conditions. We show within this vignette the application of SCONE to a B cell precursors dataset from human bone marrow to reveal the coordination between surface marker expression changes and IL-7 responsiveness through pSTAT5 in the B-cell developmental trajectory. Taken together, this approach will allow for visualization and analysis of changes and trends at the single cell level across multiple biological conditions in a wide variety of model systems.
@@ -26,7 +26,7 @@ To perform such comparisons, researchers routinely resort to first partitioning 
 We developed a computational method that allows for direct visualization of biological differences in single-cell datasets, entirely omitting the partitioning step. SCONE, which stands for Smooth Comparison of NEighbors, is an algorithm that makes statistical comparisons in overlapping k-nearest neighborhoods rather than mutually exclusive clusters. The results of statistical comparisons are visualized here using a single t-SNE map or heatmap. Here, each cell represents the information contained within itself and its k-nearest neighborhood (which contains all biological conditions of interest). If one uses markers that do not change across biological conditions for k-nearest neighbor calculations, then the conditions being compared can be assumed to be distributed evenly in the marker space such that each cell and its k-nearest neighbors will contain data points from all biological conditions in question. As such, a comparison between biological conditions is made for that given neighborhood, and the cell of interest is colored based on that comparison. One can perform the same type of analysis one would for general clustering of concatenated flow and mass cytometry data (7-9), but without bias introduced by mutual exclusivity of the clusters. Given the overlap of each adjacent k-nearest neighbor, one can visualize both continuous change, or highlight the boundaries of discrete changes.
 
 
-###################################### THE PROCEDURE ###################################### 
+THE PROCEDURE
 
 File processing: 
 This vignette continues from where HowToProcessFCSFiles.Rmd leaves off. Here, we will be binary data stored within this package, that has alraedy been pre-processed to the necessary requirements for the functionality here. 
