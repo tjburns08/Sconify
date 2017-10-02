@@ -32,38 +32,41 @@ markers <- read.csv("input.scone.csv")
 ```
 ```{r}
 # The above example is stored in the package as "markers," loaded here
-data(markers)
-input <- markers$input %>% .[. != ""]
-scone <- markers$scone %>% .[. != ""]
+library(Sconify)
 
-# Selection of the k
-k <- nrow(com) %/% 100
+# How to convert your excel sheet into vector of static and functional markers
+data(markers)
+
+# addition in the end gets rid of empty strings
+input.markers <- markers$surface %>% .[. != ""] 
+funct.markers <- markers$functional %>% .[. != ""]
+
+# Selection of the k. Default is number of cells / 100. 
+k <- nrow(combined) %/% 100
 
 # The built-in scone functions
-nn <- fnn(cell.df = com, input.markers = input, k = k)
+nn <- fnn(cell.df = combined, input.markers = input.markers, k = k)
 
 # Cell identity is in rows, k-nearest neighbors are columns
 # List of 2 includes the cell identity of each nn, and the euclidean distance between
 #   itself and the cell of interest
 str(nn)
+nn[1:20, 1:10]
 ```
 
 Finding scone values:
-This is the function that iterates through each cell in the original dataset, and makes a series of calculations based on the cells within its k-nearest neighbors. The “scone values” is the comparison between the two or more biological conditions for a protein of interest. For each protein of interest, a t test is conducted to determine if there is a significant difference between the values of each condition compared to a selected “basal” condition. If the FDR-adjusted p value is below a specific threshold indicated as input for the function, then the computation is made. Otherwise, the scone value is set to zero, meaning zero change between biological conditions. Additionally, ratio of the raw number of cells for each condition is computed, and outputted as a percentage. Finally, a k-nearest neighbors density estimation is computed. These values are concatenated as columns on the original matrix from the process.multiple.files() function, and this new matrix is returned. 
+
+This function iterates through each KNN, and performs a series of calculations. The first is fold change values for each maker per KNN, where the user chooses whether this will be based on medians or means. The second is a statistical test, where the user chooses t test or Mann-Whitney U test. I prefer the latter, because it does not assume any properties of the distributions. Of note, the p values are adjusted for false discovery rate, and therefore are called q values in the output of this function. The user also inputs a threshold parameter (default 0.05), where the fold change values will only be shown if the corresponding statistical test returns a q value below said threshold. Finally, the "multiple.donor.compare" option, if set to TRUE will perform a t test based on the mean per-marker values of each donor. This is to allow the user to make comparisons across replicates or multiple donors if that is relevant to the user's biological questions. This function returns a matrix of cells by computed values (change and statistical test results, labeled either marker.change or marker.qvalue). This matrix is intermediate, as it gets concatenated with the original input matrix in the post-processing step (see the relevant vignette). We show the code and the output below. See the post-processing vignette, where we show how this gets combined with the input data, and additional analysis is performed. 
+
 
 ```{r}
-final <- scone.values(cell.df = com,
-                      nn = nn,
-                      input.markers = input,
-                      scone.markers = scone,
-                      basal = "basal",
-                      k = k,
-                      p.threshold = 1)
-
-head(final)
+final <- scone.values(nn.matrix = nn, 
+                      cell.data = combined, 
+                      scone.markers = funct.markers, 
+                      unstim = "basal")
+final
 ```
 
-Additional notes on output:
-For visualization, we advise performing t-SNE on this matrix using the same markers as input as was done for the knn generation. From here, the t-SNE map can be colored by the SCONE values, cell ratios, and density estimation. We have done this effectively by writing the matrix to csv and using the CYT software from Dana Pe’er. We have also done this by writing the data to fcs format and uploading it to Cytobank. Although we have preferred t-SNE as the visual output, we also advise trying force directed layout generation, which has had success in other applications in Nolan Lab CyTOF analysis..
+.
 
 
