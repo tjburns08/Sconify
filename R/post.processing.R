@@ -78,7 +78,16 @@ string.to.numbers <- function(strings) {
 #' @return result: the concatenated original input data with the scone derived
 #' data, with the option of the q values being inverse log10 transformed, and
 #' two additional tSNE columns being added to the data (from the Rtsne package)
-post.processing <- function(scone.output, cell.data, input, tsne = TRUE, log.transform.qvalue = TRUE) {
+#' @examples
+#' final <- post.processing(scone.output = scone.output,
+#'                          cell.data = combined,
+#'                          input = input.markers)
+#' @export
+post.processing <- function(scone.output,
+                            cell.data,
+                            input,
+                            tsne = TRUE,
+                            log.transform.qvalue = TRUE) {
     # Generic pre-processing
     result <- bind_cols(cell.data, scone.output) %>% na.omit()
     result$condition <- string.to.numbers(result$condition)
