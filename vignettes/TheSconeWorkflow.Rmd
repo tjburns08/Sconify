@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
 ```
 
 Abstract:
@@ -33,6 +33,7 @@ markers <- read.csv("input.scone.csv")
 ```{r}
 # The above example is stored in the package as "markers," loaded here
 library(Sconify)
+library(dplyr)
 
 # How to convert your excel sheet into vector of static and functional markers
 data(markers)
