@@ -3,6 +3,10 @@ title: "General Scone Analysis"
 author: "Tyler J Burns"
 date: "9/30/2017"
 output: html_document
+vignette: >
+  %\VignetteIndexEntry{General Scone Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -61,11 +65,11 @@ This function iterates through each KNN, and performs a series of calculations. 
 
 
 ```{r}
-final <- scone.values(nn.matrix = nn, 
+scone.output <- scone.values(nn.matrix = nn, 
                       cell.data = combined, 
                       scone.markers = funct.markers, 
                       unstim = "basal")
-final
+scone.output
 ```
 
 .
