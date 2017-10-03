@@ -129,18 +129,6 @@ unique(split$condition)
 ```
 
 
-From data matrix to fcs file:
-After the full scone pipeline, one may want to convert the data back into fcs files to be read into fcs processing software, such as FlowJo or Cytobank. As such, I include a wrapper for FlowCore functionality, called data.to.fcs, that does just this. I also include the option to "un-transform" the data, if it has been asinh transformed with a co-factor of 5 initially. You specify the name of the output file, and it gets saved to your working directory accordingly.
-
-```
-basal <- system.file('extdata',
-    'Bendall et al Cell Sample C_basal.fcs',
-    package = "Sconify")
-basal <- fcs.to.tibble(basal, transform = "asinh")
-data.to.fcs(basal, "basal.output.FCS", untransform = TRUE)
-
-```
-
 Conclusions: 
 The suite of functions I have provided here will allow for more complex fluorescence and mass cytometry analysis, with the particular focus on the downstream analyses in this package. Outside of knn statistics, this ranges from modifications of the data prior to reading it into a program like Cytobank, trying novel machine learning algorithms on the raw data, or developing entirely new algoirthms for this type of analysis. Subsequent versions of this package will have added functionality depending on the requests of the users. I hope these pre-processing functions will lower the barriers to entry for raw analysis of the data through R or other programming languages. It's not as hard as it looks. I promise. 
 
