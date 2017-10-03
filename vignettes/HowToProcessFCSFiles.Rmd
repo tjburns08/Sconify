@@ -48,9 +48,8 @@ get.marker.names(basal)
 
 ```
 
-From fcs file to data matrix (a general function).
-
-I provide here a general function that takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. For SCONE, you'll use process.multiple.files(), which has this function embedded inside it. I provide it as well for any instance where you simply want to read a fcs file into R. 
+From fcs file to data matrix (a general function):
+Skip to "processing multiple files" section for the function that directly produces the data matrix for SCONE. Here, I provide here a general function that takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. For SCONE, you'll use process.multiple.files(), which has this function embedded inside it. I provide it as well for any instance where you simply want to read a fcs file into R. 
 
 ```{r}
 
@@ -71,7 +70,8 @@ basal.asinh
 
 ```
 
-This is the function that will be used for SCONE. If multiple files are used, the data will be conatenated into a single labeled tibble with an additional column containing "condition" information for each cell (which file it came from). If multiple donors as used, an additional column can be added with this information as well. Per marker, the files can be quantile normalized (across files), or z score transformed. If one only wants a subsample for downstream analysis (given space and time constrains), then random subsampling will occur per file, returning an even number of cells per file in the concatenated tibble.
+Processing multiple files:
+This is the function that will be used as input for the rest of the SCONE pipeline. If multiple files are used, the data will be conatenated into a single labeled tibble with an additional column containing "condition" information for each cell (which file it came from). If multiple donors as used, an additional column can be added with this information as well (see MultipleDonorScone.Rmd). Per marker, the files can be quantile normalized (across files), or z score transformed. The files are downsampled evenly to the number specified by the user. We recommend 20,000. 
 
 ```{r}
 # The FCS files (THEY NEED TO BE IN THE "....._condidtion.fcs" format")
@@ -105,6 +105,7 @@ unique(basal.data$condition)
 
 ```
 
+(Optional) a control condition using a split single file:
 For the type of condition versus basal analysis shown above, it may behoove the user to have a control containing two basal files being compared to each other (eg. with phospho-protein shifts across clusters). To this end, I developed a function called splitFile() that takes in a single file as input and splits it into two sub-matricies such that one group of cells can be the "treated" condition. 
 
 ```{r}
@@ -129,7 +130,7 @@ unique(split$condition)
 
 
 From data matrix to fcs file:
-After processing fcs files with the functions included here, and additional downstream analysis, one may want to convert the data back into fcs files to be read into fcs processing software, such as FlowJo or Cytobank. As such, I include a wrapper for FlowCore functionality, called data.to.fcs, that does just this. I also include the option to "un-transform" the data, if it has been asinh transformed with a co-factor of 5 initially. You specify the name of the output file, and it gets saved to your working directory accordingly.
+After the full scone pipeline, one may want to convert the data back into fcs files to be read into fcs processing software, such as FlowJo or Cytobank. As such, I include a wrapper for FlowCore functionality, called data.to.fcs, that does just this. I also include the option to "un-transform" the data, if it has been asinh transformed with a co-factor of 5 initially. You specify the name of the output file, and it gets saved to your working directory accordingly.
 
 ```
 basal <- system.file('extdata',
