@@ -47,6 +47,22 @@ get.marker.names(basal)
 # file in the process.multiple.files() function.
 
 ```
+The markers.csv file, when opened in excel, looks like this (first 20 rows: 
+
+```{r, out.width = "200px"}
+knitr::include_graphics("original.markers.csv.example.png")
+
+```
+
+You modify it by hand. In the case of this dataset, it looks like this (first 20 rows):
+
+```{r, out.width = "200px"}
+knitr::include_graphics("modified.markers.csv.example.png")
+
+```
+
+
+
 
 From fcs file to data matrix (a general function):
 Skip to "processing multiple files" section for the function that directly produces the data matrix for SCONE. Here, I provide here a general function that takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. For SCONE, you'll use process.multiple.files(), which has this function embedded inside it. I provide it as well for any instance where you simply want to read a fcs file into R. 
