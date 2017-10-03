@@ -26,9 +26,12 @@ We will be using the Wanderlust dataset through this vignette and TheSconeWorkfl
 
 THE PROCEDURE
 
+The name of your file: 
+For general comparisons, your files need to take on the structure "name_condition.fcs." If you are comparing multiple donors, then your files need to take on the structure "name__donorID_condition.fcs."
+
 Getting the right markers out of your file:
-Flow and mass cytometry experiments can have their parameters listed in different ways. If processing data directly within R, one needs to have vectors of strings containing these markers exactly as they are written in the fcs file. Thus, I provide a function to get these names in a spreadsheet and organize them accoringly.
-Marker selection is performed using the get.marker.names() function. This function takes in an fcs file of interest and returns a list of markers, which is downloaded to your computer as markers.csv where the markers show up as a single column. If you want to filter out markers that will exist in the data matrix, you can modify the column in a program like excel. If you want to organize the markers into categories, with the primary example being static (eg. surface) and functional (eg. phospho), then you can create two columns with the respective markers of interest and label them "static" and "functional" accordingly. Save the spreadsheet as a csv file, and you're ready to use this downstream in the computational pipelines of interest. 
+I provide the function get.marker.names() to get the names of your parameters out of your data and modify them accordingly. This saves a list of marker names to a csv, as a single named column. Open this up in excel and delete the parameters you don't want. Then, make two named columns. One contains static markers to be used for KNN (typically surface markers). The second contains the markers to be used in the comparisons. Name these two columns what you like. You'll read in this csv and get these columns out as a vector of strings. 
+
 
 ```
 # Example fcs file
