@@ -1,5 +1,5 @@
 ---
-title: "Final Post-Processing Steps for Scone"
+title: "Step 3: Post-Processing"
 author: "Tyler J Burns"
 date: "October 2, 2017"
 output: rmarkdown::html_vignette

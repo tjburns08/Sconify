@@ -1,5 +1,5 @@
 ---
-title: "How to process FCS files for downstream use in R"
+title: "Step 1: Pre-Processing"
 author: "Tyler J Burns"
 date: September 29, 2017
 output: rmarkdown::html_vignette

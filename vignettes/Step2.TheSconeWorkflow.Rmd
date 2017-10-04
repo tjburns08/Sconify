@@ -1,5 +1,5 @@
 ---
-title: "General Scone Analysis"
+title: "Step 2: The Scone Workflow"
 author: "Tyler J Burns"
 date: "9/30/2017"
 output: html_document
