@@ -24,7 +24,6 @@ set.seed(12043)
 final <- post.processing(scone.output = scone.output,
                          cell.data = combined,
                          input = input.markers)
-
 combined # input data
 scone.output # scone-generated data
 final # the data after post-processing
