@@ -20,6 +20,7 @@ This vignette covers what takes place following the generation of SCONE output d
 ```{r}
 library(Sconify)
 library(ggplot2)
+set.seed(12043)
 final <- post.processing(scone.output = scone.output,
                          cell.data = combined,
                          input = input.markers)
