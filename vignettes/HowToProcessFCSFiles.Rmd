@@ -49,7 +49,7 @@ get.marker.names(basal)
 ```
 The markers.csv file, when opened in excel, looks like this (first 20 rows: 
 
-```{r, out.width = "200px"}
+```{r, out.width = "200px", eval = TRUE}
 knitr::include_graphics("original.markers.csv.example.png")
 
 ```
