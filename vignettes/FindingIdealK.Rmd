@@ -22,6 +22,7 @@ ideal.k <- impute.testing(k.titration = k.titration, cells = il7.data, input.mar
 
 The output looks like this: 
 ```{r}
+library(Sconify)
 ideal.k
 ```
 
