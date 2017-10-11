@@ -1,12 +1,15 @@
-############################### SELECTION OF IDEAL K ###############################
+#' @import FNN
+NULL
 
-# Imputes values for all markers (used as input) for each cell
-# Args:
-#   cells: the input matrix of cells
-#   input.markers: the markers the user wants to impute
-#   nn: the matrix of k-nearest neighbors (derived perhaps NOT from the "input markers" above)
-# Returns:
-#   result: a data frame of imputed cells for the "input markers" of interest
+#' @title Imputes values for all markers (used as input) for each cell
+#'
+#' @description This function takes as input the markers to be imputed from
+#' a pre-existing KNN computation.
+#'
+#' @param cells the input matrix of cells
+#' @param input.markers the markers the user wants to impute
+#' @param nn the matrix of k-nearest neighbors (derived perhaps NOT from the "input markers" above)
+#' @return a data frame of imputed cells for the "input markers" of interest
 impute <- function(cells, input.markers, nn) {
     result <- sapply(1:nrow(cells), function(i) {
         curr.nn <- cells[nn[i,],][,input.markers] %>% apply(., 2, median)
@@ -16,14 +19,20 @@ impute <- function(cells, input.markers, nn) {
     return(result)
 }
 
-# Tests the euclidean distance error for imputation using knn and markers of interest
-# Args:
-#   k.titration: a vector integer values of k to be tested
-#   cells: a matrix of cells by features used as original input
-#   input.markers: markers to be used for the knn calculation
-#   test.markers: the markers to be tested for imputation (either surface or scone)
-# Returns:
-#   final.distances: the median imputation error for each value k tested
+#' @title Impute testing
+#'
+#' @description Tests the euclidean distance error for imputation using knn and markers of interest
+#'
+#' @param k.titration a vector integer values of k to be tested
+#' @param cells a matrix of cells by features used as original input
+#' @param input.markers markers to be used for the knn calculation
+#' @param test.markers the markers to be tested for imputation (either surface or scone)
+#' @return the median imputation error for each value k tested
+#' @examples
+#' k.titration <- c(10, 50, 100, 200, 500, 1000)
+#' ideal.k <- impute.testing(k.titration = k.titration, cells = combined,
+#'                           input.markers = input, test.markers = scone)
+#' @export
 impute.testing <- function(k.titration, cells, input.markers, test.markers) {
     final.distances <- lapply(k.titration, function(k) {
         nn <- fnn(cell.df = cells, input.markers = input.markers, k = k)
