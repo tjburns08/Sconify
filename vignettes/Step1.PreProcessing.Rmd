@@ -33,7 +33,7 @@ For general comparisons, your files need to take on the structure "name_conditio
 I provide the function get.marker.names() to get the names of your parameters out of your data and modify them accordingly. This saves a list of marker names to a csv, as a single named column. Open this up in excel and delete the parameters you don't want. Then, make two named columns. One contains static markers to be used for KNN (typically surface markers). The second contains the markers to be used in the comparisons. Name these two columns what you like. You'll read in this csv and get these columns out as a vector of strings. 
 
 
-```
+```{r, eval = FALSE}
 # Example fcs file
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',

@@ -52,7 +52,7 @@ For more extensive visualizations, you can output these results as an fcs file u
 ### From data matrix to fcs file:
 After the full scone pipeline, one may want to convert the data back into fcs files to be read into fcs processing software, such as FlowJo or Cytobank. As such, I include a wrapper for FlowCore functionality, called data.to.fcs, that does just this. I also include the option to "un-transform" the data, if it has been asinh transformed with a co-factor of 5 initially. This is because Cytobank cannot (yet) effectively display asinh transformed data ranges, and it becomes tedious to switch the scale ranges within Cytobank. With data.to.fcs, you specify the name of the output file, and it gets saved to your working directory accordingly.
 
-```
+```{r, eval = FALSE}
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
     package = "Sconify")
