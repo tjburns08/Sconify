@@ -17,13 +17,16 @@ knitr::opts_chunk$set(fig.width=6, fig.height=4)
 ### The post-processing function:  
 This vignette covers what takes place following the generation of SCONE output detailed in TheSconeWorkflow.Rmd. The obvious step that needs to take place is the Scone generated columns being merged into the original input data. The user gets the option of log base 10 transforming q values, which is easier to visualize. The user also gets the option to run t-SNE on the data, such that said maps can be colored by SCONE generated values. In this case, t-SNE is run utilizing the Rtsne package, using the same markers that were used as input for the KNN. generation. 
 
-```{r}
-library(Sconify)
-library(ggplot2)
-set.seed(12043)
+```{r, eval = FALSE}
 final <- post.processing(scone.output = scone.output,
                          cell.data = combined,
                          input = input.markers)
+```
+
+```{r}
+library(Sconify)
+library(ggplot2)
+
 combined # input data
 scone.output # scone-generated data
 final # the data after post-processing
