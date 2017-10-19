@@ -1,0 +1,113 @@
+---
+title: "Assessing quality of CyTOF data"
+author: "Tyler J Burns"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+### CyTOF data quality
+CyTOF data can potentially vary across replicates if there are problems with the process of sample preparation and/or data acquisition, among other things. Given that these samples are typically complicated, multi-subset specimens, measuing per-sample variance can be challenging. Here, we use our KNN to approximate variance across the manifold. This can potentially be performed when variance is biologically driven as well. For the purpose of this vignette, we focus on data where the hypothesis is that there will be no variation between (and therefore all variation observed will be technical variation).
+
+### KNN for differential abundance
+There are many ways to assess differential abundance in CyTOF data (and high dimensional data in general). Here, we use our KNN as a proxy for variance across each cell in the manifold. In our case, we test two tubes that should in theory be the same (eg. PBMCs from the same donor, with the same markers). SCONE automatically outputs the per-knn percentage of cells in the non-baseline condition, shown below. 
+
+```{r}
+library(Sconify)
+final$IL7.fraction.cond.2[1:10]
+knitr::opts_chunk$set(fig.width=6, fig.height=4) 
+```
+
+We can plot this as a distrubtion between 0 and 100%. We hypothesize that this distribution of n cells and k nearest neighbors per cell will have the median and standard deviation of a coin tossed k times, with this action repeated n times. The analysis is below.
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+# Makes a histogram of the data that is inputted
+# Args:
+#   dat: tibble consisting both of original markers and the appended values from scone
+#   k: the binwidth
+# Returns:
+#   a histogram of said vector in ggplot2 form
+make.hist <- function(dat, k) {
+  ggplot(data = dat, aes(x = dat[,grep("fraction.cond.2", colnames(dat))])) + 
+    geom_histogram(aes(y = ..count..), binwidth = 1/k) + 
+    xlim(c(0, 1)) + 
+    theme(text = element_text(size = 20)) + 
+    xlab("fraction stimulated") 
+}
+
+# Visualization
+make.hist(final, 100)
+
+# Characteristics of the visualization
+median(final$IL7.fraction.cond.2)
+sd(final$IL7.fraction.cond.2)
+
+```
+
+We now compare to our coin flipping. 
+
+```{r}
+# Compare to a coin toss distribution
+# Flips a coin k number of times, n repetitions, and returns the vector containing the per-k percent heads 
+k.flip <- function(k, n) {
+  # The result 
+  result <- sapply(1:n, function(i) {
+    # Get the fraction heads for n flips
+    flips <- sample(c(0, 1), k, replace = TRUE)
+    percent.heads <- sum(flips)/length(flips)
+    return(percent.heads)
+  })
+}
+
+# Makes a histogram of the data that is inputted
+# Args:
+#   dat: tibble consisting both of original markers and the appended values from scone
+#   k: the binwidth
+# Returns:
+#   a histogram of said vector in ggplot2 form
+make.hist <- function(dat, k) {
+  ggplot(data = dat, aes(x = dat[,1])) + 
+    geom_histogram(aes(y = ..count..), binwidth = 1/k) + 
+    xlim(c(0, 1)) + 
+    theme(text = element_text(size = 20)) + 
+    xlab("fraction stimulated") 
+}
+
+coin.toss <- k.flip(100, 10000)
+make.hist(as.tibble(coin.toss), 100)
+median(coin.toss)
+sd(coin.toss)
+```
+
+We can see that the Wanderlust dataset example has a standard deviation that is higher (0.08) than that of the binomial distribution (0.05). We can also see that the Wanderlust dataset distribution has a slight tail to the right. If we consider the Wanderlust dataset as a "benchmark" in terms of data quality, we can see that new CyTOF datasets should be within a few hundreths of the standard deviation of the binomial distribution with the same number of trials as the number of nearest neighbors used. Of note, we can approximate the standard deviation of the binomical distribution for any value k by using the formula sd = 0.5/sqrt(k). This means one does not need to simulate a distibution of coin tosses every time the k in the KNN is changed. I do it here just to show what it looks like. 
+
+Given that the observed variation (sd = 0.08) is higher than that of the binomial distribution, and we observed the slight tail to the right, we hypothesize that this slight tail to the right could be a specific cell subset that is overrepresented in the IL-7 tube. To this end, we visualize our results colored on a t-SNE map. If our hypothesis is true, a specific region of the map will be enriched by higher "fraction IL-7" values.
+
+```{r}
+
+# Raw per-cell IgM levels
+qplot(final$`bh-SNE1`, 
+      final$`bh-SNE2`, 
+      color = final$`IgM(Eu153)Di`, 
+      xlab = "bh-SNE1",
+      ylab = "bh-SNE2") + 
+    labs(color = "Raw IgM expression") + 
+    scale_color_gradientn(colors = c("black", "yellow"))
+
+# Fraction of cells belonging to the IL-7 condition. 
+qplot(final$`bh-SNE1`, 
+      final$`bh-SNE2`, 
+      color = final$IL7.fraction.cond.2, 
+      xlab = "bh-SNE1",
+      ylab = "bh-SNE2") + 
+    labs(color = "Fraction cells in IL7 condition") + 
+    scale_color_gradientn(colors = c("black", "yellow"), limits = c(0.25, 0.75))
+
+```
+
+One can see with the t-SNE map that the IL-7 condition appears to be overrepresented in the more mature B cell compartment, as represented above by high IgM expression, which is consistent with our hypothesis. Given that the IL-7 stimulatory condition was only for 15 minutes (and therefore likely did not kill the stem cells), the result here leads to the hypothesis that the IL-7 tube had slightly more mature B cells in it than stem cells to begin with. While this particular case is not substantial and did not affect the identification of the IL-7 responsive population, results like this could help a user fine-tune a data analysis pipeline using this hypothesis-driven search for technical artifact.
