@@ -159,8 +159,8 @@ data.to.fcs <- function(dta, outfile, untransform) {
 #' @export
 make.hist <- function(dat,
                       k,
-                      column.label = "fraction.cond.2",
-                      x.label = "fraction stimulated") {
+                      column.label,
+                      x.label) {
     ggplot(data = dat, aes(x = dat[,grep(column.label, colnames(dat))])) +
         geom_histogram(aes(y = ..count..), binwidth = 1/k) +
         xlim(c(0, 1)) +

@@ -4,8 +4,7 @@
 \alias{make.hist}
 \title{make.hist}
 \usage{
-make.hist(dat, k, column.label = "fraction.cond.2",
-  x.label = "fraction stimulated")
+make.hist(dat, k, column.label, x.label)
 }
 \arguments{
 \item{dat}{tibble consisting both of original markers and the appended values from scone}
