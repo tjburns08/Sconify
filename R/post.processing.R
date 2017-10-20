@@ -1,4 +1,4 @@
-#' @import Rtsne
+#' @import Rtsne ggplot2
 #' @title Add tSNE to your results.
 #'
 #' @description This function gives the user the option to add t-SNE to the
@@ -146,3 +146,24 @@ data.to.fcs <- function(dta, outfile, untransform) {
     write.FCS(dta, outfile)
 }
 
+#' @title make.hist
+#'
+#' @description Makes a histogram of the data that is inputted
+#'
+#' @param dat tibble consisting both of original markers and the appended values from scone
+#' @param k the binwidth
+#' @param column.label the label in the tibble's columns the function will search for
+#' @param x.label the label that the x axis will be labeled as
+#'
+#' @return a histogram of said vector in ggplot2 form
+#' @export
+make.hist <- function(dat,
+                      k,
+                      column.label = "fraction.cond.2",
+                      x.label = "fraction stimulated") {
+    ggplot(data = dat, aes(x = dat[,grep(column.label, colnames(dat))])) +
+        geom_histogram(aes(y = ..count..), binwidth = 1/k) +
+        xlim(c(0, 1)) +
+        theme(text = element_text(size = 20)) +
+        xlab(x.label)
+}

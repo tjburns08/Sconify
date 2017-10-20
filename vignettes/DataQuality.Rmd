@@ -111,3 +111,5 @@ qplot(final$`bh-SNE1`,
 ```
 
 One can see with the t-SNE map that the IL-7 condition appears to be overrepresented in the more mature B cell compartment, as represented above by high IgM expression, which is consistent with our hypothesis. Given that the IL-7 stimulatory condition was only for 15 minutes (and therefore likely did not kill the stem cells), the result here leads to the hypothesis that the IL-7 tube had slightly more mature B cells in it than stem cells to begin with. While this particular case is not substantial and did not affect the identification of the IL-7 responsive population, results like this could help a user fine-tune a data analysis pipeline using this hypothesis-driven search for technical artifact.
+
+ 
