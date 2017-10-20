@@ -10,7 +10,7 @@ make.hist(dat, k, column.label = "fraction.cond.2",
 \arguments{
 \item{dat}{tibble consisting both of original markers and the appended values from scone}
 
-\item{k}{the binwidth}
+\item{k}{the binwidth, set to 1/k}
 
 \item{column.label}{the label in the tibble's columns the function will search for}
 

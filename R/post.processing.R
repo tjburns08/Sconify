@@ -151,7 +151,7 @@ data.to.fcs <- function(dta, outfile, untransform) {
 #' @description Makes a histogram of the data that is inputted
 #'
 #' @param dat tibble consisting both of original markers and the appended values from scone
-#' @param k the binwidth
+#' @param k the binwidth, set to 1/k
 #' @param column.label the label in the tibble's columns the function will search for
 #' @param x.label the label that the x axis will be labeled as
 #'
