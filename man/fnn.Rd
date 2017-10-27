@@ -4,7 +4,7 @@
 \alias{fnn}
 \title{Compute knn using the fnn algorithm}
 \usage{
-fnn(cell.df, input.markers, k = 100)
+fnn(cell.df, input.markers, k = 100, approx = FALSE)
 }
 \arguments{
 \item{cell.df:}{the cell data frame used as input}
@@ -12,6 +12,9 @@ fnn(cell.df, input.markers, k = 100)
 \item{input.markers:}{markers to be used as input for knn}
 
 \item{k:}{the number of nearest neighbors to identify}
+
+\item{approx:}{boolean indicating whether a faster approximate knn should
+be used}
 }
 \value{
 nn: list of 2, nn.index: index of knn (columns) for each cell (rows)

@@ -1,4 +1,5 @@
 #' @import FNN
+#' @import rflann
 NULL
 
 #' @title Compute knn using the fnn algorithm
@@ -10,18 +11,32 @@ NULL
 #' @param cell.df: the cell data frame used as input
 #' @param input.markers: markers to be used as input for knn
 #' @param k: the number of nearest neighbors to identify
+#' @param approx: boolean indicating whether a faster approximate knn should
+#' be used
 #' @return nn: list of 2, nn.index: index of knn (columns) for each cell (rows)
 #' nn.dist: euclidean distance of each k-nearest neighbor
 #' @examples
 #' surface <- markers$surface
 #' nn <- fnn(combined, input.markers = surface, k = 100)
 #' @export
-fnn <- function(cell.df, input.markers, k = 100) {
+fnn <- function(cell.df, input.markers, k = 100, approx = FALSE) {
     print("finding k-nearest neighbors")
     input <- cell.df[,input.markers]
-    nn <- get.knn(input, k, algorithm = "kd_tree")[[1]]
+
+    if(approx == TRUE) {
+        nn <- Neighbour(query = input, ref = input, k = k + 1)
+        nn.index <- nn[[1]][,2:ncol(nn[[1]])]
+        nn.dist <- nn[[2]][,2:ncol(nn[[2]])]
+    } else if (approx == FALSE) {
+        nn <- get.knn(data = input, k = k, algorithm = "kd_tree")
+        nn.index <- nn[[1]]
+        nn.dist <- nn[[2]]
+    } else {
+        stop("Please enter a boolean value for 'approx' argument")
+    }
+
     print("k-nearest neighbors complete")
-    return(nn)
+    return(list(nn.index = nn.index, nn.dist = nn.dist))
 }
 
 
@@ -236,6 +251,14 @@ scone.values <- function(nn.matrix,
     conditions <- unique(cell.data$condition)
     stims <- conditions[!(conditions %in% unstim)]
 
+    # Unpack the nn matrix
+    nn.dist <- nn.matrix[[2]]
+    nn.matrix <- nn.matrix[[1]] # overwrite to be used in rest of this
+
+    # Get the KNN density estimation (1 / avg distance to knn)
+    avg.dist <- apply(nn.dist, 1, mean)
+    knn.density <- 1/avg.dist
+
     # Variables to be used for progress tracker within the loop
     percent <- nrow(cell.data) %/% 10
 
@@ -293,6 +316,9 @@ scone.values <- function(nn.matrix,
     frac <- final[, grep("fraction", colnames(final))]
     final <- q.correction.thresholding(final, threshold)
     final <- bind_cols(final, frac)
+
+    # Add the density estimation
+    final$density <- knn.density
 
     print("per-knn statistics complete")
 

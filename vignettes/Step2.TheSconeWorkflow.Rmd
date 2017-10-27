@@ -63,8 +63,14 @@ nn <- fnn(cell.df = combined, input.markers = input.markers, k = k)
 # Cell identity is in rows, k-nearest neighbors are columns
 # List of 2 includes the cell identity of each nn, and the euclidean distance between
 #   itself and the cell of interest
-str(nn)
-nn[1:20, 1:10]
+
+# Indices
+str(nn[[1]])
+nn[[1]][1:20, 1:10]
+
+# Distance
+str(nn[[2]])
+nn[[2]][1:20, 1:10]
 ```
 
 ### Finding scone values:

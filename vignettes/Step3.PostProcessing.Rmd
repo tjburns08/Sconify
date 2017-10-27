@@ -48,6 +48,16 @@ qplot(final$`bh-SNE1`,
       ylab = "bh-SNE2") + 
     labs(color = "IL7 -> pSTAT5 -log10(qvalue)") + 
     scale_color_gradientn(colors = c("black", "yellow"))
+
+# tSNE map colored by KNN density estimation
+qplot(final$`bh-SNE1`,
+      final$`bh-SNE2`,
+      color = final$density,
+      xlab = "bh-SNE1",
+      ylab = "bh-SNE2") +
+    labs(color = "density") +
+    scale_color_gradientn(colors = c("black", "yellow"))
+
 ```
 
 For more extensive visualizations, you can output these results as an fcs file using the data.to.fcs wrapper I provided in the pre-processing functions. I would recommend this option, as Cytobank and FlowJo (among other tools) are more accessable than ggplot2 (although it is a great tool if you have learned it).
