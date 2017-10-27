@@ -287,7 +287,7 @@ scone.values <- function(nn.matrix,
 
                 # We want multiple donor testing only if all donors are in each knn
                 if(length(unique(nn.donors)) < length(donors)) {
-                    donor.output <- rep(NA, times = length(scone)) # Check length
+                    donor.output <- rep(NA, times = length(scone.markers)) # Check length
                 } else {
                     basal.d <- curr[curr$condition == unstim,] %>% .[,c(scone.markers, "donor")]
                     stim.d <- curr[curr$condition == s,] %>% .[,c(scone.markers, "donor")]
