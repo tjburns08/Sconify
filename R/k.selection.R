@@ -27,15 +27,16 @@ impute <- function(cells, input.markers, nn) {
 #' @param cells a matrix of cells by features used as original input
 #' @param input.markers markers to be used for the knn calculation
 #' @param test.markers the markers to be tested for imputation (either surface or scone)
+#' @param approx: boolean indicating whether the approximate knn should be used
 #' @return the median imputation error for each value k tested
 #' @examples
 #' k.titration <- c(10, 50, 100, 200, 500, 1000)
 #' ideal.k <- impute.testing(k.titration = k.titration, cells = combined,
 #'                           input.markers = input, test.markers = scone)
 #' @export
-impute.testing <- function(k.titration, cells, input.markers, test.markers) {
+impute.testing <- function(k.titration, cells, input.markers, test.markers, approx = FALSE) {
     final.distances <- lapply(k.titration, function(k) {
-        nn <- fnn(cell.df = cells, input.markers = input.markers, k = k)
+        nn <- fnn(cell.df = cells, input.markers = input.markers, k = k, approx = approx)[[1]]
         imputed.cells <- impute(cells = cells, input.markers = test.markers, nn = nn)
 
         print(k)

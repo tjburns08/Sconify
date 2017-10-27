@@ -4,7 +4,8 @@
 \alias{impute.testing}
 \title{Impute testing}
 \usage{
-impute.testing(k.titration, cells, input.markers, test.markers)
+impute.testing(k.titration, cells, input.markers, test.markers,
+  approx = FALSE)
 }
 \arguments{
 \item{k.titration}{a vector integer values of k to be tested}
@@ -14,6 +15,8 @@ impute.testing(k.titration, cells, input.markers, test.markers)
 \item{input.markers}{markers to be used for the knn calculation}
 
 \item{test.markers}{the markers to be tested for imputation (either surface or scone)}
+
+\item{approx:}{boolean indicating whether the approximate knn should be used}
 }
 \value{
 the median imputation error for each value k tested
