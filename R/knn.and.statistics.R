@@ -210,6 +210,7 @@ q.correction.thresholding <- function(cells, threshold) {
 #' @return list of 2. First element is a vector of the KNN-density estimate.
 #' second element is a list where each element is the cell number from the
 #' original cell.data tibble and a matrix of cells x feautures for its KNN
+#' @export
 make.knn.list <- function(cell.data, nn.matrix) {
     # Unpack the KNN output
     nn.index <- nn.matrix[[1]]
