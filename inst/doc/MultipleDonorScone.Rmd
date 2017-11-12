@@ -1,0 +1,18 @@
+---
+title: "Running Scone with multiple donors"
+author: "Tyler J Burns"
+date: "October 2, 2017"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Running Scone with multiple donors}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
+```
+
+The HowToProcessFCSFiles and TheSconeWorkflow vignettes show pre-processing and analysis for instances where the comparisons being made are across single cells. However, datasets may contain multiple donors or replicates, and the user might want to make comparisons acorss these donors, rather than a pool of single cells. This vignette covers this case. Here, we use data from Fragidakis et al (https://www.ncbi.nlm.nih.gov/pubmed/26655308), where we compare basline versus multiple stimulation conditions, across four healthy human donors. 
+
+

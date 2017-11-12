@@ -17,16 +17,13 @@ knitr::opts_chunk$set(fig.width=6, fig.height=4)
 ### The post-processing function:  
 This vignette covers what takes place following the generation of SCONE output detailed in TheSconeWorkflow.Rmd. The obvious step that needs to take place is the Scone generated columns being merged into the original input data. The user gets the option of log base 10 transforming q values, which is easier to visualize. The user also gets the option to run t-SNE on the data, such that said maps can be colored by SCONE generated values. In this case, t-SNE is run utilizing the Rtsne package, using the same markers that were used as input for the KNN. generation. 
 
-```{r, eval = FALSE}
-final <- post.processing(scone.output = scone.output,
-                         cell.data = combined,
-                         input = input.markers)
-```
-
 ```{r}
 library(Sconify)
 library(ggplot2)
-
+set.seed(12043)
+final <- post.processing(scone.output = scone.output,
+                         cell.data = combined,
+                         input = input.markers)
 combined # input data
 scone.output # scone-generated data
 final # the data after post-processing
@@ -48,37 +45,14 @@ qplot(final$`bh-SNE1`,
       ylab = "bh-SNE2") + 
     labs(color = "IL7 -> pSTAT5 -log10(qvalue)") + 
     scale_color_gradientn(colors = c("black", "yellow"))
-
-# tSNE map colored by KNN density estimation
-qplot(final$`bh-SNE1`,
-      final$`bh-SNE2`,
-      color = final$density,
-      xlab = "bh-SNE1",
-      ylab = "bh-SNE2") +
-    labs(color = "density") +
-    scale_color_gradientn(colors = c("black", "yellow"))
-
 ```
-
-### Subsampling your data prior to running t-SNE:
-If one has a large number of cells in the dataset (>100K), then t-SNE can become time-consuming and produce results that are less clean. I detail this in the following blog post: http://blog.cytobank.org/2017/01/17/fine-tune-visne-to-get-the-most-of-your-single-cell-data-analysis/.
-As such, I provide a wrapper that allows one to subsample the final data and run t-SNE on the subsampled data, producing a new tibble that contains the subsampled data along with two t-SNE dimensions added to it. Note the two added dimensions at the end of the tibble are called "bh-SNE11" and "bh-SNE21". This is because the dimensions "bh-SNE1" and "bh-SNE2" are already in the data, because t-SNE was run during the post processing step in this example. As I have stated, a user would realistically use this function with a much larger number of cells, in which case the user would have selected "tsne = FALSE" in the post.processing function detailed above in this vignette.
-
-```{r, eval = FALSE}
-final.sub <- subsample.and.tsne(dat = final, input = input.markers, numcells = 2000)
-```
-```{r}
-final.sub
-```
-
 
 For more extensive visualizations, you can output these results as an fcs file using the data.to.fcs wrapper I provided in the pre-processing functions. I would recommend this option, as Cytobank and FlowJo (among other tools) are more accessable than ggplot2 (although it is a great tool if you have learned it).
 
 ### From data matrix to fcs file:
 After the full scone pipeline, one may want to convert the data back into fcs files to be read into fcs processing software, such as FlowJo or Cytobank. As such, I include a wrapper for FlowCore functionality, called data.to.fcs, that does just this. I also include the option to "un-transform" the data, if it has been asinh transformed with a co-factor of 5 initially. This is because Cytobank cannot (yet) effectively display asinh transformed data ranges, and it becomes tedious to switch the scale ranges within Cytobank. With data.to.fcs, you specify the name of the output file, and it gets saved to your working directory accordingly.
 
-
-```{r, eval = FALSE}
+```
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',
     package = "Sconify")

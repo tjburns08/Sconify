@@ -200,32 +200,43 @@ q.correction.thresholding <- function(cells, threshold) {
     return(result)
 }
 
-#' @title Make list of cells by features for each KNN member
-#' @description Takes the KNN function output and the cell data, and
-#' makes list where each element is a matrix of cells in the KNN and features,
-#' and also computes the KNN density estimation
-#' @param cell.data: tibble of cells by features
-#' @param nn.matrix: list of 2. First element is cells x 100 nearest neighbor
-#' indices. Second element is cells x 100 nearest neighbor distances
-#' @return list of 2. First element is a vector of the KNN-density estimate.
-#' second element is a list where each element is the cell number from the
-#' original cell.data tibble and a matrix of cells x feautures for its KNN
+#' @title Get the KNN density estimaion
+#' @description Obtain a density estimation derived from the original manifold,
+#' avoiding the lossiness of lower dimensional embeddings
+#' @param nn.matrix A list of 2, where the first is a matrix of nn indices,
+#' and the second is a matrix of nn distances
+#' @return a vector where each element is the KNN-DE for that given cell,
+#' ordered by row number, in the original input matrix of cells x features
 #' @export
-make.knn.list <- function(cell.data, nn.matrix) {
-    # Unpack the KNN output
-    nn.index <- nn.matrix[[1]]
+get.knn.de <- function(nn.matrix) {
+    # Distances
     nn.dist <- nn.matrix[[2]]
 
     # KNN-DE
     mean.dist <- apply(nn.dist, 1, mean)
     density <- 1/mean.dist
+    return(density)
+}
+
+#' @title Make list of cells by features for each KNN member
+#' @description Takes the KNN function output and the cell data, and
+#' makes list where each element is a matrix of cells in the KNN and features.
+#' @param cell.data: tibble of cells by features
+#' @param nn.matrix: list of 2. First element is cells x 100 nearest neighbor
+#' indices. Second element is cells x 100 nearest neighbor distances
+#' @return a list where each element is the cell number from the
+#' original cell.data tibble and a matrix of cells x feautures for its KNN
+#' @export
+make.knn.list <- function(cell.data, nn.matrix) {
+    # Unpack the KNN output
+    nn.index <- nn.matrix[[1]]
 
     # The list
     knn.list <- lapply(1:nrow(nn.index), function(i) {
         cell.data[nn.index[i,],]
     })
 
-    return(list(density = density, knn.list = knn.list))
+    return(knn.list)
 }
 
 

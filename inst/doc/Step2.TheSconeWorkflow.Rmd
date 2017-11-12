@@ -1,0 +1,82 @@
+---
+title: "Step 2: The Scone Workflow"
+author: "Tyler J Burns"
+date: "9/30/2017"
+output: html_document
+vignette: >
+  %\VignetteIndexEntry{General Scone Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
+```
+
+## ABOUT SCONE
+
+### Abstract:
+High-dimensional single-cell data is routinely visualized in two dimensions using manifold embedding algorithms such as t-SNE. However, comparison of functional responses across biological conditions typically requires partitioning of cell populations (clustering or gating), which can be a cumbersome and error-prone process. To address that problem, we developed Smooth Comparison of NEighbors (SCONE), an algorithm for direct statistical comparisons in continuously overlapping phenotypic neighborhoods. SCONE output can be displayed as a lower-dimensional embedding (eg. a t-SNE map) or a heatmap describing local changes within immune cell subsets across biological conditions. We show within this vignette the application of SCONE to a B cell precursors dataset from human bone marrow to reveal the coordination between surface marker expression changes and IL-7 responsiveness through pSTAT5 in the B-cell developmental trajectory. Taken together, this approach will allow for visualization and analysis of changes and trends at the single cell level across multiple biological conditions in a wide variety of model systems.
+
+### Introduction:
+Novel technologies have emerged providing high parameter information from single cells, providing many opportunities to study the diversity of complex biological systems. These technologies include CyTOF, MIBI, and single-cell sequencing. Manifold embedding algorithms such as force-directed graphs, t-SNE, and principal component analysis (PCA) are routinely utilized to visually represent the distribution of cells in high-dimensional space near each other in two dimensions. This provides an intuitive readout of the diversity of a given dataset and provides insight into a system’s superstructure. Despite providing a visual and intuitive way to explore single-cell data, dimensionality reduction plots are based on single cells and therefore to date have not allowed for direct visualization and quantification of differences between biological samples. 
+
+To perform such comparisons, researchers routinely resort to first partitioning the concatenated dataset into disjoint subsets (clusters or gates) based on surface markers that are not expected to change between conditions, and then for each subset performing sample-to-sample comparison of markers that are expected to change (functional markers). This approach allows visualization of discrete changes such as signaling differences between subsets. However, there may be changes in cell subsets smaller than the size of the clusters, a pattern of change within single cells not reflective of the clustering, or a continuous change across the manifold. Each of these possibilities would be difficult to observe within the partition-based paradigm.
+
+We developed a computational method that allows for direct visualization of biological differences in single-cell datasets, entirely omitting the partitioning step. SCONE, which stands for Smooth Comparison of NEighbors, is an algorithm that makes statistical comparisons in overlapping k-nearest neighborhoods rather than mutually exclusive clusters. The results of statistical comparisons are visualized here using a single t-SNE map or heatmap. Here, each cell represents the information contained within itself and its k-nearest neighborhood (which contains all biological conditions of interest). If one uses markers that do not change across biological conditions for k-nearest neighbor calculations, then the conditions being compared can be assumed to be distributed evenly in the marker space such that each cell and its k-nearest neighbors will contain data points from all biological conditions in question. As such, a comparison between biological conditions is made for that given neighborhood, and the cell of interest is colored based on that comparison. One can perform the same type of analysis one would for general clustering of concatenated flow and mass cytometry data (7-9), but without bias introduced by mutual exclusivity of the clusters. Given the overlap of each adjacent k-nearest neighbor, one can visualize both continuous change, or highlight the boundaries of discrete changes.
+
+
+## THE PROCEDURE
+
+### File processing: 
+This vignette continues from where HowToProcessFCSFiles.Rmd leaves off. Here, we will be binary data stored within this package, that has alraedy been pre-processed to the necessary requirements for the functionality here. 
+
+
+### K-nearest neighbors:
+We read in input.scone.csv, which is our file modified (and renamed) from the get.marker.names() function. The K-nearest neighbor generation is derived from the Fast Nearest Neighbors (FNN) R package, within our function f.nn(), which takes as input the “input markers” to be used, along with the concatenated data previously generated, and the desired k. We advise the default selection to the total number of cells in the dataset divided by 100, as has been optimized on existing mass cytometry datasets. The output of this function is a matrix of each cell and the identity of its k-nearest neighbors, in terms of its row number in the dataset used here as input. 
+
+```
+# Markers from the user-generated excel file
+markers <- read.csv("input.scone.csv")
+```
+```{r}
+# The above example is stored in the package as "markers," loaded here
+library(Sconify)
+library(dplyr)
+
+# How to convert your excel sheet into vector of static and functional markers
+data(markers)
+
+# addition in the end gets rid of empty strings
+input.markers <- markers$surface %>% .[. != ""] 
+funct.markers <- markers$functional %>% .[. != ""]
+
+# Selection of the k. Default is number of cells / 100. 
+k <- nrow(combined) %/% 100
+
+# The built-in scone functions
+nn <- fnn(cell.df = combined, input.markers = input.markers, k = k)
+
+# Cell identity is in rows, k-nearest neighbors are columns
+# List of 2 includes the cell identity of each nn, and the euclidean distance between
+#   itself and the cell of interest
+str(nn)
+nn[1:20, 1:10]
+```
+
+### Finding scone values:
+
+This function iterates through each KNN, and performs a series of calculations. The first is fold change values for each maker per KNN, where the user chooses whether this will be based on medians or means. The second is a statistical test, where the user chooses t test or Mann-Whitney U test. I prefer the latter, because it does not assume any properties of the distributions. Of note, the p values are adjusted for false discovery rate, and therefore are called q values in the output of this function. The user also inputs a threshold parameter (default 0.05), where the fold change values will only be shown if the corresponding statistical test returns a q value below said threshold. Finally, the "multiple.donor.compare" option, if set to TRUE will perform a t test based on the mean per-marker values of each donor. This is to allow the user to make comparisons across replicates or multiple donors if that is relevant to the user's biological questions. This function returns a matrix of cells by computed values (change and statistical test results, labeled either marker.change or marker.qvalue). This matrix is intermediate, as it gets concatenated with the original input matrix in the post-processing step (see the relevant vignette). We show the code and the output below. See the post-processing vignette, where we show how this gets combined with the input data, and additional analysis is performed. 
+
+
+```{r}
+scone.output <- scone.values(nn.matrix = nn, 
+                      cell.data = combined, 
+                      scone.markers = funct.markers, 
+                      unstim = "basal")
+scone.output
+```
+
+.
+
+

@@ -13,12 +13,10 @@ make.knn.list(cell.data, nn.matrix)
 indices. Second element is cells x 100 nearest neighbor distances}
 }
 \value{
-list of 2. First element is a vector of the KNN-density estimate.
-second element is a list where each element is the cell number from the
+a list where each element is the cell number from the
 original cell.data tibble and a matrix of cells x feautures for its KNN
 }
 \description{
 Takes the KNN function output and the cell data, and
-makes list where each element is a matrix of cells in the KNN and features,
-and also computes the KNN density estimation
+makes list where each element is a matrix of cells in the KNN and features.
 }
