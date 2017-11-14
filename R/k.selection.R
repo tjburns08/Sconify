@@ -1,4 +1,3 @@
-#' @import FNN
 #' @import rflann
 NULL
 
@@ -35,9 +34,9 @@ impute <- function(cells, input.markers, nn) {
 #' ideal.k <- impute.testing(k.titration = k.titration, cells = combined,
 #'                           input.markers = input, test.markers = scone)
 #' @export
-impute.testing <- function(k.titration, cells, input.markers, test.markers, approx = FALSE) {
+impute.testing <- function(k.titration, cells, input.markers, test.markers) {
     final.distances <- lapply(k.titration, function(k) {
-        nn <- fnn(cell.df = cells, input.markers = input.markers, k = k, approx = approx)[[1]]
+        nn <- fnn(cell.df = cells, input.markers = input.markers, k = k)[[1]]
         imputed.cells <- impute(cells = cells, input.markers = test.markers, nn = nn)
 
         print(k)
