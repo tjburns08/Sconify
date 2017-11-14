@@ -1,4 +1,3 @@
-#' @import FNN
 #' @import rflann
 NULL
 
@@ -19,21 +18,14 @@ NULL
 #' surface <- markers$surface
 #' nn <- fnn(combined, input.markers = surface, k = 100)
 #' @export
-fnn <- function(cell.df, input.markers, k = 100, approx = FALSE) {
+fnn <- function(cell.df, input.markers, k = 100) {
     print("finding k-nearest neighbors")
     input <- cell.df[,input.markers]
 
-    if(approx == TRUE) {
-        nn <- Neighbour(query = input, ref = input, k = k + 1)
-        nn.index <- nn[[1]][,2:ncol(nn[[1]])]
-        nn.dist <- nn[[2]][,2:ncol(nn[[2]])]
-    } else if (approx == FALSE) {
-        nn <- get.knn(data = input, k = k, algorithm = "kd_tree")
-        nn.index <- nn[[1]]
-        nn.dist <- nn[[2]]
-    } else {
-        stop("Please enter a boolean value for 'approx' argument")
-    }
+    # Using the rflann package
+    nn <- Neighbour(query = input, ref = input, k = k + 1)
+    nn.index <- nn[[1]][,2:ncol(nn[[1]])]
+    nn.dist <- nn[[2]][,2:ncol(nn[[2]])]
 
     print("k-nearest neighbors complete")
     return(list(nn.index = nn.index, nn.dist = nn.dist))
