@@ -23,8 +23,7 @@ fnn <- function(cell.df, input.markers, k = 100) {
 
     # Edge case (rflann with kd-tree doesn't have it)
     if(k >= nrow(cell.df)) {
-        stop("Please select a k that is less
-             than the total number of data points")
+        stop("k must be less than the total number of data points")
     }
 
     input <- cell.df[,input.markers]
