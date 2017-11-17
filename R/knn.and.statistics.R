@@ -20,14 +20,13 @@ NULL
 #' @export
 fnn <- function(cell.df, input.markers, k = 100) {
     print("finding k-nearest neighbors")
-    
+
     # Edge case (rflann with kd-tree doesn't have it)
-    if(k >= nrow(cells)) {
-        stop("Please select a k that is less 
+    if(k >= nrow(cell.df)) {
+        stop("Please select a k that is less
              than the total number of data points")
     }
-    
-    
+
     input <- cell.df[,input.markers]
 
     # Using the rflann package
