@@ -4,7 +4,7 @@
 \alias{fnn}
 \title{Compute knn using the fnn algorithm}
 \usage{
-fnn(cell.df, input.markers, k = 100, approx = FALSE)
+fnn(cell.df, input.markers, k = 100)
 }
 \arguments{
 \item{cell.df:}{the cell data frame used as input}

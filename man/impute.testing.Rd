@@ -4,8 +4,7 @@
 \alias{impute.testing}
 \title{Impute testing}
 \usage{
-impute.testing(k.titration, cells, input.markers, test.markers,
-  approx = FALSE)
+impute.testing(k.titration, cells, input.markers, test.markers)
 }
 \arguments{
 \item{k.titration}{a vector integer values of k to be tested}
