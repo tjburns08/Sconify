@@ -12,10 +12,16 @@ NULL
 #' @return a data frame of imputed cells for the "input markers" of interest
 impute <- function(cells, input.markers, nn) {
     result <- sapply(1:nrow(cells), function(i) {
-        curr.nn <- cells[nn[i,],][,input.markers] %>% apply(., 2, median)
-    }) %>%
-        t() %>%
-        as.data.frame()
+        curr.nn <- cells[nn[i,],][,input.markers] %>% apply(., 2, mean)
+    })
+
+    if(length(input.markers) > 1) {
+        result <- t(result) %>%
+            as.data.frame()
+    } else if(length(input.markers) == 1) {
+        result <- as.data.frame(result)
+    }
+
     return(result)
 }
 
@@ -48,8 +54,8 @@ impute.testing <- function(k.titration, cells, input.markers, test.markers) {
 
     # Get final distances into tibble format
     names(final.distances) <- k.titration
-    final.distances <- as.tibble(final.distances) # BUG
-    final.distances <- apply(final.distances, 2, median)
+    final.distances <- as.tibble(final.distances)
+    final.distances <- apply(final.distances, 2, mean)
 
     return(final.distances)
 }
