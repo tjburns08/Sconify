@@ -33,7 +33,6 @@ impute <- function(cells, input.markers, nn) {
 #' @param cells a matrix of cells by features used as original input
 #' @param input.markers markers to be used for the knn calculation
 #' @param test.markers the markers to be tested for imputation (either surface or scone)
-#' @param approx boolean indicating whether the approximate knn should be used
 #' @return the median imputation error for each value k tested
 #' @examples
 #' k.titration <- c(10, 50, 100, 200, 500, 1000)
