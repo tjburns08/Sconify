@@ -13,3 +13,10 @@ quant.normalize.elements(dat.list)
 \value{
 the per-column quantile normalized list
 }
+\description{
+This function performs per-marker quantile normalization
+on multiple data tibbles. The normalization occurrs marker by marker.
+The user assumes that the markers are distributed equally across tibbles,
+as quantile normalization forces these marker distributions to be the same
+per file
+}

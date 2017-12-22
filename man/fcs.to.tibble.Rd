@@ -14,6 +14,14 @@ fcs.to.tibble(file, transform = "asinh")
 \value{
 tibble of info contained within the fcs file
 }
+\description{
+This function is a quick way to take the exprs content of
+a fcs file, do an asinh transform, and create a tibble data structure
+that can be further manipulated. Our default transform is asinh, but
+you just have to change the transform to anything else, and you'll
+get the raw data. This function is used in the main function
+process.multiple.files
+}
 \examples{
 basal <- system.file('extdata',
     'Bendall et al Cell Sample C_basal.fcs',

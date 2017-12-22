@@ -28,6 +28,12 @@ get.marker.names <- function(file) {
 }
 
 #' @title Takes a file as input and returns a data frame of cells by features
+#' @description This function is a quick way to take the exprs content of
+#' a fcs file, do an asinh transform, and create a tibble data structure
+#' that can be further manipulated. Our default transform is asinh, but
+#' you just have to change the transform to anything else, and you'll
+#' get the raw data. This function is used in the main function
+#' process.multiple.files
 #'
 #' @param file the fcs file containing cell infomration
 #' @param transform if set to asinh, then asinh transforms with scale arg 5
@@ -80,6 +86,11 @@ quantile_normalization <- function(df){
 
 #' @title Takes a list of tibbles as input, and performs per-column
 #' quantile normalization, then outputs the quantile normalized list
+#' @description This function performs per-marker quantile normalization
+#' on multiple data tibbles. The normalization occurrs marker by marker.
+#' The user assumes that the markers are distributed equally across tibbles,
+#' as quantile normalization forces these marker distributions to be the same
+#' per file
 #'
 #' @param dat.list: a list of tibbles
 #' @return the per-column quantile normalized list
