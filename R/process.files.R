@@ -14,11 +14,6 @@ NULL
 #'
 #' @param file the fcs file of interest
 #' @return the list of markers of interest, as a csv
-#' @examples
-#' basal <- system.file('extdata',
-#'     'Bendall et al Cell Sample C_basal.fcs',
-#'      package = "Sconify")
-#' get.marker.names(basal)
 #' @export
 get.marker.names <- function(file) {
     cells <- fcs.to.tibble(file)
@@ -38,12 +33,6 @@ get.marker.names <- function(file) {
 #' @param file the fcs file containing cell infomration
 #' @param transform if set to asinh, then asinh transforms with scale arg 5
 #' @return tibble of info contained within the fcs file
-#' @examples
-#' basal <- system.file('extdata',
-#'     'Bendall et al Cell Sample C_basal.fcs',
-#'     package = "Sconify")
-#' fcs.to.tibble(basal, transform = "none")
-#' fcs.to.tibble(basal, transform = "asinh")
 #' @export
 fcs.to.tibble <- function(file, transform = "asinh") {
     # Read in the files and set the columns as human-named parameters
@@ -142,19 +131,6 @@ quant.normalize.elements <- function(dat.list) {
 #' @param name.multiple.donors boolean indicating whether multiple donors
 #' will be distinguished (as a separate "patient" column)
 #' @return result: a combined file set
-#' @examples
-#' basal <- system.file('extdata',
-#'     'Bendall et al Cell Sample C_basal.fcs',
-#'      package = "Sconify")
-#' il7 <- system.file('extdata',
-#'     'Bendall et al Cell Sample C_IL7.fcs',
-#'     package = "Sconify")
-#' markers <- system.file('extdata',
-#'     'markers.csv',
-#'     package = "Sconify")
-#' markers <- read.csv(markers, stringsAsFactors = FALSE)
-#' surface <- markers$surface
-#' combined <- process.multiple.files(files = c(basal, il7), input = surface)
 #' @export
 process.multiple.files <- function(files,
                                    transform = "asinh",
@@ -252,16 +228,6 @@ process.multiple.files <- function(files,
 #' @param scale boolean of whether data should be z-scored
 #' @param input.markers vector of strings indicating the markers
 #' to be used as input
-#' @examples
-#' basal <- system.file('extdata',
-#'     'Bendall et al Cell Sample C_basal.fcs',
-#'     package = "Sconify")
-#' markers <- system.file('extdata',
-#'     'markers.csv',
-#'     package = "Sconify")
-#' markers <- read.csv(markers, stringsAsFactors = FALSE)
-#' surface <- markers$surface
-#' split <- splitFile(file = basal, input.markers = surface)
 #' @return tibble containing original markers and all values
 #' calculated by SCONE
 #' @export

@@ -35,17 +35,3 @@ Files need the following name convention: "xxxx_stim.fcs"
 Files where you want to name the patients need the following convention:
 "xxxx__patientID_stim.fcs"
 }
-\examples{
-basal <- system.file('extdata',
-    'Bendall et al Cell Sample C_basal.fcs',
-     package = "Sconify")
-il7 <- system.file('extdata',
-    'Bendall et al Cell Sample C_IL7.fcs',
-    package = "Sconify")
-markers <- system.file('extdata',
-    'markers.csv',
-    package = "Sconify")
-markers <- read.csv(markers, stringsAsFactors = FALSE)
-surface <- markers$surface
-combined <- process.multiple.files(files = c(basal, il7), input = surface)
-}

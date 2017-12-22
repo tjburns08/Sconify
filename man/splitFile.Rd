@@ -35,14 +35,3 @@ If phosphoproteins are being compared across conditions, for example,
 then there should be no difference in the case that you split the same file
 and compare the two halves.
 }
-\examples{
-basal <- system.file('extdata',
-    'Bendall et al Cell Sample C_basal.fcs',
-    package = "Sconify")
-markers <- system.file('extdata',
-    'markers.csv',
-    package = "Sconify")
-markers <- read.csv(markers, stringsAsFactors = FALSE)
-surface <- markers$surface
-split <- splitFile(file = basal, input.markers = surface)
-}
