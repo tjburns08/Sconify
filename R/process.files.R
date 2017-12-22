@@ -36,7 +36,7 @@ get.marker.names <- function(file) {
 #' @export
 fcs.to.tibble <- function(file, transform = "asinh") {
     # Read in the files and set the columns as human-named parameters
-    cells <- read.FCS(file = file)
+    cells <- flowCore::read.FCS(file = file)
     params <- as.vector(pData(parameters(cells))$desc)
     colnames(cells) <- params
 
