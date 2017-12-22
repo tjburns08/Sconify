@@ -12,6 +12,7 @@ Description: This package reads in fcs files as input. The primary goal is to
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 2.10)
 Imports: tibble, 
     magrittr,
     rflann,
