@@ -81,7 +81,7 @@ I use this metric to avoid the unusual properties of the volume of a sphere as i
 An individual with basic programming skills can iterate through these elements to perform the statistics of one's choosing. Examples would include per-KNN regression and classification, or feature imputation. The additional functionality is shown below, with the example knn.list in the package being the first ten instances: 
 
 ```{r, eval = FALSE}
-# Constructs KNN list, and computes KNN density estimation
+# Constructs KNN list, computes KNN density estimation
 knn.list <- make.knn.list(cell.data = combined, nn.matrix = nn)
 
 # Finds the KNN density estimation for each cell, ordered by column, in the original data matrix
