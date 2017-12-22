@@ -8,15 +8,15 @@ process.multiple.files(files, transform = "asinh", numcells = 10000,
   norm = FALSE, scale = FALSE, input, name.multiple.donors = FALSE)
 }
 \arguments{
-\item{files:}{a vector of file names (name = "anything_condition.fcs")}
+\item{files}{a vector of file names (name = "anything_condition.fcs")}
 
-\item{numcells:}{desiered number of cells in the matrix}
+\item{numcells}{desiered number of cells in the matrix}
 
-\item{norm:}{boolean that quantile normalizes the data if true}
+\item{norm}{boolean that quantile normalizes the data if true}
 
-\item{scale:}{boolean that converts all values to z scores if true}
+\item{scale}{boolean that converts all values to z scores if true}
 
-\item{name.multiple.donors:}{boolean indicating whether multiple donors
+\item{name.multiple.donors}{boolean indicating whether multiple donors
 will be distinguished (as a separate "patient" column)}
 }
 \value{

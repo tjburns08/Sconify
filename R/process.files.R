@@ -68,7 +68,7 @@ fcs.to.tibble <- function(file, transform = "asinh") {
 #'
 #' @description Credit goes to: http://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/
 #'
-#' @param df: a data frame with rows as cells and columns as features
+#' @param df a data frame with rows as cells and columns as features
 #' @return a data frame where the columns have been quantile normalized
 quantile_normalization <- function(df){
     df_rank <- apply(df,2,rank,ties.method="first")
@@ -92,7 +92,7 @@ quantile_normalization <- function(df){
 #' as quantile normalization forces these marker distributions to be the same
 #' per file
 #'
-#' @param dat.list: a list of tibbles
+#' @param dat.list a list of tibbles
 #' @return the per-column quantile normalized list
 quant.normalize.elements <- function(dat.list) {
     # Store the marker names for the re-naming when the list is reverted
@@ -130,11 +130,11 @@ quant.normalize.elements <- function(dat.list) {
 #' Files need the following name convention: "xxxx_stim.fcs"
 #' Files where you want to name the patients need the following convention:
 #' "xxxx__patientID_stim.fcs"
-#' @param files: a vector of file names (name = "anything_condition.fcs")
-#' @param numcells: desiered number of cells in the matrix
-#' @param norm: boolean that quantile normalizes the data if true
-#' @param scale: boolean that converts all values to z scores if true
-#' @param name.multiple.donors: boolean indicating whether multiple donors
+#' @param files a vector of file names (name = "anything_condition.fcs")
+#' @param numcells desiered number of cells in the matrix
+#' @param norm boolean that quantile normalizes the data if true
+#' @param scale boolean that converts all values to z scores if true
+#' @param name.multiple.donors boolean indicating whether multiple donors
 #' will be distinguished (as a separate "patient" column)
 #' @return result: a combined file set
 #' @examples

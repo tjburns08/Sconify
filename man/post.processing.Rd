@@ -8,17 +8,17 @@ post.processing(scone.output, cell.data, input, tsne = TRUE,
   log.transform.qvalue = TRUE)
 }
 \arguments{
-\item{scone.output:}{tibble of the output of the given scone analysis}
+\item{scone.output}{tibble of the output of the given scone analysis}
 
-\item{cells:}{the tibble used as input for the scone.values function}
-
-\item{input:}{the input markers used for the knn calculation (to be used
+\item{input}{the input markers used for the knn calculation (to be used
 for tsne here)}
 
-\item{tsne:}{boolean value to indicate whether tSNE is to be done}
+\item{tsne}{boolean value to indicate whether tSNE is to be done}
 
-\item{log.transform.qvalue:}{boolean to indicate whether log transformation
+\item{log.transform.qvalue}{boolean to indicate whether log transformation
 of all q values is to be done}
+
+\item{cells}{the tibble used as input for the scone.values function}
 }
 \value{
 result: the concatenated original input data with the scone derived

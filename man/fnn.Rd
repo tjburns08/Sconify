@@ -7,13 +7,13 @@
 fnn(cell.df, input.markers, k = 100)
 }
 \arguments{
-\item{cell.df:}{the cell data frame used as input}
+\item{cell.df}{the cell data frame used as input}
 
-\item{input.markers:}{markers to be used as input for knn}
+\item{input.markers}{markers to be used as input for knn}
 
-\item{k:}{the number of nearest neighbors to identify}
+\item{k}{the number of nearest neighbors to identify}
 
-\item{approx:}{boolean indicating whether a faster approximate knn should
+\item{approx}{boolean indicating whether a faster approximate knn should
 be used}
 }
 \value{

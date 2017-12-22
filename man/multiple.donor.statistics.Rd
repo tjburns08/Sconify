@@ -8,13 +8,13 @@ same condition}
 multiple.donor.statistics(basal, stim, stim.name, donors)
 }
 \arguments{
-\item{basal:}{tibble that contains unstim for a knn including donor identity}
+\item{basal}{tibble that contains unstim for a knn including donor identity}
 
-\item{stim:}{tibble that contains stim for a knn including donor identity}
+\item{stim}{tibble that contains stim for a knn including donor identity}
 
-\item{stim.name:}{string of the name of the current stim being tested}
+\item{stim.name}{string of the name of the current stim being tested}
 
-\item{donors:}{vector of strings corresponding to the designated names
+\item{donors}{vector of strings corresponding to the designated names
 of the donors}
 }
 \value{

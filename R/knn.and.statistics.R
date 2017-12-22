@@ -7,10 +7,10 @@ NULL
 #' functionality to speed up the KNN process. It uses KD trees as default,
 #' along with k set to 100. Selection of K will vary based on the dataset.
 #' See k.selection.R.
-#' @param cell.df: the cell data frame used as input
-#' @param input.markers: markers to be used as input for knn
-#' @param k: the number of nearest neighbors to identify
-#' @param approx: boolean indicating whether a faster approximate knn should
+#' @param cell.df the cell data frame used as input
+#' @param input.markers markers to be used as input for knn
+#' @param k the number of nearest neighbors to identify
+#' @param approx boolean indicating whether a faster approximate knn should
 #' be used
 #' @return nn: list of 2, nn.index: index of knn (columns) for each cell (rows)
 #' nn.dist: euclidean distance of each k-nearest neighbor
@@ -47,11 +47,11 @@ fnn <- function(cell.df, input.markers, k = 100) {
 #'
 #' @param basal tibble of cells corresponding to the unstimulated condition
 #' @param stim a tibble of cells corresponding to the stimulated condition
-#' @param fold: a string that specifies the use of "median" or "mean" when
+#' @param fold a string that specifies the use of "median" or "mean" when
 #' calculating fold change
-#' @param stat.test: a string that specifies Mann-Whitney U test (mwu) or T test (t)
+#' @param stat.test a string that specifies Mann-Whitney U test (mwu) or T test (t)
 #' for q value calculation
-#' @param stim.name: a string corresponding to the name of the stim being tested
+#' @param stim.name a string corresponding to the name of the stim being tested
 #' compared to basal
 #' @return result: a named vector corresponding to the results of the
 #' "fold change" and mann-whitney u test
@@ -113,10 +113,10 @@ run.statistics <- function(basal,
 #' interest. The mean value of the markers of interest is calculated across
 #' the donors, such that each data point for the subsequent t-test represents
 #' a marker for a danor.
-#' @param basal: tibble that contains unstim for a knn including donor identity
-#' @param stim: tibble that contains stim for a knn including donor identity
-#' @param stim.name: string of the name of the current stim being tested
-#' @param donors: vector of strings corresponding to the designated names
+#' @param basal tibble that contains unstim for a knn including donor identity
+#' @param stim tibble that contains stim for a knn including donor identity
+#' @param stim.name string of the name of the current stim being tested
+#' @param donors vector of strings corresponding to the designated names
 #' of the donors
 #' @return result: a named vector of p values (soon to be q values) from the
 #' t test done on each marker
@@ -166,8 +166,8 @@ multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
 #' neighborhoods, which is far more than that of disjoint subsetting, this
 #' step is important given that there is an increased likelihood that some
 #' statistically significant differences will occur by chance.
-#' @param cells: tibble of change values, p values, and fraction condition 2
-#' @param threshold: a q value below which the change values will be reported
+#' @param cells tibble of change values, p values, and fraction condition 2
+#' @param threshold a q value below which the change values will be reported
 #' for that cell for that param. If no change is desired, this is set to 1.
 #' @return inputted p values, adjusted and therefore described as "q values"
 q.correction.thresholding <- function(cells, threshold) {
@@ -219,8 +219,8 @@ get.knn.de <- function(nn.matrix) {
 #' @title Make list of cells by features for each KNN member
 #' @description Takes the KNN function output and the cell data, and
 #' makes list where each element is a matrix of cells in the KNN and features.
-#' @param cell.data: tibble of cells by features
-#' @param nn.matrix: list of 2. First element is cells x 100 nearest neighbor
+#' @param cell.data tibble of cells by features
+#' @param nn.matrix list of 2. First element is cells x 100 nearest neighbor
 #' indices. Second element is cells x 100 nearest neighbor distances
 #' @return a list where each element is the cell number from the
 #' original cell.data tibble and a matrix of cells x feautures for its KNN
@@ -256,7 +256,7 @@ make.knn.list <- function(cell.data, nn.matrix) {
 #' @param fold a string that specifies the use of "median" or "mean" when
 #' calculating fold change
 #' @param stat.test string denoting Mann Whitney U test ("mwu") or T test ("t)
-#' @param multiple.donor.compare: a boolean that indicates whether t test
+#' @param multiple.donor.compare a boolean that indicates whether t test
 #' across multiple donors should be done
 #' @return result: tibble of raw changes and p values for each feature of
 #' interest, and fraction of cells with condition 2

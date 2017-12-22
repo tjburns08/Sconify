@@ -15,7 +15,7 @@ impute.testing(k.titration, cells, input.markers, test.markers)
 
 \item{test.markers}{the markers to be tested for imputation (either surface or scone)}
 
-\item{approx:}{boolean indicating whether the approximate knn should be used}
+\item{approx}{boolean indicating whether the approximate knn should be used}
 }
 \value{
 the median imputation error for each value k tested

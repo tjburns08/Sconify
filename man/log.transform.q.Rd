@@ -7,10 +7,10 @@
 \method{log}{transform.q}(dat, negative)
 }
 \arguments{
-\item{dat:}{tibble containing cells x features, with orignal expression,
+\item{dat}{tibble containing cells x features, with orignal expression,
 p values, and raw change}
 
-\item{negative:}{boolean value to determine whether to multiple transformed
+\item{negative}{boolean value to determine whether to multiple transformed
 p values by -1}
 }
 \value{

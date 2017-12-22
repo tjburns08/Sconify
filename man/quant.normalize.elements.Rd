@@ -8,7 +8,7 @@ quantile normalization, then outputs the quantile normalized list}
 quant.normalize.elements(dat.list)
 }
 \arguments{
-\item{dat.list:}{a list of tibbles}
+\item{dat.list}{a list of tibbles}
 }
 \value{
 the per-column quantile normalized list

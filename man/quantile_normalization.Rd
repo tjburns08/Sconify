@@ -7,7 +7,7 @@
 quantile_normalization(df)
 }
 \arguments{
-\item{df:}{a data frame with rows as cells and columns as features}
+\item{df}{a data frame with rows as cells and columns as features}
 }
 \value{
 a data frame where the columns have been quantile normalized

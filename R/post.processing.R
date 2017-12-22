@@ -2,12 +2,12 @@
 #' @title Add tSNE to your results.
 #'
 #' @description This function gives the user the option to add t-SNE to the
-#' final output, using the same input features used in KNN (eg. surface markers)
+#' final output, using the same input features used in KNN, eg. surface markers,
 #' as input for t-SNE.
-#' @param dat: matrix of cells by features, that contain all features needed
+#' @param dat matrix of cells by features, that contain all features needed
 #' for tSNE analysis
-#' @param input: the features to be used as input for tSNE (usually the same
-#' for knn generation)
+#' @param input the features to be used as input for tSNE,usually the same
+#' for knn generation
 #' @return result: dat, with tSNE1 and tSNE2 attached
 add.tsne <- function(dat, input) {
     result <- Rtsne(X = dat[,input],
@@ -44,9 +44,9 @@ subsample.and.tsne <- function(dat, input, numcells) {
 #'
 #' @description Takes all p values from the data and does a log10 transform
 #' for easier visualization.
-#' @param dat: tibble containing cells x features, with orignal expression,
+#' @param dat tibble containing cells x features, with orignal expression,
 #' p values, and raw change
-#' @param negative: boolean value to determine whether to multiple transformed
+#' @param negative boolean value to determine whether to multiple transformed
 #' p values by -1
 #' @return result: tibble of cells x features with all p values log10
 #' transformed
@@ -87,12 +87,12 @@ string.to.numbers <- function(strings) {
 #'
 #' @description Performs final processing and transformations on the scone data
 #' @export
-#' @param scone.output: tibble of the output of the given scone analysis
-#' @param cells: the tibble used as input for the scone.values function
-#' @param input: the input markers used for the knn calculation (to be used
+#' @param scone.output tibble of the output of the given scone analysis
+#' @param cells the tibble used as input for the scone.values function
+#' @param input the input markers used for the knn calculation (to be used
 #' for tsne here)
-#' @param tsne: boolean value to indicate whether tSNE is to be done
-#' @param log.transform.qvalue: boolean to indicate whether log transformation
+#' @param tsne boolean value to indicate whether tSNE is to be done
+#' @param log.transform.qvalue boolean to indicate whether log transformation
 #' of all q values is to be done
 #' @return result: the concatenated original input data with the scone derived
 #' data, with the option of the q values being inverse log10 transformed, and
@@ -136,7 +136,7 @@ post.processing <- function(scone.output,
 #' scales. Thus, untransforming them prior to Cytobank use allows the biaxials
 #' to be effectively visualized.
 #'
-#' @param dat a data matrix intended to be converted to fcs
+#' @param dta a data matrix intended to be converted to fcs
 #' @param outfile a string containing your original data matrix
 #' @param untransform takes data out of asinh(x/5) transformation
 #' @return fcs file containing your original data matrix

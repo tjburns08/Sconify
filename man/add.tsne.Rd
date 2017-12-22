@@ -7,17 +7,17 @@
 add.tsne(dat, input)
 }
 \arguments{
-\item{dat:}{matrix of cells by features, that contain all features needed
+\item{dat}{matrix of cells by features, that contain all features needed
 for tSNE analysis}
 
-\item{input:}{the features to be used as input for tSNE (usually the same
-for knn generation)}
+\item{input}{the features to be used as input for tSNE,usually the same
+for knn generation}
 }
 \value{
 result: dat, with tSNE1 and tSNE2 attached
 }
 \description{
 This function gives the user the option to add t-SNE to the
-final output, using the same input features used in KNN (eg. surface markers)
+final output, using the same input features used in KNN, eg. surface markers,
 as input for t-SNE.
 }

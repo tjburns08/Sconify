@@ -8,11 +8,11 @@ and outputs an fcs file containing said inroamtion.}
 data.to.fcs(dta, outfile, untransform)
 }
 \arguments{
+\item{dta}{a data matrix intended to be converted to fcs}
+
 \item{outfile}{a string containing your original data matrix}
 
 \item{untransform}{takes data out of asinh(x/5) transformation}
-
-\item{dat}{a data matrix intended to be converted to fcs}
 }
 \value{
 fcs file containing your original data matrix

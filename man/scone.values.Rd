@@ -28,7 +28,7 @@ calculating fold change}
 
 \item{stat.test}{string denoting Mann Whitney U test ("mwu") or T test ("t)}
 
-\item{multiple.donor.compare:}{a boolean that indicates whether t test
+\item{multiple.donor.compare}{a boolean that indicates whether t test
 across multiple donors should be done}
 }
 \value{

@@ -12,13 +12,13 @@ run.statistics(basal, stim, fold = "median", stat.test = "mwu", stim.name)
 
 \item{stim}{a tibble of cells corresponding to the stimulated condition}
 
-\item{fold:}{a string that specifies the use of "median" or "mean" when
+\item{fold}{a string that specifies the use of "median" or "mean" when
 calculating fold change}
 
-\item{stat.test:}{a string that specifies Mann-Whitney U test (mwu) or T test (t)
+\item{stat.test}{a string that specifies Mann-Whitney U test (mwu) or T test (t)
 for q value calculation}
 
-\item{stim.name:}{a string corresponding to the name of the stim being tested
+\item{stim.name}{a string corresponding to the name of the stim being tested
 compared to basal}
 }
 \value{

@@ -7,9 +7,9 @@
 make.knn.list(cell.data, nn.matrix)
 }
 \arguments{
-\item{cell.data:}{tibble of cells by features}
+\item{cell.data}{tibble of cells by features}
 
-\item{nn.matrix:}{list of 2. First element is cells x 100 nearest neighbor
+\item{nn.matrix}{list of 2. First element is cells x 100 nearest neighbor
 indices. Second element is cells x 100 nearest neighbor distances}
 }
 \value{
