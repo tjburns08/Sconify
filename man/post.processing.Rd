@@ -28,8 +28,3 @@ two additional tSNE columns being added to the data (from the Rtsne package)
 \description{
 Performs final processing and transformations on the scone data
 }
-\examples{
-final <- post.processing(scone.output = scone.output,
-                         cell.data = combined,
-                         input = input.markers)
-}

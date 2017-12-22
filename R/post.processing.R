@@ -74,6 +74,7 @@ log.transform.q <- function(dat, negative) {
 #' in which case they are converted to numbers (1, 2)
 #' @param strings vector of strings
 #' @return strings: same vector with each unique element converted to a number
+#' @export
 string.to.numbers <- function(strings) {
     elements <- unique(strings)
     for(i in 1:length(elements)) {
@@ -97,10 +98,6 @@ string.to.numbers <- function(strings) {
 #' @return result: the concatenated original input data with the scone derived
 #' data, with the option of the q values being inverse log10 transformed, and
 #' two additional tSNE columns being added to the data (from the Rtsne package)
-#' @examples
-#' final <- post.processing(scone.output = scone.output,
-#'                          cell.data = combined,
-#'                          input = input.markers)
 #' @export
 post.processing <- function(scone.output,
                             cell.data,

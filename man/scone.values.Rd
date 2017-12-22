@@ -40,11 +40,3 @@ This function is run following the KNN computation
 and respective cell grouping. The function also contains a progress ticker
 that allows one to determine how much time left in this function.
 }
-\examples{
-surface <- markers$surface
-scone <- markers$functional
-scone <- scone[scone != ""]
-conditions <- unique(combined$condition) # get name of basal
-nn <- fnn(combined, input.markers = surface, k = 100)
-scone <- scone.values(nn, combined, scone, "basal")
-}

@@ -34,10 +34,6 @@ impute <- function(cells, input.markers, nn) {
 #' @param input.markers markers to be used for the knn calculation
 #' @param test.markers the markers to be tested for imputation (either surface or scone)
 #' @return the median imputation error for each value k tested
-#' @examples
-#' k.titration <- c(10, 50, 100, 200, 500, 1000)
-#' ideal.k <- impute.testing(k.titration = k.titration, cells = combined,
-#'                           input.markers = input, test.markers = scone)
 #' @export
 impute.testing <- function(k.titration, cells, input.markers, test.markers) {
     final.distances <- lapply(k.titration, function(k) {

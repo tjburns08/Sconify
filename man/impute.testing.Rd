@@ -21,8 +21,3 @@ the median imputation error for each value k tested
 \description{
 Tests the euclidean distance error for imputation using knn and markers of interest
 }
-\examples{
-k.titration <- c(10, 50, 100, 200, 500, 1000)
-ideal.k <- impute.testing(k.titration = k.titration, cells = combined,
-                          input.markers = input, test.markers = scone)
-}

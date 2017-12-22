@@ -12,9 +12,6 @@ NULL
 #' @param k the number of nearest neighbors to identify
 #' @return nn: list of 2, nn.index: index of knn (columns) for each cell (rows)
 #' nn.dist: euclidean distance of each k-nearest neighbor
-#' @examples
-#' surface <- markers$surface
-#' nn <- fnn(combined, input.markers = surface, k = 100)
 #' @export
 fnn <- function(cell.df, input.markers, k = 100) {
     print("finding k-nearest neighbors")
@@ -258,13 +255,6 @@ make.knn.list <- function(cell.data, nn.matrix) {
 #' across multiple donors should be done
 #' @return result: tibble of raw changes and p values for each feature of
 #' interest, and fraction of cells with condition 2
-#' @examples
-#' surface <- markers$surface
-#' scone <- markers$functional
-#' scone <- scone[scone != ""]
-#' conditions <- unique(combined$condition) # get name of basal
-#' nn <- fnn(combined, input.markers = surface, k = 100)
-#' scone <- scone.values(nn, combined, scone, "basal")
 #' @export
 scone.values <- function(nn.matrix,
                          cell.data,
