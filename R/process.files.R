@@ -131,9 +131,14 @@ quant.normalize.elements <- function(dat.list) {
 #' Files where you want to name the patients need the following convention:
 #' "xxxx__patientID_stim.fcs"
 #' @param files a vector of file names (name = "anything_condition.fcs")
-#' @param numcells desiered number of cells in the matrix
+#' @param transform set to asinh if you want to do an asinh transform of
+#' all markers in the dataset
+#' @param numcells desiered number of cells in the matrix, set at 10k
 #' @param norm boolean that quantile normalizes the data if true
 #' @param scale boolean that converts all values to z scores if true
+#' @param input the static markers that will be used downstream in knn
+#' computation. These are included here to include the option of per-marker
+#' quantile normalization, in the event norm is set to TRUE
 #' @param name.multiple.donors boolean indicating whether multiple donors
 #' will be distinguished (as a separate "patient" column)
 #' @return result: a combined file set
@@ -239,6 +244,10 @@ process.multiple.files <- function(files,
 #' and compare the two halves.
 #'
 #' @param file the file we're going to split
+#' @param transform if set to asinh, performs asinh transformation on all
+#' markers of the dataset
+#' @param numcells the number of total cells to be subsampled to, set at 10k
+#' for default
 #' @param norm boolean of whether data should be quantile normalized
 #' @param scale boolean of whether data should be z-scored
 #' @param input.markers vector of strings indicating the markers

@@ -10,11 +10,18 @@ process.multiple.files(files, transform = "asinh", numcells = 10000,
 \arguments{
 \item{files}{a vector of file names (name = "anything_condition.fcs")}
 
-\item{numcells}{desiered number of cells in the matrix}
+\item{transform}{set to asinh if you want to do an asinh transform of
+all markers in the dataset}
+
+\item{numcells}{desiered number of cells in the matrix, set at 10k}
 
 \item{norm}{boolean that quantile normalizes the data if true}
 
 \item{scale}{boolean that converts all values to z scores if true}
+
+\item{input}{the static markers that will be used downstream in knn
+computation. These are included here to include the option of per-marker
+quantile normalization, in the event norm is set to TRUE}
 
 \item{name.multiple.donors}{boolean indicating whether multiple donors
 will be distinguished (as a separate "patient" column)}

@@ -88,7 +88,7 @@ string.to.numbers <- function(strings) {
 #' @description Performs final processing and transformations on the scone data
 #' @export
 #' @param scone.output tibble of the output of the given scone analysis
-#' @param cells the tibble used as input for the scone.values function
+#' @param cell.data the tibble used as input for the scone.values function
 #' @param input the input markers used for the knn calculation (to be used
 #' for tsne here)
 #' @param tsne boolean value to indicate whether tSNE is to be done

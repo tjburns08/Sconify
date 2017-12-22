@@ -11,6 +11,12 @@ splitFile(file, transform = "asinh", numcells = 10000, norm = FALSE,
 \arguments{
 \item{file}{the file we're going to split}
 
+\item{transform}{if set to asinh, performs asinh transformation on all
+markers of the dataset}
+
+\item{numcells}{the number of total cells to be subsampled to, set at 10k
+for default}
+
 \item{norm}{boolean of whether data should be quantile normalized}
 
 \item{scale}{boolean of whether data should be z-scored}

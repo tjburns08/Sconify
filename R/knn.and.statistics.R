@@ -10,8 +10,6 @@ NULL
 #' @param cell.df the cell data frame used as input
 #' @param input.markers markers to be used as input for knn
 #' @param k the number of nearest neighbors to identify
-#' @param approx boolean indicating whether a faster approximate knn should
-#' be used
 #' @return nn: list of 2, nn.index: index of knn (columns) for each cell (rows)
 #' nn.dist: euclidean distance of each k-nearest neighbor
 #' @examples
