@@ -124,46 +124,6 @@ post.processing <- function(scone.output,
     return(result)
 }
 
-#' @title Takes as input a labeled data matrix,
-#' and outputs an fcs file containing said inroamtion.
-#'
-#' @description Note that Cytobank's DROP feature in theory does what
-#' this script does for csv files, but its availability is currently limited
-#' and not all fcs processing software will have similar functionality.
-#' Note also the untransform parameter. This is for the instrances where
-#' an asinh transformation with a scale argument of 5 takes place within R
-#' (for example when one is clustering). Cytobank is not used to reading these
-#' scales. Thus, untransforming them prior to Cytobank use allows the biaxials
-#' to be effectively visualized.
-#'
-#' @param dta a data matrix intended to be converted to fcs
-#' @param outfile a string containing your original data matrix
-#' @param untransform takes data out of asinh(x/5) transformation
-#' @return fcs file containing your original data matrix
-#' @examples
-#' basal <- system.file('extdata',
-#'     'Bendall et al Cell Sample C_basal.fcs',
-#'     package = "Sconify")
-#' basal <- fcs.to.tibble(basal, transform = "asinh")
-#' data.to.fcs(basal, "basal.output.FCS")
-#' @export
-data.to.fcs <- function(dta, outfile, untransform) {
-    # Convert the data of interest into a matrix
-    if(!is.matrix(dta)) {
-        dta <- as.matrix(dta)
-    }
-
-    # Take it out of asinh transform
-    if(untransform == TRUE) {
-        dta <- sinh(dta)*5
-    }
-
-    # Convert into a flow frame
-    dta <- flowFrame(dta)
-
-    # now you can save it back to the filesystem
-    write.FCS(dta, outfile)
-}
 
 #' @title make.hist
 #'
