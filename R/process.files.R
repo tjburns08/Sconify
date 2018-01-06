@@ -14,6 +14,10 @@ NULL
 #'
 #' @param file the fcs file of interest
 #' @return the list of markers of interest, as a csv
+#' @examples
+#' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
+#'     package = "Sconify")
+#' get.marker.names("file")
 #' @export
 get.marker.names <- function(file) {
     cells <- fcs.to.tibble(file)
@@ -33,6 +37,10 @@ get.marker.names <- function(file) {
 #' @param file the fcs file containing cell infomration
 #' @param transform if set to asinh, then asinh transforms with scale arg 5
 #' @return tibble of info contained within the fcs file
+#' @examples
+#' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
+#'     package = "Sconify")
+#' fcs.to.tibble(file)
 #' @export
 fcs.to.tibble <- function(file, transform = "asinh") {
     # Read in the files and set the columns as human-named parameters
@@ -131,6 +139,12 @@ quant.normalize.elements <- function(dat.list) {
 #' @param name.multiple.donors boolean indicating whether multiple donors
 #' will be distinguished (as a separate "patient" column)
 #' @return result: a combined file set
+#' @examples
+#' file1 <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
+#'     package = "Sconify")
+#' file2 <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_IL7.fcs",
+#'     package = "Sconify")
+#' process.multiple.files(c(file1, file2), input.markers)
 #' @export
 process.multiple.files <- function(files,
                                    transform = "asinh",
@@ -230,6 +244,10 @@ process.multiple.files <- function(files,
 #' to be used as input
 #' @return tibble containing original markers and all values
 #' calculated by SCONE
+#' @examples
+#' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
+#'     package = "Sconify")
+#' splitFile(file, input.markers)
 #' @export
 splitFile <- function(file,
                       transform = "asinh",

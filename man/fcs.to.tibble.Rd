@@ -22,3 +22,8 @@ you just have to change the transform to anything else, and you'll
 get the raw data. This function is used in the main function
 process.multiple.files
 }
+\examples{
+file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
+    package = "Sconify")
+fcs.to.tibble(file)
+}
