@@ -20,3 +20,7 @@ original cell.data tibble and a matrix of cells x feautures for its KNN
 Takes the KNN function output and the cell data, and
 makes list where each element is a matrix of cells in the KNN and features.
 }
+\examples{
+ex.knn <- fnn(combined[1:1000,], input.markers)
+make.knn.list(combined[1:1000,], ex.knn)
+}

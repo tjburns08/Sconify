@@ -40,3 +40,8 @@ This function is run following the KNN computation
 and respective cell grouping. The function also contains a progress ticker
 that allows one to determine how much time left in this function.
 }
+\examples{
+ex.cells <- combined[sample(1:nrow(combined), 1000),]
+ex.nn <- fnn(ex.cells, input.markers)
+scone.values(ex.nn, ex.cells, funct.markers, "basal")
+}

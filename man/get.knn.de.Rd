@@ -18,3 +18,7 @@ ordered by row number, in the original input matrix of cells x features
 Obtain a density estimation derived from the original manifold,
 avoiding the lossiness of lower dimensional embeddings
 }
+\examples{
+ex.knn <- fnn(combined[1:1000,], input.markers)
+get.knn.de(ex.knn)
+}
