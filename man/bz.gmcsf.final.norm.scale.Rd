@@ -12,7 +12,7 @@ abundance ("fraction.cond.2), and two t-SNE coordinates.}
 bz.gmcsf.final.norm.scale
 }
 \description{
-The post-SCONE output from a normalized and z scored Bodenmiller-Zunder
-dataset pair of fcs files, one untreated and one treated with GM-CSF.
+The post-SCONE output from a per-marker quantile normalized and z scored
+treated with GM-CSF.
 }
 \keyword{datasets}

@@ -40,3 +40,10 @@
 #' are untreated cells and the last 5000 rows are IL7 treated.
 "combined"
 
+#' Random musing
+#'
+#' Seriously random
+#'
+#' @format a string
+"exist"
+
