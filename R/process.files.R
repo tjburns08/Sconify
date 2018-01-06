@@ -268,6 +268,8 @@ splitFile <- function(file,
 #'
 #' @description Just a random musing
 #'
+#' @example
+#' meaning.of.life()
 #' @export
 meaning.of.life <- function() {
     exist
