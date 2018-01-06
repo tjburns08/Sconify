@@ -198,6 +198,26 @@
 #' @format A vector of strings
 "md.scone"
 
+#' Nearest neighbors
+#'
+#' Nearest neighbor matrices for the Wanderlust dataset.
+#'
+#' @format List of 2. First element named nn.index is a matrix of 10,000 cells
+#' by 100 nearest neighbor positions, with the matrix elements being cell
+#' identity.The second element is a matrix of 10,000 cells by 100 nearest
+#' neighborhood positions with the matrix elements being distances.
+"nn"
+
+#' Scone output
+#'
+#' The scone output for the Wanderlust dataset
+#'
+#' @format A tibble of 10,000 cells by 34 features. These features include
+#' the KNN comparisons, KNN density estimation, and differential abundance.
+#' Note that this tibble gets concatenated with the original tibble, as well
+#' as two t-SNE dimensions in the post.processing() command of the pipeline.
+"scone.output"
+
 
 
 
