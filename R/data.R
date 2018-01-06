@@ -118,10 +118,36 @@
 
 #' KNN density
 #'
-#' A vector of per-cell KNN density.
+#' A vector of per-cell KNN density from the Wanderlust dataset, generated
+#' from the get.knn.de command. Of note, the SCONE pipeline will automatically
+#' generate this for you. This is just one divided by the average distance
+#' to KNN.
 #'
 #' @format A numeric vector
 "knn.density"
+
+#' KNN list
+#'
+#' A list of the features of each cell's KNN. This is from the optional
+#' make.knn.list function, that allows the user to do KNN-based operations
+#' that go beyond the scope of the Sconify package.
+#'
+#' @format A list of tibbles, with each element being a tibble of cells
+#' by features corresponding to a given cell's KNN. The element of the list
+#' corresponds to the cell identity (row) of the original input data.
+"knn.list"
+
+#' Markers for the Wanderlust dataset
+#'
+#' Both the surface and functional markers for the Wanderlust dataset
+#'
+#' @format a tibble with two columns, "surface" and "fucntional."
+"markers"
+
+
+
+
+
 
 
 
