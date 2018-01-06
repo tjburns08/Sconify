@@ -24,3 +24,6 @@ contain large numbers of cells that tSNE would either be too time-consuming
 or messy for. Regarding the latter, tSNE typically begins to look less clean
 in the range of 10^5 cells
 }
+\examples{
+subsample.and.tsne(combined, input.markers, 1000)
+}

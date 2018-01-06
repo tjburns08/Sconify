@@ -32,6 +32,8 @@ add.tsne <- function(dat, input) {
 #' typically surface markers
 #' @param numcells the number of cells to be downsampled to
 #' @return a subsampled tibble that contains tSNE values
+#' @examples
+#' subsample.and.tsne(combined, input.markers, 1000)
 #' @export
 subsample.and.tsne <- function(dat, input, numcells) {
     dat <- dat[sample(nrow(dat), numcells),]
@@ -74,6 +76,9 @@ log.transform.q <- function(dat, negative) {
 #' in which case they are converted to numbers (1, 2)
 #' @param strings vector of strings
 #' @return strings: same vector with each unique element converted to a number
+#' @examples
+#' ex.string <- c("unstim", "unstim", "stim", "stim", "stim")
+#' string.to.numbers(ex.string)
 #' @export
 string.to.numbers <- function(strings) {
     elements <- unique(strings)
@@ -98,6 +103,8 @@ string.to.numbers <- function(strings) {
 #' @return result: the concatenated original input data with the scone derived
 #' data, with the option of the q values being inverse log10 transformed, and
 #' two additional tSNE columns being added to the data (from the Rtsne package)
+#' @examples
+#' post.processing(scone.output, combined, input.markers, tsne = FALSE)
 #' @export
 post.processing <- function(scone.output,
                             cell.data,
@@ -130,8 +137,9 @@ post.processing <- function(scone.output,
 #' @param k the binwidth, set to 1/k
 #' @param column.label the label in the tibble's columns the function will search for
 #' @param x.label the label that the x axis will be labeled as
-#'
 #' @return a histogram of said vector in ggplot2 form
+#' @example
+#' make.hist(final, 100, "IL7.fraction.cond.2", "fraction IL7")
 #' @export
 make.hist <- function(dat,
                       k,

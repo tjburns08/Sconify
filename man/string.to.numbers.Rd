@@ -17,3 +17,7 @@ Takes a vector of strings and outputs simple numbers. This
 takes care of the case where conditions are listed as strings (basal, IL7),
 in which case they are converted to numbers (1, 2)
 }
+\examples{
+ex.string <- c("unstim", "unstim", "stim", "stim", "stim")
+string.to.numbers(ex.string)
+}
