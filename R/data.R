@@ -47,3 +47,34 @@
 #' @format a string
 "exist"
 
+#' Post-scone output of the "combiend" Wanderlust data.
+#'
+#' "combined" data taken through KNN generation and comparisons, along
+#' with t-SNE map generation.
+#'
+#' @format A tibble of 10,000 cells and 87 feaures, including the input
+#' features, the SCONE-generated comparisons, differential abundance, and
+#' two t-SNE dimesnions
+"final"
+
+#' A 2000 cell subset of the "final" data
+#'
+#' 2000 cells randomly taken from the 10,000 cell final dataset.
+#'
+#' @format A tibble of 2000 cells and 87 feaures, including the input
+#' features, the SCONE-generated comparisons, differential abundance, and two
+#' t-SNE runs. One genrated from the 10,000 cell data (bh-SNE1 and bh-SNE2),
+#' along with a run from the 2000 cell data (bh-SNE11 and bh-SNE21). This
+#' is used in the post-processing vignette to describe the subsample.and.tsne
+#' function from this package
+"final.sub"
+
+#' Functional markers from the Wanderlust dataset.
+#'
+#' These are the markers that will be used in the KNN comparisons, as opposed
+#' to the KNN generation.
+#'
+#' @format A vector of strings.
+"funct.markers"
+
+
