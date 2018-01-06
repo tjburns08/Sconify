@@ -10,8 +10,8 @@ and the names are the values of from a 10,000 cell dataset.}
 ideal.k
 }
 \description{
-This is the output of the impute.testing function, which finds the
-avergae imputation error of all signal markers imputed from KNN
-of surface markers.
+This is the output of the impute.testing function used on the
+Wanderlust dataset, which finds the avergae imputation error of all signal
+markers imputed from KNN of surface markers.
 }
 \keyword{datasets}

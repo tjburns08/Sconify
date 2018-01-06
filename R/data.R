@@ -79,13 +79,45 @@
 
 #' A named vector to help the user determine the ideal k.
 #'
-#' This is the output of the impute.testing function, which finds the
-#' avergae imputation error of all signal markers imputed from KNN
-#' of surface markers.
+#' This is the output of the impute.testing function used on the
+#' Wanderlust dataset, which finds the avergae imputation error of all signal
+#' markers imputed from KNN of surface markers.
 #'
 #' @format A named vector, where the elements are averge imputation error
 #' and the names are the values of from a 10,000 cell dataset.
 "ideal.k"
+
+#' IL7 data
+#'
+#' The IL7 treated cells from a single patient in the Wanderlust dataset
+#'
+#' @format A tibble of 10,000 cells by 51 features. All markers in the
+#' dataset, along with pre-calculated Wanderlust value and condition,
+#' which is a string that denotes that this is the "IL7" condition for
+#' each row. Important when this is concatenated with additional conditions
+"il7.data"
+
+#' Input markers for the Wanderlust dataset
+#'
+#' These are the markers that KNN generation will be done on for the
+#' Wanderlust dataset. These are mostly surface markers.These are the
+#' same markers one would use as input for clustering or t-SNE generation,
+#' for exmaple, as they are not expected to change through the duration
+#' of the quick IL7 stimulation.
+#'
+#' @format A vector of strings corresponding to the markers.
+"input.markers"
+
+#' K titration
+#'
+#' A titration of values of K used for a 10,000 cell dataset as input
+#' for the impute.testing function.
+#'
+#' @format A vector of numbers
+"k.titration"
+
+
+
 
 
 
