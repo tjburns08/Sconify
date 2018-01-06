@@ -144,6 +144,35 @@
 #' @format a tibble with two columns, "surface" and "fucntional."
 "markers"
 
+#' Multiple donor dataset post-SCONE
+#'
+#' The Fragidakis dataset with multiple donors, post-SCONE analysis.
+#'
+#' @format A tibble of 18,514 cells by 124 features. These features include
+#' original input markers, per-donor comparisons, per-cell comparisons,
+#' density, density estimation, and per-condition differential abundance.
+"md.final"
+
+#' Multiple donor dataset input markers
+#'
+#' The markers to be used for KNN generation for the Fragidakis multiple donor
+#' dataset. These are primarily surface markers
+#'
+#' @format A vector of strings
+"md.input"
+
+#' Fragidakis multiple donor dataset nearest neighbor information
+#'
+#' Two matrices corresponding to the KNN identity and distance.
+#'
+#' @format List of 2. First element named nn.index is a matrix of 19,992 cells
+#' by 200 nearest neighbor positions, with the matrix elements being cell
+#' identity.The second element is a matrix of 19,992 cells by 200 nearest
+#' neighborhood positions with the matrix elements being distances.
+"md.nn"
+
+
+
 
 
 
