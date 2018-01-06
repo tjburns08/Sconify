@@ -1,4 +1,4 @@
-#' @import magrittr tibble flowCore
+#' @import dplyr tibble flowCore
 NULL
 
 #' @title Takes in an example file as input and returns all markers
@@ -14,10 +14,6 @@ NULL
 #'
 #' @param file the fcs file of interest
 #' @return the list of markers of interest, as a csv
-#' @examples
-#' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
-#'     package = "Sconify")
-#' get.marker.names("file")
 #' @export
 get.marker.names <- function(file) {
     cells <- fcs.to.tibble(file)
@@ -144,7 +140,7 @@ quant.normalize.elements <- function(dat.list) {
 #'     package = "Sconify")
 #' file2 <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_IL7.fcs",
 #'     package = "Sconify")
-#' process.multiple.files(c(file1, file2), input.markers)
+#' process.multiple.files(c(file1, file2), input = input.markers)
 #' @export
 process.multiple.files <- function(files,
                                    transform = "asinh",
@@ -247,7 +243,7 @@ process.multiple.files <- function(files,
 #' @examples
 #' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
 #'     package = "Sconify")
-#' splitFile(file, input.markers)
+#' splitFile(file, input.markers = input.markers)
 #' @export
 splitFile <- function(file,
                       transform = "asinh",

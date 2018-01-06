@@ -16,7 +16,7 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.4)
 Imports: tibble, 
-    magrittr,
+    dplyr,
     rflann,
     flowCore,
     Rtsne,

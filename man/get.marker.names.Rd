@@ -22,8 +22,3 @@ list of interest. In particular, name the top of the column as "markers" if
 you're just altering the list. If you're doing to divide it into static
 and functional markers, produce two columns, naming them respectively.
 }
-\examples{
-file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
-    package = "Sconify")
-get.marker.names("file")
-}

@@ -40,5 +40,5 @@ file1 <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
     package = "Sconify")
 file2 <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_IL7.fcs",
     package = "Sconify")
-process.multiple.files(c(file1, file2), input.markers)
+process.multiple.files(c(file1, file2), input = input.markers)
 }
