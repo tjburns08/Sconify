@@ -28,3 +28,4 @@ Collate:
     'process.files.R'
     'knn.and.statistics.R'
     'post.processing.R'
+    'data.R'
