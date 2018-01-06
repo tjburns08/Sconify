@@ -138,7 +138,7 @@ post.processing <- function(scone.output,
 #' @param column.label the label in the tibble's columns the function will search for
 #' @param x.label the label that the x axis will be labeled as
 #' @return a histogram of said vector in ggplot2 form
-#' @example
+#' @examples
 #' make.hist(final, 100, "IL7.fraction.cond.2", "fraction IL7")
 #' @export
 make.hist <- function(dat,
