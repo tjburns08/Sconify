@@ -1,6 +1,8 @@
 Package: Sconify
 Type: Package
-Title: A toolkit for processing and manipulating data contained in FCS files.
+Title: A toolkit for processing and manipulating data contained in FCS files
+biocViews: SingleCell, FlowCytometry, Software, MultipleComparison, 
+    Visualization 
 Version: 0.99.1
 Author: Tyler J Burns
 Maintainer: Tyler J Burns <burns.tyler@gmail.com>
