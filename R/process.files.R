@@ -268,7 +268,7 @@ splitFile <- function(file,
 #'
 #' @description Just a random musing
 #'
-#' @example
+#' @examples
 #' meaning.of.life()
 #' @export
 meaning.of.life <- function() {

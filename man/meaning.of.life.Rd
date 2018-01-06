@@ -9,3 +9,6 @@ meaning.of.life()
 \description{
 Just a random musing
 }
+\examples{
+meaning.of.life()
+}

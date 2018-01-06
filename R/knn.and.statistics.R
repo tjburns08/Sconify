@@ -12,7 +12,7 @@ NULL
 #' @param k the number of nearest neighbors to identify
 #' @return nn: list of 2, nn.index: index of knn (columns) for each cell (rows)
 #' nn.dist: euclidean distance of each k-nearest neighbor
-#' @example
+#' @examples
 #' fnn(combined, input.markers)
 #' @export
 fnn <- function(cell.df, input.markers, k = 100) {
