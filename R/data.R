@@ -171,9 +171,32 @@
 #' neighborhood positions with the matrix elements being distances.
 "md.nn"
 
+#' The Fragidakis multiple donor dataset.
+#'
+#' The two condition tibble used as input for SCONE analysis.
+#'
+#' @format A tibble of 19,992 cells by 47 features. These features include
+#' all acquired markers, the per-cell condition (baseline, LPS, or IL6), and
+#' the donor (coded p101, p104, p106, and p108).
+"md"
 
+#' The SCONE output of the Fragidakis multiple donor dataset.
+#'
+#' The KNN comparisons, density, and per-cell differential abundance from the
+#' aforementioned dataset.
+#'
+#' @format A tibble of 19,992 cells and 75 features, that includes the
+#' aforementioned features, but not the original input features. These are
+#' added in the post-processing step along with a t-SNE map.
+"md.scone.output"
 
-
+#' KNN comparison markers for Fragidakis multiple donor dataset.
+#'
+#' The markers in the Fragidakis multiple donor dataset to be used for KNN
+#' (scone) comparisons
+#'
+#' @format A vector of strings
+"md.scone"
 
 
 
