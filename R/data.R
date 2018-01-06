@@ -116,6 +116,13 @@
 #' @format A vector of numbers
 "k.titration"
 
+#' KNN density
+#'
+#' A vector of per-cell KNN density.
+#'
+#' @format A numeric vector
+"knn.density"
+
 
 
 
