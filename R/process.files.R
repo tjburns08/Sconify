@@ -264,6 +264,10 @@ splitFile <- function(file,
     return(s.merge)
 }
 
+#' @title Meaning of life
+#'
+#' @description Just a random musing
+#'
 #' @export
 meaning.of.life <- function() {
     exist
