@@ -77,4 +77,16 @@
 #' @format A vector of strings.
 "funct.markers"
 
+#' A named vector to help the user determine the ideal k.
+#'
+#' This is the output of the impute.testing function, which finds the
+#' avergae imputation error of all signal markers imputed from KNN
+#' of surface markers.
+#'
+#' @format A named vector, where the elements are averge imputation error
+#' and the names are the values of from a 10,000 cell dataset.
+"ideal.k"
+
+
+
 
