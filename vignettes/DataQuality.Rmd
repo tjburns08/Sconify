@@ -17,7 +17,7 @@ There are many ways to assess differential abundance in CyTOF data (and high dim
 
 ```{r}
 library(Sconify)
-final$IL7.fraction.cond.2[1:10]
+wand.final$IL7.fraction.cond.2[1:10]
 knitr::opts_chunk$set(fig.width=6, fig.height=4) 
 ```
 
@@ -27,11 +27,11 @@ We can plot this as a distrubtion between 0 and 100%. We hypothesize that this d
 library(tidyverse)
 
 # Visualization
-make.hist(final, 100, "IL7.fraction.cond.2", "fraction IL7")
+make.hist(wand.final, 30, "IL7.fraction.cond.2", "fraction IL7")
 
 # Characteristics of the visualization
-median(final$IL7.fraction.cond.2)
-sd(final$IL7.fraction.cond.2)
+median(wand.final$IL7.fraction.cond.2)
+sd(wand.final$IL7.fraction.cond.2)
 
 ```
 
@@ -51,8 +51,8 @@ k.flip <- function(k, n) {
 }
 
 
-coin.toss <- tibble("binomial" = k.flip(100, 10000))
-make.hist(coin.toss, 100, "binomial", "fraction heads")
+coin.toss <- tibble("binomial" = k.flip(30, 1000))
+make.hist(coin.toss, 30, "binomial", "fraction heads")
 median(coin.toss$binomial)
 sd(coin.toss$binomial)
 ```
@@ -66,18 +66,18 @@ Given that the observed variation (sd = 0.08) is higher than that of our aforeme
 ```{r}
 
 # Raw per-cell IgM levels
-qplot(final$`bh-SNE1`, 
-      final$`bh-SNE2`, 
-      color = final$`IgM(Eu153)Di`, 
+qplot(wand.final$`bh-SNE1`, 
+      wand.final$`bh-SNE2`, 
+      color = wand.final$`IgM(Eu153)Di`, 
       xlab = "bh-SNE1",
       ylab = "bh-SNE2") + 
     labs(color = "Raw IgM expression") + 
     scale_color_gradientn(colors = c("black", "yellow"))
 
 # Fraction of cells belonging to the IL-7 condition. 
-qplot(final$`bh-SNE1`, 
-      final$`bh-SNE2`, 
-      color = final$IL7.fraction.cond.2, 
+qplot(wand.final$`bh-SNE1`, 
+      wand.final$`bh-SNE2`, 
+      color = wand.final$IL7.fraction.cond.2, 
       xlab = "bh-SNE1",
       ylab = "bh-SNE2") + 
     labs(color = "Fraction cells in IL7 condition") + 
