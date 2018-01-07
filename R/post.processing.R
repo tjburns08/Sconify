@@ -33,7 +33,7 @@ add.tsne <- function(dat, input) {
 #' @param numcells the number of cells to be downsampled to
 #' @return a subsampled tibble that contains tSNE values
 #' @examples
-#' subsample.and.tsne(combined, input.markers, 1000)
+#' subsample.and.tsne(wand.combined, input.markers, 500)
 #' @export
 subsample.and.tsne <- function(dat, input, numcells) {
     dat <- dat[sample(nrow(dat), numcells),]
@@ -104,7 +104,7 @@ string.to.numbers <- function(strings) {
 #' data, with the option of the q values being inverse log10 transformed, and
 #' two additional tSNE columns being added to the data (from the Rtsne package)
 #' @examples
-#' post.processing(scone.output, combined, input.markers, tsne = FALSE)
+#' post.processing(wand.scone, wand.combined, input.markers, tsne = FALSE)
 #' @export
 post.processing <- function(scone.output,
                             cell.data,
@@ -139,7 +139,7 @@ post.processing <- function(scone.output,
 #' @param x.label the label that the x axis will be labeled as
 #' @return a histogram of said vector in ggplot2 form
 #' @examples
-#' make.hist(final, 100, "IL7.fraction.cond.2", "fraction IL7")
+#' make.hist(wand.final, 100, "IL7.fraction.cond.2", "fraction IL7")
 #' @export
 make.hist <- function(dat,
                       k,
