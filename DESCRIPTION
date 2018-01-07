@@ -20,7 +20,8 @@ Imports: tibble,
     rflann,
     flowCore,
     Rtsne,
-    ggplot2
+    ggplot2,
+    magrittr
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown

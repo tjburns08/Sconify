@@ -1,4 +1,7 @@
-#' @import dplyr tibble flowCore
+#' @import tibble flowCore
+#' @importFrom dplyr bind_rows
+#' @importFrom dplyr bind_cols
+#' @importFrom magrittr "%>%"
 NULL
 
 #' @title Takes in an example file as input and returns all markers
@@ -40,7 +43,7 @@ get.marker.names <- function(file) {
 #' @export
 fcs.to.tibble <- function(file, transform = "asinh") {
     # Read in the files and set the columns as human-named parameters
-    cells <- flowCore::read.FCS(file = file)
+    cells <- read.FCS(file = file)
     params <- as.vector(pData(parameters(cells))$desc)
     colnames(cells) <- params
 
