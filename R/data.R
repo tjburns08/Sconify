@@ -1,12 +1,12 @@
-#' Basal data
+#' Wanderlust basal data
 #'
 #' The basal cells from a single patient in the Wanderlust dataset
 #'
-#' @format A tibble of 10,000 cells by 51 features. All markers in the
+#' @format A tibble of 1000 cells by 51 features. All markers in the
 #' dataset, along with pre-calculated Wanderlust value and condition,
 #' which is a string that denotes that this is the "basal" condition for
 #' each row. Important when this is concatenated with additional conditions
-"basal.data"
+"wand.basal"
 
 #' Bodenmiller-Zunder GM-CSF post-SCONE final data, that's been quantile
 #' normalized and z scored
@@ -30,15 +30,15 @@
 #' abundance ("fraction.cond.2), and two t-SNE coordinates.
 "bz.gmcsf.final"
 
-#' The Wanderlust dataset, combined basal and IL7 conditions
+#' Wanderlust data combined basal and IL7 cells
 #'
 #' A single patient pair of basal and IL7 treated cells from bone marrow
 #' gated for B cell precursors.
 #'
-#' @format A tibble of 10,000 cells by 51 features, including all the input
-#' markers, Wanderlust values, and the condition. The first 5000 rows
-#' are untreated cells and the last 5000 rows are IL7 treated.
-"combined"
+#' @format A tibble of 1000 cells by 51 features, including all the input
+#' markers, Wanderlust values, and the condition. The first 500 rows
+#' are untreated cells and the last 500 rows are IL7 treated.
+"wand.combined"
 
 #' Random musing
 #'
@@ -52,22 +52,10 @@
 #' "combined" data taken through KNN generation and comparisons, along
 #' with t-SNE map generation.
 #'
-#' @format A tibble of 10,000 cells and 87 feaures, including the input
+#' @format A tibble of 1000 cells and 87 feaures, including the input
 #' features, the SCONE-generated comparisons, differential abundance, and
 #' two t-SNE dimesnions
-"final"
-
-#' A 2000 cell subset of the "final" data
-#'
-#' 2000 cells randomly taken from the 10,000 cell final dataset.
-#'
-#' @format A tibble of 2000 cells and 87 feaures, including the input
-#' features, the SCONE-generated comparisons, differential abundance, and two
-#' t-SNE runs. One genrated from the 10,000 cell data (bh-SNE1 and bh-SNE2),
-#' along with a run from the 2000 cell data (bh-SNE11 and bh-SNE21). This
-#' is used in the post-processing vignette to describe the subsample.and.tsne
-#' function from this package
-"final.sub"
+"wand.final"
 
 #' Functional markers from the Wanderlust dataset.
 #'
@@ -87,15 +75,15 @@
 #' and the names are the values of from a 10,000 cell dataset.
 "ideal.k"
 
-#' IL7 data
+#' Wanderlust IL7 data
 #'
 #' The IL7 treated cells from a single patient in the Wanderlust dataset
 #'
-#' @format A tibble of 10,000 cells by 51 features. All markers in the
+#' @format A tibble of 1000 cells by 51 features. All markers in the
 #' dataset, along with pre-calculated Wanderlust value and condition,
 #' which is a string that denotes that this is the "IL7" condition for
 #' each row. Important when this is concatenated with additional conditions
-"il7.data"
+"wand.il7"
 
 #' Input markers for the Wanderlust dataset
 #'
@@ -115,27 +103,6 @@
 #'
 #' @format A vector of numbers
 "k.titration"
-
-#' KNN density
-#'
-#' A vector of per-cell KNN density from the Wanderlust dataset, generated
-#' from the get.knn.de command. Of note, the SCONE pipeline will automatically
-#' generate this for you. This is just one divided by the average distance
-#' to KNN.
-#'
-#' @format A numeric vector
-"knn.density"
-
-#' KNN list
-#'
-#' A list of the features of each cell's KNN. This is from the optional
-#' make.knn.list function, that allows the user to do KNN-based operations
-#' that go beyond the scope of the Sconify package.
-#'
-#' @format A list of tibbles, with each element being a tibble of cells
-#' by features corresponding to a given cell's KNN. The element of the list
-#' corresponds to the cell identity (row) of the original input data.
-"knn.list"
 
 #' Markers for the Wanderlust dataset
 #'
@@ -198,25 +165,15 @@
 #' @format A vector of strings
 "md.scone"
 
-#' Nearest neighbors
-#'
-#' Nearest neighbor matrices for the Wanderlust dataset.
-#'
-#' @format List of 2. First element named nn.index is a matrix of 10,000 cells
-#' by 100 nearest neighbor positions, with the matrix elements being cell
-#' identity.The second element is a matrix of 10,000 cells by 100 nearest
-#' neighborhood positions with the matrix elements being distances.
-"nn"
-
-#' Scone output
+#' Wanderlust scone output
 #'
 #' The scone output for the Wanderlust dataset
 #'
-#' @format A tibble of 10,000 cells by 34 features. These features include
+#' @format A tibble of 1000 cells by 34 features. These features include
 #' the KNN comparisons, KNN density estimation, and differential abundance.
 #' Note that this tibble gets concatenated with the original tibble, as well
 #' as two t-SNE dimensions in the post.processing() command of the pipeline.
-"scone.output"
+"wand.scone"
 
 
 
