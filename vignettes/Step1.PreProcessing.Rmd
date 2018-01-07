@@ -111,7 +111,7 @@ wand.combined <- process.multiple.files(files = c(basal, il7), input = surface, 
 ```
 ```{r}
 wand.combined
-unique(combined$condition)
+unique(wand.combined$condition)
 
 # Limit your matrix to surface markers, if just using those downstream
 wand.combined.input <- wand.combined[,surface]

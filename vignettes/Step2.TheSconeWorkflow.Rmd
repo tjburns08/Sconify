@@ -80,7 +80,7 @@ An individual with basic programming skills can iterate through these elements t
 
 ```{r}
 # Constructs KNN list, computes KNN density estimation
-wand.knn.list <- make.knn.list(cell.data = combined, nn.matrix = wand.nn)
+wand.knn.list <- make.knn.list(cell.data = wand.combined, nn.matrix = wand.nn)
 wand.knn.list[[8]]
 
 # Finds the KNN density estimation for each cell, ordered by column, in the original data matrix

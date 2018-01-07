@@ -65,7 +65,7 @@ If one has a large number of cells in the dataset (>100K), then t-SNE can become
 As such, I provide a wrapper that allows one to subsample the final data and run t-SNE on the subsampled data, producing a new tibble that contains the subsampled data along with two t-SNE dimensions added to it. Note the two added dimensions at the end of the tibble are called "bh-SNE11" and "bh-SNE21". This is because the dimensions "bh-SNE1" and "bh-SNE2" are already in the data, because t-SNE was run during the post processing step in this example. As I have stated, a user would realistically use this function with a much larger number of cells, in which case the user would have selected "tsne = FALSE" in the post.processing function detailed above in this vignette.
 
 ```{r}
-wand.final.sub <- subsample.and.tsne(dat = final, input = input.markers, numcells = 500)
+wand.final.sub <- subsample.and.tsne(dat = wand.final, input = input.markers, numcells = 500)
 wand.final.sub
 ```
 

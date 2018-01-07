@@ -203,7 +203,7 @@ q.correction.thresholding <- function(cells, threshold) {
 #' @return a vector where each element is the KNN-DE for that given cell,
 #' ordered by row number, in the original input matrix of cells x features
 #' @examples
-#' ex.knn <- fnn(wand.combined, input.markers)
+#' ex.knn <- fnn(wand.combined, input.markers, k = 30)
 #' get.knn.de(ex.knn)
 #' @export
 get.knn.de <- function(nn.matrix) {
@@ -225,8 +225,8 @@ get.knn.de <- function(nn.matrix) {
 #' @return a list where each element is the cell number from the
 #' original cell.data tibble and a matrix of cells x feautures for its KNN
 #' @examples
-#' ex.knn <- fnn(wand.combined, input.markers)
-#' make.knn.list(wand.combined, ex.knn)
+#' ex.knn <- fnn(wand.combined, input.markers, k = 30)
+#' knn.list <- make.knn.list(wand.combined, ex.knn)
 #' @export
 make.knn.list <- function(cell.data, nn.matrix) {
     # Unpack the KNN output
