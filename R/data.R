@@ -65,7 +65,8 @@
 #' @format A vector of strings.
 "funct.markers"
 
-#' A named vector to help the user determine the ideal k.
+#' A named vector to help the user determine the ideal k
+#' for the Wanderlust dataset.
 #'
 #' This is the output of the impute.testing function used on the
 #' Wanderlust dataset, which finds the avergae imputation error of all signal
@@ -73,7 +74,7 @@
 #'
 #' @format A named vector, where the elements are averge imputation error
 #' and the names are the values of from a 10,000 cell dataset.
-"ideal.k"
+"wand.ideal.k"
 
 #' Wanderlust IL7 data
 #'
@@ -98,7 +99,7 @@
 
 #' K titration
 #'
-#' A titration of values of K used for a 10,000 cell dataset as input
+#' A titration of values of K used for a 1000 cell dataset as input
 #' for the impute.testing function.
 #'
 #' @format A vector of numbers

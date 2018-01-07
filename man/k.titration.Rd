@@ -9,7 +9,7 @@
 k.titration
 }
 \description{
-A titration of values of K used for a 10,000 cell dataset as input
+A titration of values of K used for a 1000 cell dataset as input
 for the impute.testing function.
 }
 \keyword{datasets}
