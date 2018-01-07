@@ -29,5 +29,5 @@ two additional tSNE columns being added to the data (from the Rtsne package)
 Performs final processing and transformations on the scone data
 }
 \examples{
-post.processing(scone.output, combined, input.markers, tsne = FALSE)
+post.processing(wand.scone, wand.combined, input.markers, tsne = FALSE)
 }

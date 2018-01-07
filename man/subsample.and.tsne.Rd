@@ -25,5 +25,5 @@ or messy for. Regarding the latter, tSNE typically begins to look less clean
 in the range of 10^5 cells
 }
 \examples{
-subsample.and.tsne(combined, input.markers, 1000)
+subsample.and.tsne(wand.combined, input.markers, 500)
 }
