@@ -114,17 +114,17 @@ wand.combined
 unique(combined$condition)
 
 # Limit your matrix to surface markers, if just using those downstream
-wand.combined.input <- combined[,surface]
+wand.combined.input <- wand.combined[,surface]
 wand.combined.input
 ```
 ```{r, eval = FALSE}
 
 # We can do this on a single file as well. 
-wand.basal.data <- process.multiple.files(files = basal, numcells = 1000, scale = TRUE, input = surface)
+wand.basal <- process.multiple.files(files = basal, numcells = 1000, scale = TRUE, input = surface)
 ```
 ```{r}
-wand.basal.data
-unique(basal.data$condition)
+wand.basal
+unique(wand.basal$condition)
 
 ```
 
