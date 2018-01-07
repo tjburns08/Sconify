@@ -132,10 +132,7 @@ unique(wand.basal$condition)
 For the type of condition versus basal analysis shown above, it may behoove the user to have a control containing two basal files being compared to each other (eg. with phospho-protein shifts across clusters). To this end, I developed a function called splitFile() that takes in a single file as input and splits it into two sub-matricies such that one group of cells can be the "treated" condition. 
 
 ```{r}
-# The FCS files
-basal <- system.file('extdata',
-    'Bendall_et_al_Cell_Sample_C_basal.fcs',
-    package = "Sconify")
+# Using the aforementioned basal fcs file
 markers <- system.file('extdata',
     'markers.csv',
     package = "Sconify")

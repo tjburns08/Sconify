@@ -18,7 +18,7 @@ knitr::opts_chunk$set(fig.width=6, fig.height=4)
 This vignette covers what takes place following the generation of SCONE output detailed in TheSconeWorkflow.Rmd. The obvious step that needs to take place is the Scone generated columns being merged into the original input data. The user gets the option of log base 10 transforming q values, which is easier to visualize. The user also gets the option to run t-SNE on the data, such that said maps can be colored by SCONE generated values. In this case, t-SNE is run utilizing the Rtsne package, using the same markers that were used as input for the KNN. generation. 
 
 ```{r, eval = FALSE}
-final <- post.processing(scone.output = scone.output,
+wand.final <- post.processing(scone.output = wand.scone,
                          cell.data = combined,
                          input = input.markers)
 ```
@@ -27,32 +27,32 @@ final <- post.processing(scone.output = scone.output,
 library(Sconify)
 library(ggplot2)
 
-combined # input data
-scone.output # scone-generated data
-final # the data after post-processing
+wand.combined # input data
+wand.scone # scone-generated data
+wand.final # the data after post-processing
 
 # tSNE map shows highly responsive population of interest
-qplot(final$`bh-SNE1`, 
-      final$`bh-SNE2`, 
-      color = final$`pSTAT5(Nd150)Di.IL7.change`, 
+qplot(wand.final$`bh-SNE1`, 
+      wand.final$`bh-SNE2`, 
+      color = wand.final$`pSTAT5(Nd150)Di.IL7.change`, 
       xlab = "bh-SNE1",
       ylab = "bh-SNE2") + 
     labs(color = "IL7 -> pSTAT5 change") + 
     scale_color_gradientn(colors = c("black", "yellow")) 
 
 # tSNE map now colored by q value
-qplot(final$`bh-SNE1`, 
-      final$`bh-SNE2`, 
-      color = final$`pSTAT5(Nd150)Di.IL7.qvalue`, 
+qplot(wand.final$`bh-SNE1`, 
+      wand.final$`bh-SNE2`, 
+      color = wand.final$`pSTAT5(Nd150)Di.IL7.qvalue`, 
       xlab = "bh-SNE1",
       ylab = "bh-SNE2") + 
     labs(color = "IL7 -> pSTAT5 -log10(qvalue)") + 
     scale_color_gradientn(colors = c("black", "yellow"))
 
 # tSNE map colored by KNN density estimation
-qplot(final$`bh-SNE1`,
-      final$`bh-SNE2`,
-      color = final$density,
+qplot(wand.final$`bh-SNE1`,
+      wand.final$`bh-SNE2`,
+      color = wand.final$density,
       xlab = "bh-SNE1",
       ylab = "bh-SNE2") +
     labs(color = "density") +
@@ -64,12 +64,11 @@ qplot(final$`bh-SNE1`,
 If one has a large number of cells in the dataset (>100K), then t-SNE can become time-consuming and produce results that are less clean. I detail this in the following blog post: http://blog.cytobank.org/2017/01/17/fine-tune-visne-to-get-the-most-of-your-single-cell-data-analysis/.
 As such, I provide a wrapper that allows one to subsample the final data and run t-SNE on the subsampled data, producing a new tibble that contains the subsampled data along with two t-SNE dimensions added to it. Note the two added dimensions at the end of the tibble are called "bh-SNE11" and "bh-SNE21". This is because the dimensions "bh-SNE1" and "bh-SNE2" are already in the data, because t-SNE was run during the post processing step in this example. As I have stated, a user would realistically use this function with a much larger number of cells, in which case the user would have selected "tsne = FALSE" in the post.processing function detailed above in this vignette.
 
-```{r, eval = FALSE}
-final.sub <- subsample.and.tsne(dat = final, input = input.markers, numcells = 2000)
-```
 ```{r}
-final.sub
+wand.final.sub <- subsample.and.tsne(dat = final, input = input.markers, numcells = 500)
+wand.final.sub
 ```
+
 
 
 

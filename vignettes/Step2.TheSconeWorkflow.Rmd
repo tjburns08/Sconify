@@ -18,6 +18,7 @@ We read in input.scone.csv, which is our file modified (and renamed) from the ge
 
 ```{r}
 library(Sconify)
+library(dplyr)
 ```
 ```{r, eval = FALSE}
 # Markers from the user-generated excel file
@@ -28,30 +29,27 @@ markers <- read.csv("input.scone.csv")
 markers
 ```
 
-```{r, eval = FALSE}
+```{r}
 # addition in the end gets rid of empty strings
 input.markers <- markers$surface %>% .[. != ""] 
 funct.markers <- markers$functional %>% .[. != ""]
 
-# Selection of the k. Default is number of cells / 100. 
-k <- nrow(combined) %/% 100
+# Selection of the k. See "Finding Ideal K" vignette
+k <- 30
 
 # The built-in scone functions
-nn <- fnn(cell.df = combined, input.markers = input.markers, k = k)
-```
-
-```{r}
+wand.nn <- fnn(cell.df = wand.combined, input.markers = input.markers, k = k)
 # Cell identity is in rows, k-nearest neighbors are columns
 # List of 2 includes the cell identity of each nn, and the euclidean distance between
 #   itself and the cell of interest
 
 # Indices
-str(nn[[1]])
-nn[[1]][1:20, 1:10]
+str(wand.nn[[1]])
+wand.nn[[1]][1:20, 1:10]
 
 # Distance
-str(nn[[2]])
-nn[[2]][1:20, 1:10]
+str(wand.nn[[2]])
+wand.nn[[2]][1:20, 1:10]
 ```
 
 ### Finding scone values:
@@ -60,13 +58,13 @@ This function iterates through each KNN, and performs a series of calculations. 
 
 
 ```{r, eval = FALSE}
-scone.output <- scone.values(nn.matrix = nn, 
+wand.scone <- scone.values(nn.matrix = wand.nn, 
                       cell.data = combined, 
                       scone.markers = funct.markers, 
                       unstim = "basal")
 ```
 ```{r}
-scone.output
+wand.scone
 ```
 
 ### For programmers: performing additional per-KNN statistics
@@ -80,19 +78,14 @@ I use this metric to avoid the unusual properties of the volume of a sphere as i
 
 An individual with basic programming skills can iterate through these elements to perform the statistics of one's choosing. Examples would include per-KNN regression and classification, or feature imputation. The additional functionality is shown below, with the example knn.list in the package being the first ten instances: 
 
-```{r, eval = FALSE}
+```{r}
 # Constructs KNN list, computes KNN density estimation
-knn.list <- make.knn.list(cell.data = combined, nn.matrix = nn)
+wand.knn.list <- make.knn.list(cell.data = combined, nn.matrix = wand.nn)
+wand.knn.list[[8]]
 
 # Finds the KNN density estimation for each cell, ordered by column, in the original data matrix
-knn.density <- get.knn.de(nn.matrix = nn)
+wand.knn.density <- get.knn.de(nn.matrix = wand.nn)
+str(wand.knn.density)
 ```
 
-```{r}
-# Cell number 8 of the KNN list
-knn.list[[8]]
-
-# The KNN density estimation vector
-str(knn.density)
-```
 
