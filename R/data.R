@@ -97,74 +97,12 @@
 #' @format A vector of strings corresponding to the markers.
 "input.markers"
 
-#' K titration
-#'
-#' A titration of values of K used for a 1000 cell dataset as input
-#' for the impute.testing function.
-#'
-#' @format A vector of numbers
-"k.titration"
-
 #' Markers for the Wanderlust dataset
 #'
 #' Both the surface and functional markers for the Wanderlust dataset
 #'
 #' @format a tibble with two columns, "surface" and "fucntional."
 "markers"
-
-#' Multiple donor dataset post-SCONE
-#'
-#' The Fragidakis dataset with multiple donors, post-SCONE analysis.
-#'
-#' @format A tibble of 18,514 cells by 124 features. These features include
-#' original input markers, per-donor comparisons, per-cell comparisons,
-#' density, density estimation, and per-condition differential abundance.
-"md.final"
-
-#' Multiple donor dataset input markers
-#'
-#' The markers to be used for KNN generation for the Fragidakis multiple donor
-#' dataset. These are primarily surface markers
-#'
-#' @format A vector of strings
-"md.input"
-
-#' Fragidakis multiple donor dataset nearest neighbor information
-#'
-#' Two matrices corresponding to the KNN identity and distance.
-#'
-#' @format List of 2. First element named nn.index is a matrix of 19,992 cells
-#' by 200 nearest neighbor positions, with the matrix elements being cell
-#' identity.The second element is a matrix of 19,992 cells by 200 nearest
-#' neighborhood positions with the matrix elements being distances.
-"md.nn"
-
-#' The Fragidakis multiple donor dataset.
-#'
-#' The two condition tibble used as input for SCONE analysis.
-#'
-#' @format A tibble of 19,992 cells by 47 features. These features include
-#' all acquired markers, the per-cell condition (baseline, LPS, or IL6), and
-#' the donor (coded p101, p104, p106, and p108).
-"md"
-
-#' The SCONE output of the Fragidakis multiple donor dataset.
-#'
-#' The KNN comparisons, density, and per-cell differential abundance from the
-#' aforementioned dataset.
-#'
-#' @format A tibble of 19,992 cells and 75 features, that includes the
-#' aforementioned features, but not the original input features. These are
-#' added in the post-processing step along with a t-SNE map.
-"md.scone.output"
-
-#' KNN comparison markers for Fragidakis multiple donor dataset.
-#'
-#' The markers in the Fragidakis multiple donor dataset to be used for KNN
-#' (scone) comparisons
-#'
-#' @format A vector of strings
-"md.scone"
 
 #' Wanderlust scone output
 #'
