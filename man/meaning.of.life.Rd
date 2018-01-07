@@ -6,6 +6,9 @@
 \usage{
 meaning.of.life()
 }
+\value{
+A string containing a random musing
+}
 \description{
 Just a random musing
 }

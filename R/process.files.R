@@ -282,6 +282,8 @@ splitFile <- function(file,
 #'
 #' @description Just a random musing
 #'
+#' @return A string containing a random musing
+#'
 #' @examples
 #' meaning.of.life()
 #' @export
