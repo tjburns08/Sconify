@@ -4,7 +4,7 @@
 \name{bz.gmcsf.final}
 \alias{bz.gmcsf.final}
 \title{Bodenmiller-Zunder GM-CSF post-SCONE final data}
-\format{A tibble of 9,998 cells by 69 features. This includes all the
+\format{A tibble of 1000 cells by 69 features. This includes all the
 original parameters, the KNN-generated comparisons, differential
 abundance ("fraction.cond.2), and two t-SNE coordinates.}
 \usage{
@@ -12,6 +12,7 @@ bz.gmcsf.final
 }
 \description{
 The post-SCONE output from Bodenmiller-Zunder dataset pair of fcs files,
-one untreated and one treated with GM-CSF.
+one untreated and one treated with GM-CSF.We ran this on 10,000 cells and
+subsampled to 1000 for this vignette.
 }
 \keyword{datasets}

@@ -9,13 +9,14 @@
 "wand.basal"
 
 #' Bodenmiller-Zunder GM-CSF post-SCONE final data, that's been quantile
-#' normalized and z scored
+#' normalized and z scored.
 #'
 #' The post-SCONE output from a per-marker quantile normalized and z scored
 #  Bodenmiller-Zunder dataset pair of fcs files, one untreated and one
-#' treated with GM-CSF.
+#' treated with GM-CSF. We ran this on 10,000 cells and sub-sampled
+#' to 1000 for this package.
 #'
-#' @format A tibble of 10,000 cells by 69 features. This includes all the
+#' @format A tibble of 1000 cells by 69 features. This includes all the
 #' original parameters, the KNN-generated comparisons, differential
 #' abundance ("fraction.cond.2), and two t-SNE coordinates.
 "bz.gmcsf.final.norm.scale"
@@ -23,9 +24,10 @@
 #' Bodenmiller-Zunder GM-CSF post-SCONE final data
 #'
 #' The post-SCONE output from Bodenmiller-Zunder dataset pair of fcs files,
-#' one untreated and one treated with GM-CSF.
+#' one untreated and one treated with GM-CSF.We ran this on 10,000 cells and
+#' subsampled to 1000 for this vignette.
 #'
-#' @format A tibble of 9,998 cells by 69 features. This includes all the
+#' @format A tibble of 1000 cells by 69 features. This includes all the
 #' original parameters, the KNN-generated comparisons, differential
 #' abundance ("fraction.cond.2), and two t-SNE coordinates.
 "bz.gmcsf.final"
