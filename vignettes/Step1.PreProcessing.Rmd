@@ -117,12 +117,10 @@ unique(wand.combined$condition)
 wand.combined.input <- wand.combined[,surface]
 wand.combined.input
 ```
-```{r, eval = FALSE}
 
+```{r}
 # We can do this on a single file as well. 
 wand.basal <- process.multiple.files(files = basal, numcells = 1000, scale = TRUE, input = surface)
-```
-```{r}
 wand.basal
 unique(wand.basal$condition)
 
