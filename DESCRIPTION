@@ -6,11 +6,13 @@ biocViews: SingleCell, FlowCytometry, Software, MultipleComparison,
 Version: 0.99.1
 Author: Tyler J Burns
 Maintainer: Tyler J Burns <burns.tyler@gmail.com>
-Description: This package reads in fcs files as input. The primary goal is to
-    prepare these files for R-based manipulations, like unsupervised learning. 
-    This includes converting the files into data matricies with markers of
-    interest, transformations, and normalizations. Included are functions to 
-    output these matricies as csv files and fcs files. 
+Description: This package does k-nearest neighbor based statistics and 
+visualizations with flow and mass cytometery data. This gives tSNE maps
+"fold change" functionality and provides a data quality metric by assessing
+manifold overlap between fcs files expected to be the same. Other applications
+using this package include imputation, marker redundancy, and testing the 
+relative information loss of lower dimension embeddings compared to the 
+original manifold.
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
