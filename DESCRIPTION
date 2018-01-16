@@ -3,7 +3,7 @@ Type: Package
 Title: A toolkit for performing KNN-based statistics for flow and mass cytometry data. 
 biocViews: SingleCell, FlowCytometry, Software, MultipleComparison, 
     Visualization 
-Version: 0.99.1
+Version: 0.99.2
 Author: Tyler J Burns
 Maintainer: Tyler J Burns <burns.tyler@gmail.com>
 Description: This package does k-nearest neighbor based statistics and 
