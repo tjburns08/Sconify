@@ -17,6 +17,7 @@ There are many ways to assess differential abundance in CyTOF data (and high dim
 
 ```{r}
 library(Sconify)
+library(ggplot2)
 wand.final$IL7.fraction.cond.2[1:10]
 knitr::opts_chunk$set(fig.width=6, fig.height=4) 
 ```
@@ -24,8 +25,6 @@ knitr::opts_chunk$set(fig.width=6, fig.height=4)
 We can plot this as a distrubtion between 0 and 100%. We hypothesize that this distribution of n cells and k nearest neighbors per cell will have the median and standard deviation of a coin tossed k times, with this action repeated n times. This is known formally as the binomial distribution with a probability set at 0.5. The analysis is below.
 
 ```{r}
-library(tidyverse)
-
 # Visualization
 make.hist(wand.final, 30, "IL7.fraction.cond.2", "fraction IL7")
 
@@ -51,7 +50,7 @@ k.flip <- function(k, n) {
 }
 
 
-coin.toss <- tibble("binomial" = k.flip(30, 1000))
+coin.toss <- data.frame("binomial" = k.flip(30, 1000))
 make.hist(coin.toss, 30, "binomial", "fraction heads")
 median(coin.toss$binomial)
 sd(coin.toss$binomial)
