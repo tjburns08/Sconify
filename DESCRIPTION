@@ -10,7 +10,7 @@ Description: This package does k-nearest neighbor based statistics and visualiza
 License: Artistic-2.0
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.5)
+Depends: R (>= 3.4)
 Imports: tibble, 
     dplyr,
     rflann,
