@@ -43,7 +43,7 @@ get.marker.names <- function(file) {
 #' @export
 fcs.to.tibble <- function(file, transform = "asinh") {
     # Read in the files and set the columns as human-named parameters
-    cells <- read.FCS(file = file)
+    cells <- read.FCS(filename = file)
     params <- as.vector(pData(parameters(cells))$desc)
     colnames(cells) <- params
 
