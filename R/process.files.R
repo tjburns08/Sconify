@@ -4,7 +4,7 @@
 #' @importFrom magrittr "%>%"
 NULL
 
-#' @title Takes in an example file as input and returns all markers
+#' @title Takes in an example file as input and returns all marker names
 #'
 #' @description This is a quick way to get a list of preferred marker names.
 #' This outputs a csv file containing all markers in the dataset in the name
