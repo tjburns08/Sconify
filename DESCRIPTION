@@ -22,7 +22,6 @@ RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
     ggplot2,
-    dplyr
 VignetteBuilder: knitr
 Collate: 
     'k.selection.R'
