@@ -78,6 +78,23 @@ test_that("Process multiple files effectively sub-samples", {
 
     expect_error(process.multiple.files(files = basal.file, numcells = 10.76,
                                         input = input))
+
+    expect_error(process.multiple.files(files = c(basal.file, stim.file), numcells = 1,
+                                        input = input))
+})
+
+test_that("Process multiple files divdes the contribution of each file equally", {
+
+    testing <- c(100, 99, 2)
+    lapply(testing, function(i) {
+        dat <- process.multiple.files(files = basal.file, numcells = 99,
+                                      input = input)
+        cond.dat <- dat[["condition"]]
+        conds <- unique(cond.dat)
+        cond1 <- cond.dat[cond.dat == conds[1]]
+        cond2 <- cond.dat[cond.dat == conds[2]]
+        expect_equal(length(cond1), length(cond2))
+    })
 })
 
 
