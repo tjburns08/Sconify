@@ -20,8 +20,7 @@ Imports: tibble,
     magrittr
 RoxygenNote: 6.0.1
 Suggests: knitr,
-    rmarkdown,
-    ggplot2
+    rmarkdown
 VignetteBuilder: knitr
 Collate: 
     'k.selection.R'
