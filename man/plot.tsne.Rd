@@ -22,3 +22,6 @@ Wrapper for ggplot2 based plotting of a tSNE map to color
 by markers from the post-processed file if tSNE was set to TRUE in
 the post-processing function.
 }
+\examples{
+plot.tsne(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
+}
