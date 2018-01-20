@@ -2,7 +2,7 @@
 % Please edit documentation in R/process.files.R
 \name{get.marker.names}
 \alias{get.marker.names}
-\title{Takes in an example file as input and returns all markers}
+\title{Takes in an example file as input and returns all marker names}
 \usage{
 get.marker.names(file)
 }

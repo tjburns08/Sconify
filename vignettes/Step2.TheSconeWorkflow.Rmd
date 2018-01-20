@@ -18,11 +18,10 @@ We read in input.scone.csv, which is our file modified (and renamed) from the ge
 
 ```{r}
 library(Sconify)
-library(dplyr)
 ```
 ```{r, eval = FALSE}
 # Markers from the user-generated excel file
-markers <- read.csv("input.scone.csv")
+markers <- parse.markers("input.scone.csv")
 ```
 ```{r}
 # How to convert your excel sheet into vector of static and functional markers
@@ -31,8 +30,8 @@ markers
 
 ```{r}
 # addition in the end gets rid of empty strings
-input.markers <- markers$surface %>% .[. != ""] 
-funct.markers <- markers$functional %>% .[. != ""]
+input.markers <- markers[[1]]
+funct.markers <- markers[[2]]
 
 # Selection of the k. See "Finding Ideal K" vignette
 k <- 30
