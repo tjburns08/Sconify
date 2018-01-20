@@ -1,4 +1,5 @@
-#' @import tibble flowCore utils
+#' @import tibble flowCore
+#' @importFrom utils write.csv
 #' @importFrom dplyr bind_rows
 #' @importFrom dplyr bind_cols
 #' @importFrom magrittr "%>%"
