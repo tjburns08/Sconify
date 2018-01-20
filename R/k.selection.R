@@ -1,4 +1,5 @@
 #' @import rflann
+#' @importFrom stats dist
 NULL
 
 #' @title Imputes values for all markers (used as input) for each cell
