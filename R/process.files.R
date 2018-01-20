@@ -3,6 +3,7 @@
 #' @importFrom dplyr bind_rows bind_cols
 #' @importFrom magrittr "%>%"
 #' @importFrom stats complete.cases
+#' @importFrom readr read_csv
 NULL
 
 #' @title Takes in an example file as input and returns all marker names
