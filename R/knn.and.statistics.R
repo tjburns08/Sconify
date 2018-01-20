@@ -1,9 +1,5 @@
 #' @import rflann
-#' @importFrom stats t.test
-#' @importFrom stats wilcox.test
-#' @importFrom stats na.fail
-#' @importFrom stats p.adjust
-#' @importFrom stats median
+#' @importFrom stats t.test wilcox.test na.fail p.adjust median
 NULL
 
 #' @title Compute knn using the fnn algorithm

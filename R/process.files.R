@@ -1,7 +1,6 @@
 #' @import tibble flowCore
 #' @importFrom utils write.csv
-#' @importFrom dplyr bind_rows
-#' @importFrom dplyr bind_cols
+#' @importFrom dplyr bind_rows bind_cols
 #' @importFrom magrittr "%>%"
 #' @importFrom stats complete.cases
 NULL
