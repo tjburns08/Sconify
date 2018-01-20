@@ -81,9 +81,12 @@ fcs.to.tibble <- function(file, transform = "asinh") {
     return(cells)
 }
 
-#' @title Performs quantile normalization on the data frame (patient) of interest
+#' @title Performs quantile normalization on the data frame (patient)
+#' of interest
 #'
-#' @description Credit goes to: http://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/
+#' @description Credit goes to:
+#' http://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/
+#' for this function
 #'
 #' @param df a data frame with rows as cells and columns as features
 #' @return a data frame where the columns have been quantile normalized
