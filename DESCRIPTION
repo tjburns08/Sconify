@@ -19,7 +19,8 @@ Imports: tibble,
     ggplot2,
     magrittr,
     utils,
-    stats
+    stats,
+    readr
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown
