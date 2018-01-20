@@ -6,7 +6,10 @@
 #' @importFrom readr read_csv
 NULL
 
-utils::globalVariables("exist")
+# Exist is a data object stored within the package
+# . is a placeholder for a varable being piped using magrittr, used throughout
+#   the package
+utils::globalVariables(c("exist", "."))
 
 #' @title Takes in an example file as input and returns all marker names
 #'
