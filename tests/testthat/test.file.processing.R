@@ -62,10 +62,22 @@ test_that("Process multiple files effectively sub-samples", {
     testing <- c(cell.number,
                  cell.number %/% 2,
                  cell.number %/% 4,
-                 cell.number %/% 8,
-                 1,
-                 0)
-    dat <- process.multiple.files(files = basal.file)
+                 cell.number %/% 8)
+
+    lapply(testing, function(i) {
+        curr <- process.multiple.files(files = basal.file, numcells = i,
+                                       input = input)
+        expect_equal(nrow(curr), i)
+    })
+
+    expect_error(process.multiple.files(files = basal.file, numcells = 0,
+                                        input = input))
+
+    expect_error(process.multiple.files(files = basal.file, numcells = -3,
+                                        input = input))
+
+    expect_error(process.multiple.files(files = basal.file, numcells = 10.76,
+                                        input = input))
 })
 
 

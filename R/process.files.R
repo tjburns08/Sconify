@@ -185,10 +185,14 @@ process.multiple.files <- function(files,
                                    name.multiple.donors = FALSE) {
 
     # Edge case
-    if(numcells < length(files) {
+    if(numcells < length(files)) {
         stop("Please select a subsampling number greater than the number
              of files being used as input")
-    })
+    }
+
+    if(numcells %% 1 != 0) {
+        stop("Please select a subsampling number that is whole")
+    }
 
     n <- numcells %/% length(files) # integer division
 
