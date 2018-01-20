@@ -2,7 +2,7 @@
 NULL
 
 # ..count.. is part of the histogram syntax in ggplot2
-utils::globalVariables("count")
+utils::globalVariables("..count..")
 
 #' @title Add tSNE to your results.
 #'
