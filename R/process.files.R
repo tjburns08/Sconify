@@ -1,10 +1,12 @@
 #' @import tibble flowCore
-#' @importFrom utils write.csv
+#' @importFrom utils write.csv globalVariables
 #' @importFrom dplyr bind_rows bind_cols
 #' @importFrom magrittr "%>%"
 #' @importFrom stats complete.cases
 #' @importFrom readr read_csv
 NULL
+
+utils::globalVariables("exist")
 
 #' @title Takes in an example file as input and returns all marker names
 #'
