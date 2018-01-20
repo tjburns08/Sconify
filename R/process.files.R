@@ -25,6 +25,27 @@ get.marker.names <- function(file) {
     return(result)
 }
 
+
+#' @title Parse markers contained in a Sconify-directed marker file
+#'
+#' @description This occurs after the user has modified the markers.csv file
+#' to determine which markers are to be used as input for KNN and which markers
+#' are to be used for within-knn comparisons
+#'
+#' @param marker.file modified markers.csv file, now containing two columns.
+#' the left column containing KNN input markers, and the right column
+#' containing KNN comparison markers
+#' @return a list of 2 vectors of strings. The first element, labeled "input"
+#' is a vector KNN input markers. THe second slemenet, labeled "functional"
+#' are the markers to be used in the KNN based comparisons
+#' @export
+parse.markers <- function(marker.file) {
+    markers <- read_csv(marker.file)
+    input <- markers[[1]] %>% .[complete.cases(.)]
+    funct <- markers[[2]] %>% .[complete.cases(.)]
+    return(list(input = input, functional = funct))
+}
+
 #' @title Takes a file as input and returns a data frame of cells by features
 #' @description This function is a quick way to take the exprs content of
 #' a fcs file, do an asinh transform, and create a tibble data structure
