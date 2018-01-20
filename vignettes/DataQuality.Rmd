@@ -64,8 +64,8 @@ Given that the observed variation (sd = 0.108) is higher than that of our aforem
 ```{r}
 
 # Raw per-cell IgM levels
-plot.tsne(wand.final, "IgM(Eu153)Di", "Raw IgM expression")
-plot.tsne(wand.final, "IL7.fraction.cond.2", "Fraction cells in Il7 condition")
+tsne.vis(wand.final, "IgM(Eu153)Di", "Raw IgM expression")
+tsne.vis(wand.final, "IL7.fraction.cond.2", "Fraction cells in Il7 condition")
 
 
 ```
@@ -103,10 +103,10 @@ We observe that non-normalized data appears to have a global "drift" in the nort
 
 ```{r}
 # t-SNE map colored by KNN-based fraction GM-CSF
-plot.tsne(bz.gmcsf.final, "fraction.cond2", "Fraction GM-CSF")
+tsne.vis(bz.gmcsf.final, "fraction.cond2", "Fraction GM-CSF")
 
 # t-SNE map colored by KNN-based fraction GM-CSF
-plot.tsne(bz.gmcsf.final.norm.scale, "fraction.cond2", "Fraction GM-CSF")
+tsne.vis(bz.gmcsf.final.norm.scale, "fraction.cond2", "Fraction GM-CSF")
 ```
 
 

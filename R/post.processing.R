@@ -167,9 +167,9 @@ make.hist <- function(dat,
 #' ensuing plot. Set to the marker string as default.
 #' @return A plot of bh-SNE1 x bh-SNE2 colored by the specified marker.
 #' @examples
-#' plot.tsne(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
+#' tsne.vis(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
 #' @export
-plot.tsne <- function(final, marker, label = marker) {
+tsne.vis <- function(final, marker, label = marker) {
 
     # Edge case: make sure marker is in the column names of the final data
     if(is.na(match(marker, colnames(final)))) {
