@@ -183,6 +183,13 @@ process.multiple.files <- function(files,
                                    scale = FALSE,
                                    input,
                                    name.multiple.donors = FALSE) {
+
+    # Edge case
+    if(numcells < length(files) {
+        stop("Please select a subsampling number greater than the number
+             of files being used as input")
+    })
+
     n <- numcells %/% length(files) # integer division
 
     # Turn input into a list

@@ -1,3 +1,4 @@
+~%2FDocuments%2Fcareer%2Fconsulting%2Fpfizer%2Ftumor.immune.project%2Fanalysis%2Fcytof_workflow%2Fworkflow.analysis%2Funit.testing%2Ftest_workflow.R="FC9C5B9D"
 ~%2FDocuments%2Fcareer%2Fconsulting%2Fpfizer%2Ftumor.immune.project%2Fqc%2Fdo.we.need.to.normalize.for%2Fdynamic.range.analysis.R="D34B46C1"
 ~%2FDocuments%2Fcareer%2Fdrfz%2Faxel.ra.project%2Fvisualize.files.by.donor.R="4569FC98"
 ~%2FDocuments%2Flocal.R.projects%2FSconify%2F.gitignore="2907746E"
@@ -36,6 +37,8 @@
 ~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2FR%2Fknn.and.statistics.R="47BB12D0"
 ~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2FR%2Fpost.processing.R="CFC37EF"
 ~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2FR%2Fprocess.files.R="31BCCA61"
+~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2Ftests%2Ftestthat%2Ftest.file.processing.R="FAD37473"
+~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2Ftests%2Ftestthat.R="BEF568BD"
 ~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2Fvignettes%2FDataQuality.Rmd="3FA12716"
 ~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2Fvignettes%2FStep1.PreProcessing.Rmd="33067B13"
 ~%2FDocuments%2Flocal.projects%2FKNN%2FScone%2Fcode%2FSconify%2Fvignettes%2FStep2.TheSconeWorkflow.Rmd="1A929F29"
