@@ -21,7 +21,7 @@ Imports: tibble,
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown,
-    ggplot2,
+    ggplot2
 VignetteBuilder: knitr
 Collate: 
     'k.selection.R'
