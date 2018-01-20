@@ -151,3 +151,74 @@ make.hist <- function(dat,
         theme(text = element_text(size = 20)) +
         xlab(x.label)
 }
+
+#' @title Plot a tSNE map colored by a marker of interest
+#'
+#' @description Wrapper for ggplot2 based plotting of a tSNE map to color
+#' by markers from the post-processed file if tSNE was set to TRUE in
+#' the post-processing function.
+#'
+#' @param final The tibble of cells by features outputted from the
+#' post.processing function. These features encompass both regular markers
+#' from the original data and the KNN statistics processed markers
+#' @param marker String containing some or all of the marker name of interest.
+#' Ideally paste the literal marker name here.
+#' @param statistic User can choose "exp" = expression, "qvalue" = q value,
+#' or "change" = change between two comparisons. Note that the q value should
+#' be -log10 transformed for proper visualization here. This is a parameter
+#' in the post.processing function.
+#' @return A plot of bh-SNE1 x bh-SNE2 colored by the specified marker. If
+#' statistic was set to "none" then multiple plots may be returned, for
+#' example containing the expression, the q value, and the change of a
+#' phospho protein of interest.
+plot.tsne <- function(final, marker, label) {
+
+    # Find the exact names of the markers in the final data object
+    tmp <- colnames(final) %>%
+        .[grep(marker, .)]
+
+    # Sort further only if the user is interested in a statistic
+    #   other than expression
+    if(statistic != "none" & statistic != "exp") {
+        tmp <- tmp[grep(statistic, tmp)]
+    }
+
+    if(length(tmp) == 0) {
+        stop("Marker and statistic parameters did not match the column names of
+             the final output")
+    }
+
+    # This makes ggplot objects for all values stored in tmp if it is a
+    #   vector of strings greater than length 1
+    if(length(tmp) > 1) {
+
+        # Make a plot for all possible statistics (expression qvalue, change)
+        p <- lapply(tmp, function(i) {
+            qplot(final[["bh-SNE1"]],
+                  final[["bh-SNE2"]],
+                  color = wand.final[[i]],
+                  xlab = "bh-SNE1",
+                  ylab = "bh-SNE2") +
+                labs(color = i) +
+                scale_color_gradientn(colors = c("black", "yellow"))
+        })
+
+        # For the special case where one only wants to see expression
+        if(statistic == "exp") {
+            p <- p[[1]] # First element will always be expression
+            p <- p + labs(color = paste(marker, "expression"))
+        }
+
+    } else {
+        # Otherwise just plot what's in tmp
+        p <- qplot(final[["bh-SNE1"]],
+                   final[["bh-SNE2"]],
+                   color = wand.final[[tmp]],
+                   xlab = "bh-SNE1",
+                   ylab = "bh-SNE2") +
+            labs(color = paste(marker, statistic)) +
+            scale_color_gradientn(colors = c("black", "yellow"))
+    }
+
+    return(p)
+}
