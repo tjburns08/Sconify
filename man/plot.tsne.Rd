@@ -13,6 +13,9 @@ from the original data and the KNN statistics processed markers}
 
 \item{marker}{String that matches the marker name in the final data object
 exactly.}
+
+\item{label}{a string that indicates the name of the color label in the
+ensuing plot. Set to the marker string as default.}
 }
 \value{
 A plot of bh-SNE1 x bh-SNE2 colored by the specified marker.

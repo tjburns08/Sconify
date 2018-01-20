@@ -163,6 +163,8 @@ make.hist <- function(dat,
 #' from the original data and the KNN statistics processed markers
 #' @param marker String that matches the marker name in the final data object
 #' exactly.
+#' @param label a string that indicates the name of the color label in the
+#' ensuing plot. Set to the marker string as default.
 #' @return A plot of bh-SNE1 x bh-SNE2 colored by the specified marker.
 #' @examples
 #' plot.tsne(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
