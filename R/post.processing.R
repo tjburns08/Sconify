@@ -176,7 +176,7 @@ plot.tsne <- function(final, marker, label = marker) {
         # Set up the ggplot object
         p <- qplot(final[["bh-SNE1"]],
                    final[["bh-SNE2"]],
-                   color = wand.final[[marker]],
+                   color = final[[marker]],
                    xlab = "bh-SNE1",
                    ylab = "bh-SNE2") +
             labs(color = paste(label)) +
