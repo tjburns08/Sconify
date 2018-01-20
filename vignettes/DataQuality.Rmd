@@ -104,23 +104,9 @@ We observe that non-normalized data appears to have a global "drift" in the nort
 ```{r}
 # t-SNE map colored by KNN-based fraction GM-CSF
 plot.tsne(bz.gmcsf.final, "fraction.cond2", "Fraction GM-CSF")
-qplot(bz.gmcsf.final$`bh-SNE1`,
-      bz.gmcsf.final$`bh-SNE2`,
-      color = bz.gmcsf.final$`fraction.cond2`,
-      xlab = "bh-SNE1",
-      ylab = "bh-SNE2") +
-    labs(color = "Fraction GM-CSF") +
-    scale_color_gradientn(colors = c("black", "yellow"), limits = c(0, 1))
 
 # t-SNE map colored by KNN-based fraction GM-CSF
-qplot(bz.gmcsf.final.norm.scale$`bh-SNE1`,
-      bz.gmcsf.final.norm.scale$`bh-SNE2`,
-      color = bz.gmcsf.final.norm.scale$`fraction.cond2`,
-      xlab = "bh-SNE1",
-      ylab = "bh-SNE2") +
-    labs(color = "Fraction GM-CSF") +
-    scale_color_gradientn(colors = c("black", "yellow"), limits = c(0, 1))
-
+plot.tsne(bz.gmcsf.final.norm.scale, "fraction.cond2", "Fraction GM-CSF")
 ```
 
 

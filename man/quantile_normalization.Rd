@@ -2,7 +2,8 @@
 % Please edit documentation in R/process.files.R
 \name{quantile_normalization}
 \alias{quantile_normalization}
-\title{Performs quantile normalization on the data frame (patient) of interest}
+\title{Performs quantile normalization on the data frame (patient)
+of interest}
 \usage{
 quantile_normalization(df)
 }
@@ -13,5 +14,7 @@ quantile_normalization(df)
 a data frame where the columns have been quantile normalized
 }
 \description{
-Credit goes to: http://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/
+Credit goes to:
+http://davetang.org/muse/2014/07/07/quantile-normalisation-in-r/
+for this function
 }
