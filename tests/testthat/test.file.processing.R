@@ -6,6 +6,8 @@ library(Sconify)
 library(testthat)
 context("Test the file processing arm of the Sconify package")
 
+################ READING IN DATA ################
+
 
 basal.file <- system.file('extdata',
                       'Bendall_et_al_Cell_Sample_C_basal.fcs',
@@ -20,6 +22,8 @@ markers.file <- system.file('extdata',
                         package = "Sconify")
 
 input <- parse.markers(markers.file)[[1]]
+
+################ THE TESTING ################
 
 # parse_markers
 test_that("Markers csv file is successfully imported", {
