@@ -298,6 +298,10 @@ splitFile <- function(file,
                       scale = FALSE,
                       input.markers) {
     # Create a subsample
+    if(length(file) > 1) {
+        stop("Please use only a single file as input")
+    }
+
     total.unstim <- process.multiple.files(files = file,
                                            numcells = numcells,
                                            transform = transform,

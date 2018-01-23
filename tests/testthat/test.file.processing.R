@@ -122,6 +122,19 @@ test_that("Simple quantile normalization case", {
     expect_equal(q.dat[[1]], q.dat[[2]])
 })
 
+# Split file
+test_that("Split file returns two conditions", {
+    dat <- splitFile(basal.file, numcells = 10000, input.markers = input)
+    expect_equal(length(unique(dat$condition)), 2)
+})
 
+test_that("Split file can only be run on a single file", {
+    expect_error(splitFile(c(basal.file, stim.file), numcells = 10000, input.markers = input))
+})
+
+test_that("Split file handles an odd number of cells", {
+    dat <- splitFile(basal.file, numcells = 99, input.markers = input)
+    expect_equal(nrow(dat), 98)
+})
 
 
