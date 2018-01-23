@@ -121,6 +121,7 @@ quantile_normalization <- function(df){
 #'
 #' @param dat.list a list of tibbles
 #' @return the per-column quantile normalized list
+#' @export
 quant.normalize.elements <- function(dat.list) {
     # Store the marker names for the re-naming when the list is reverted
     marker.names <- colnames(dat.list[[1]])

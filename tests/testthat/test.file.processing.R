@@ -4,6 +4,8 @@
 
 library(Sconify)
 library(testthat)
+library(magrittr)
+library(tibble)
 context("Test the file processing arm of the Sconify package")
 
 ################ READING IN DATA ################
@@ -100,6 +102,26 @@ test_that("Process multiple files divdes the contribution of each file equally",
         expect_equal(length(cond1), length(cond2))
     })
 })
+
+test_that("Quantile normalization only happens with two or more files", {
+    expect_error(process.multiple.files(basal.file, input = input, norm = TRUE))
+})
+
+# Quantile normalization testing
+test_that("Simple quantile normalization case", {
+    dat <- list(tibble(v1 = 1:10), tibble(v1 = 11:20))
+    q.dat <- quant.normalize.elements(dat)
+    expect_equal(q.dat[[1]], q.dat[[2]])
+
+    dat <- list(tibble(v1 = 1:5), tibble(v2 = 2, 4, 6, 8, 10))
+    q.dat <- quant.normalize.elements(dat)
+    expect_equal(q.dat[[1]], q.dat[[2]])
+
+    dat <- list(tibble(v1 = c(1, 3, 5, 7)), tibble(v2 = c(2, 4, 6, 8)))
+    q.dat <- quant.normalize.elements(dat)
+    expect_equal(q.dat[[1]], q.dat[[2]])
+})
+
 
 
 
