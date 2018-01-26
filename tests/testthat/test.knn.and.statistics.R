@@ -77,6 +77,10 @@ test_that("Scone wont perform statistics unless a proper basal name is used", {
                               unstim = "bas"))
 })
 
+test_that("Scone produces p values", {
+    expect_true(all(test.scone$`Ki67(Sm152)Di.IL7.qvalue` <= 1))
+})
+
 
 
 
