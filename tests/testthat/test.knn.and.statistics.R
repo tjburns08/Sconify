@@ -30,4 +30,8 @@ test_that("fnn does not work with some k values", {
     expect_error(fnn(wand.combined, input.markers = input.markers, k = -3))
 })
 
-test_that("fnn ")
+test_that("knn density estimation is produced", {
+    tmp <- get.knn.de(test.nn)
+    expect_equal(length(tmp), nrow(wand.combined))
+    expect_true(all(tmp > 0))
+})
