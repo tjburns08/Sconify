@@ -92,7 +92,7 @@ test_that("Scone produces fold q thresholded fold changes", {
 test_that("Scone does multiple donor stats only with donors", {
     expect_error(scone.values(nn.matrix = test.nn,
                               cell.data = wand.combined,
-                              scone.markers = funct,
+                              scone.markers = funct.markers,
                               unstim = "basal",
                               multiple.donor.compare = TRUE))
 })
