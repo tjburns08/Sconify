@@ -7,6 +7,10 @@ context("Test the knn and statistics arm of the sconify package")
 
 k <- 100
 test.nn <- fnn(wand.combined, input.markers = input.markers, k = k)
+test.scone <- scone.values(nn.matrix = test.nn,
+                    cell.data = wand.combined,
+                    scone.markers = funct.markers,
+                    unstim = "basal")
 
 test_that("fnn function produces a list of two", {
     expect_equal(length(test.nn), 2)
@@ -49,12 +53,30 @@ test_that("knn list is created for each cell", {
 })
 
 test_that("Scone values outputs a tibble of statistical values", {
-    tmp <- scone.values(nn.matrix = test.nn,
-                        cell.data = wand.combined,
-                        scone.markers = funct.markers,
-                        unstim = "basal")
-    expect_equal(ncol(tmp), 2*length(funct.markers) + 2)
+    expect_equal(ncol(test.scone), 2*length(funct.markers) + 2)
 })
+
+test_that("Scone values produces a proper knn density estimation", {
+    expect_true(all(test.scone$density, get.knn.de(test.nn)))
+})
+
+test_that("Scone produces a proper readout of differential abundance", {
+    expect_false(all(test.scone$IL7.fraction.cond.2 > 1))
+})
+
+test_that("Scone wont perform statistics unless a proper test name is used", {
+    expect_error(scone.values(nn.matrix = test.nn,
+                              scone.markers = funct.markers,
+                              unstim = "basal",
+                              stat.test = "tyler's test"))
+})
+
+test_that("Scone wont perform statistics unless a proper basal name is used", {
+    expect_error(scone.values(nn.matrix = test.nn,
+                              scone.markers = funct.markers,
+                              unstim = "bas"))
+})
+
 
 
 
