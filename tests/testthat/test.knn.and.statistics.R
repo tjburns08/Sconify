@@ -48,5 +48,13 @@ test_that("knn list is created for each cell", {
     expect_equal(nrow(tmp[[1]]), k)
 })
 
+test_that("Scone values outputs a tibble of statistical values", {
+    tmp <- scone.values(nn.matrix = test.nn,
+                        cell.data = wand.combined,
+                        scone.markers = funct.markers,
+                        unstim = "basal")
+    expect_equal(ncol(tmp), 2*length(funct.markers) + 2)
+})
+
 
 
