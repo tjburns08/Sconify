@@ -35,3 +35,10 @@ test_that("knn density estimation is produced", {
     expect_equal(length(tmp), nrow(wand.combined))
     expect_true(all(tmp > 0))
 })
+
+test_that("knn density estimation requires the list of two from fnn output", {
+    expect_error(get.knn.de(test.nn[[1]]))
+    expect_error(get.knn.de(test.nn[[2]]))
+})
+
+
