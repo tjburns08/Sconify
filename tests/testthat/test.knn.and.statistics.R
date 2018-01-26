@@ -5,7 +5,7 @@ library(testthat)
 library(Sconify)
 context("Test the knn and statistics arm of the sconify package")
 
-k <- 100
+k <- 50
 test.nn <- fnn(wand.combined, input.markers = input.markers, k = k)
 test.scone <- scone.values(nn.matrix = test.nn,
                     cell.data = wand.combined,
@@ -80,6 +80,12 @@ test_that("Scone wont perform statistics unless a proper basal name is used", {
 test_that("Scone produces FDR adjusted q-values", {
     expect_true(all(test.scone$`Ki67(Sm152)Di.IL7.qvalue` <= 1))
     expect_false(all(test.scone$`Ki67(Sm152)Di.IL7.qvalue` < 1)) # p.adjust
+})
+
+test_that("Scone produces fold q thresholded fold changes", {
+    tmp1 <- test.scone$`pSTAT5(Nd150)Di.IL7.qvalue` # 1.0
+    tmp2 <- test.scone$`pSTAT5(Nd150)Di.IL7.change`
+    expect_equal(which(tmp1 < 0.05), which(tmp2 > 0))
 })
 
 
