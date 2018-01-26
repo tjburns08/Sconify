@@ -41,4 +41,12 @@ test_that("knn density estimation requires the list of two from fnn output", {
     expect_error(get.knn.de(test.nn[[2]]))
 })
 
+test_that("knn list is created for each cell", {
+    tmp <- make.knn.list(wand.combined, test.nn)
+    expect_equal(length(tmp), nrow(wand.combined))
+    expect_true(all(colnames(tmp[[1]]) == colnames(wand.combined)))
+    expect_equal(nrow(tmp[[1]]), k)
+})
+
+
 
