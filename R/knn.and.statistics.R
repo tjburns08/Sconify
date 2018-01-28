@@ -24,6 +24,10 @@ fnn <- function(cell.df, input.markers, k = 100) {
         stop("k must be less than the total number of data points")
     }
 
+    if(k < 1) {
+        stop("Please select k greater than zero")
+    }
+
     input <- cell.df[,input.markers]
 
     # Using the rflann package
