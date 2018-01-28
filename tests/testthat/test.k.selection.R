@@ -1,6 +1,8 @@
 # Date: January 28, 2018
 # Procedure: testing the k selection
 # Purpose: unit testing
+library(Sconify)
+library(testthat)
 context("Testing the functionality of the ideal k finder")
 
 k.titration <- c(5, 50, 500)
@@ -9,7 +11,7 @@ test <- impute.testing(k.titration = k.titration,
                        input.markers = input.markers,
                        test.markers = funct.markers)
 
-test_that("High level desired output from the impute testing function", {
+test_that("High-level desired output from the impute testing function", {
     expect_equal(length(test), length(k.titration))
 })
 
@@ -18,6 +20,11 @@ test_that("Convex loss function expected", {
     expect_true(test[2] < test[3])
 })
 
-test_that("Edge case", {
-    expect_error()
+test_that("Edge case for improper k selection", {
+    expect_error(impute.testing(k.titration = c(-4),
+                                cells = wand.il7,
+                                input.markers = input.markers,
+                                test.markers = funct.markers))
 })
+
+
