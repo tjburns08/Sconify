@@ -97,6 +97,15 @@ test_that("Scone does multiple donor stats only with donors", {
                               multiple.donor.compare = TRUE))
 })
 
+test_that("Scone values output q values and fold changes", {
+    test.qvalue <- colnames(test.scone)[grep("qvalue", colnames(test.scone))]
+    test.change <- colnames(test.scone)[grep("change", colnames(test.scone))]
+    expect_equal(length(test.qvalue), length(funct.markers))
+    expect_equal(length(test.change), length(funct.markers))
+})
+
+
+
 
 
 
