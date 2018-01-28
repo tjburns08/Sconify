@@ -16,7 +16,33 @@ test_that("String to numbers works", {
     expect_equal(test.str, c(1, 1, 2, 1))
 })
 
-test.pp <- post.processing(scone.output = wand.scone, cell.data = wand.combined, input = input.markers, tsne = TRUE, log.transform.qvalue = TRUE)
+
 test_that("Basic post-processing functionality", {
+    test.pp <- post.processing(scone.output = wand.scone,
+                               cell.data = wand.combined,
+                               input = input.markers,
+                               tsne = TRUE,
+                               log.transform.qvalue = TRUE)
     expect_equal(ncol(test.pp), ncol(wand.final))
 })
+
+test_that("Log transforming q values works", {
+    test.pp <- post.processing(scone.output = wand.scone,
+                               cell.data = wand.combined,
+                               input = input.markers,
+                               tsne = FALSE,
+                               log.transform.qvalue = FALSE)
+    q <- test.pp[grep("qvalue", names(test.pp))]
+    expect_true(all(q <= 1))
+
+    test.ppq <- post.processing(scone.output = wand.scone,
+                               cell.data = wand.combined,
+                               input = input.markers,
+                               tsne = FALSE,
+                               log.transform.qvalue = TRUE)
+
+    expect_false(all(test.pp == test.ppq))
+    expect_true(max(test.ppq) > 1)
+})
+
+
