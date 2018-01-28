@@ -45,4 +45,8 @@ test_that("Log transforming q values works", {
     expect_true(max(test.ppq) > 1)
 })
 
+test_that("Edge cases for the tSNE vis function", {
+    expect_error(tsne.vis(final = wand.final, marker = "test", label = "test"))
+})
+
 
