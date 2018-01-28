@@ -49,4 +49,11 @@ test_that("Edge cases for the tSNE vis function", {
     expect_error(tsne.vis(final = wand.final, marker = "test", label = "test"))
 })
 
+test_that("Testing the output of the tSNE vis function", {
+    expect_type(tsne.vis(final = wand.final, marker = "pSTAT5(Nd150)Di.IL7.change", label = "test"), "list")
+})
+
+test_that("Testing the output of the make.hist function", {
+    expect_type(make.hist(wand.final, 100, "IL7.fraction.cond.2", "fraction IL7"), "list")
+})
 
