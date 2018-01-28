@@ -281,6 +281,10 @@ scone.values <- function(nn.matrix,
 
     # Get the donor names if you need it
     if(multiple.donor.compare == TRUE) {
+        if(is.na(match("donor", cell.data))) {
+            stop("Multiple donors not found. Please change
+                 multiple.donor.compare to FALSE")
+        }
         donors <- unique(cell.data$donor)
     }
 

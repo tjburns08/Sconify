@@ -57,7 +57,7 @@ test_that("Scone values outputs a tibble of statistical values", {
 })
 
 test_that("Scone values produces a proper knn density estimation", {
-    expect_true(all(test.scone$density, get.knn.de(test.nn)))
+    expect_true(all(test.scone$density == get.knn.de(test.nn)))
 })
 
 test_that("Scone produces a proper readout of differential abundance", {
