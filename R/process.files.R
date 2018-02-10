@@ -32,7 +32,6 @@ get.marker.names <- function(file) {
     return(result)
 }
 
-
 #' @title Parse markers contained in a Sconify-directed marker file
 #'
 #' @description This occurs after the user has modified the markers.csv file
