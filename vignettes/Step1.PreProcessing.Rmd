@@ -41,7 +41,7 @@ basal <- system.file('extdata',
      package = "Sconify")
 
 # Run this, and check your directory for "markers.csv"
-markers <- get.marker.names(basal)
+markers <- GetMarkerNames(basal)
 markers
 ```
 
@@ -81,11 +81,11 @@ basal <- system.file('extdata',
     package = "Sconify")
 
 # Example of data with no transformation
-basal.raw <- fcs.to.tibble(basal, transform = "none")
+basal.raw <- FcsToTibble(basal, transform = "none")
 basal.raw
 
 # Asinh transformation with a scale argument of 5
-basal.asinh <- fcs.to.tibble(basal, transform = "asinh")
+basal.asinh <- FcsToTibble(basal, transform = "asinh")
 basal.asinh
 
 ```
@@ -111,7 +111,7 @@ surface <- markers$surface
 ```
 ```{r}
 # Combining these. Note that default is sub-sampling to 10,000 cells, not normalizing, and not scaling
-wand.combined <- process.multiple.files(files = c(basal, il7), input = surface, numcells = 1000)
+wand.combined <- ProcessMultipleFiles(files = c(basal, il7), input = surface, numcells = 1000)
 wand.combined
 unique(wand.combined$condition)
 
@@ -142,7 +142,7 @@ markers <- read.csv(markers, stringsAsFactors = FALSE)
 surface <- markers$surface
 
 # The function
-split.data <- splitFile(file = basal, input.markers = surface, numcells = 1000)
+split.data <- SplitFile(file = basal, input.markers = surface, numcells = 1000)
 split.data
 unique(split.data$condition)
 ```
