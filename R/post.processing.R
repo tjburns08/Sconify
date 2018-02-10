@@ -7,8 +7,8 @@ utils::globalVariables("..count..")
 #' @title Add tSNE to your results.
 #'
 #' @description This function gives the user the option to add t-SNE to the
-#' final output, using the same input features used in KNN, eg. surface markers,
-#' as input for t-SNE.
+#' final output, using the same input features used in KNN, eg. surface
+#' markers, as input for t-SNE.
 #' @param dat matrix of cells by features, that contain all features needed
 #' for tSNE analysis
 #' @param input the features to be used as input for tSNE,usually the same
@@ -138,9 +138,11 @@ post.processing <- function(scone.output,
 #'
 #' @description Makes a histogram of the data that is inputted
 #'
-#' @param dat tibble consisting both of original markers and the appended values from scone
+#' @param dat tibble consisting both of original markers and the appended
+#' values from scone
 #' @param k the binwidth, set to 1/k
-#' @param column.label the label in the tibble's columns the function will search for
+#' @param column.label the label in the tibble's columns the function will
+#' search for
 #' @param x.label the label that the x axis will be labeled as
 #' @return a histogram of said vector in ggplot2 form
 #' @examples
