@@ -19,7 +19,7 @@ This vignette covers what takes place following the generation of SCONE output d
 
 ```{r, eval = FALSE}
 wand.final <- post.processing(scone.output = wand.scone,
-                         cell.data = combined,
+                         cell.data = wand.combined,
                          input = input.markers)
 ```
 

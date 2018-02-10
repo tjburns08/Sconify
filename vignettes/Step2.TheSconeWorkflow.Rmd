@@ -18,18 +18,13 @@ We read in input.scone.csv, which is our file modified (and renamed) from the ge
 
 ```{r}
 library(Sconify)
-```
-```{r, eval = FALSE}
 # Markers from the user-generated excel file
-markers <- parse.markers("input.scone.csv")
-```
-```{r}
+marker.file <- system.file('extdata', 'markers.csv', package = "Sconify")
+markers <- parse.markers(marker.file)
+
 # How to convert your excel sheet into vector of static and functional markers
 markers
-```
-
-```{r}
-# addition in the end gets rid of empty strings
+# Get the particular markers to be used as knn and knn statistics input
 input.markers <- markers[[1]]
 funct.markers <- markers[[2]]
 
