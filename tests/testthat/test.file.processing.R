@@ -64,7 +64,7 @@ test_that("Processing multiple files works on a single file", {
 })
 
 test_that("Process multiple files effectively sub-samples", {
-    cell.number <- nrow(fcs.to.tibble(basal.file))
+    cell.number <- nrow(FcsToTibble(basal.file))
     testing <- c(cell.number,
                  cell.number %/% 2,
                  cell.number %/% 4,

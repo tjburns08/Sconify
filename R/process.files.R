@@ -306,7 +306,7 @@ SplitFile <- function(file,
                                          norm = norm,
                                          scale = scale,
                                          input = input.markers,
-                                         ßname.multiple.donors = FALSE)
+                                         name.multiple.donors = FALSE)
 
     cell.rows <- 1:nrow(total.unstim)
 
