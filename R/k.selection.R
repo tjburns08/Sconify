@@ -9,7 +9,8 @@ NULL
 #'
 #' @param cells the input matrix of cells
 #' @param input.markers the markers the user wants to impute
-#' @param nn the matrix of k-nearest neighbors (derived perhaps NOT from the "input markers" above)
+#' @param nn the matrix of k-nearest neighbors
+#' (derived perhaps NOT from the "input markers" above)
 #' @return a data frame of imputed cells for the "input markers" of interest
 impute <- function(cells, input.markers, nn) {
     result <- lapply(1:nrow(cells), function(i) {
@@ -22,12 +23,14 @@ impute <- function(cells, input.markers, nn) {
 
 #' @title Impute testing
 #'
-#' @description Tests the euclidean distance error for imputation using knn and markers of interest
+#' @description Tests the euclidean distance error for imputation using knn
+#' and markers of interest
 #'
 #' @param k.titration a vector integer values of k to be tested
 #' @param cells a matrix of cells by features used as original input
 #' @param input.markers markers to be used for the knn calculation
-#' @param test.markers the markers to be tested for imputation (either surface or scone)
+#' @param test.markers the markers to be tested for imputation
+#' (either surface or scone)
 #' @return the median imputation error for each value k tested
 #' @examples
 #' impute.testing(k.titration = c(10, 20),
@@ -38,7 +41,8 @@ impute <- function(cells, input.markers, nn) {
 impute.testing <- function(k.titration, cells, input.markers, test.markers) {
     final.distances <- lapply(k.titration, function(k) {
         nn <- fnn(cell.df = cells, input.markers = input.markers, k = k)[[1]]
-        imputed.cells <- impute(cells = cells, input.markers = test.markers, nn = nn)
+        imputed.cells <- impute(cells = cells, input.markers = test.markers,
+                                nn = nn)
 
         print(k)
         # Get a vector of euclidean distances
