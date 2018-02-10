@@ -12,17 +12,11 @@ NULL
 #' @param nn the matrix of k-nearest neighbors (derived perhaps NOT from the "input markers" above)
 #' @return a data frame of imputed cells for the "input markers" of interest
 impute <- function(cells, input.markers, nn) {
-    result <- sapply(1:nrow(cells), function(i) {
+    result <- lapply(1:nrow(cells), function(i) {
         curr.nn <- cells[nn[i,],][,input.markers] %>% apply(., 2, mean)
     })
 
-    if(length(input.markers) > 1) {
-        result <- t(result) %>%
-            as.data.frame()
-    } else if(length(input.markers) == 1) {
-        result <- as.data.frame(result)
-    }
-
+    result <- do.call(rbind, result) %>% as.tibble()
     return(result)
 }
 
