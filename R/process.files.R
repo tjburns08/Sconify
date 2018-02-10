@@ -25,8 +25,8 @@ utils::globalVariables(c("exist", "."))
 #' @param file the fcs file of interest
 #' @return the list of markers of interest. This is to be written as a csv
 #' @export
-get.marker.names <- function(file) {
-    cells <- fcs.to.tibble(file)
+GetMarkerNames <- function(file) {
+    cells <- FcsToTibble(file)
     result <- colnames(cells)
     return(result)
 }
@@ -44,7 +44,7 @@ get.marker.names <- function(file) {
 #' is a vector KNN input markers. THe second slemenet, labeled "functional"
 #' are the markers to be used in the KNN based comparisons
 #' @export
-parse.markers <- function(marker.file) {
+ParseMarkers <- function(marker.file) {
     markers <- read_csv(marker.file)
     input <- markers[[1]] %>% .[complete.cases(.)]
     funct <- markers[[2]] %>% .[complete.cases(.)]
@@ -67,7 +67,7 @@ parse.markers <- function(marker.file) {
 #'     package = "Sconify")
 #' fcs.to.tibble(file)
 #' @export
-fcs.to.tibble <- function(file, transform = "asinh") {
+FcsToTibble <- function(file, transform = "asinh") {
     # Read in the files and set the columns as human-named parameters
     cells <- read.FCS(filename = file)
     params <- as.vector(pData(parameters(cells))$desc)
@@ -95,7 +95,7 @@ fcs.to.tibble <- function(file, transform = "asinh") {
 #'
 #' @param df a data frame with rows as cells and columns as features
 #' @return a data frame where the columns have been quantile normalized
-quantile_normalization <- function(df){
+QuantNormalize <- function(df){
     df_rank <- apply(df,2,rank,ties.method="first")
     df_sorted <- data.frame(apply(df, 2, sort))
     df_mean <- apply(df_sorted, 1, mean)
@@ -120,7 +120,7 @@ quantile_normalization <- function(df){
 #' @param dat.list a list of tibbles
 #' @return the per-column quantile normalized list
 #' @export
-quant.normalize.elements <- function(dat.list) {
+QuantNormalizeElements <- function(dat.list) {
     # Store the marker names for the re-naming when the list is reverted
     marker.names <- colnames(dat.list[[1]])
 
@@ -130,7 +130,7 @@ quant.normalize.elements <- function(dat.list) {
         curr <- lapply(dat.list, function(j) {
             slice <- j[,i]
         })
-        curr <- do.call(what = cbind, args = curr) %>% quantile_normalization()
+        curr <- do.call(what = cbind, args = curr) %>% QuantNormalize()
     })
 
     # Transpose again, leading to the original list of tibbles
@@ -175,13 +175,13 @@ quant.normalize.elements <- function(dat.list) {
 #'     package = "Sconify")
 #' process.multiple.files(c(file1, file2), input = input.markers)
 #' @export
-process.multiple.files <- function(files,
-                                   transform = "asinh",
-                                   numcells = 10000,
-                                   norm = FALSE,
-                                   scale = FALSE,
-                                   input,
-                                   name.multiple.donors = FALSE) {
+ProcessMultipleFiles <- function(files,
+                                 transform = "asinh",
+                                 numcells = 10000,
+                                 norm = FALSE,
+                                 scale = FALSE,
+                                 input,
+                                 name.multiple.donors = FALSE) {
 
     # Edge case
     if(numcells < length(files)) {
@@ -197,7 +197,7 @@ process.multiple.files <- function(files,
 
     # Turn input into a list
     dat <- lapply(files, function(i){
-        curr <- fcs.to.tibble(i, transform = transform) %>%
+        curr <- FcsToTibble(i, transform = transform) %>%
             .[,na.omit(colnames(.))] %>%
             as.tibble() # in case columns are named "NA"
 
@@ -240,7 +240,7 @@ process.multiple.files <- function(files,
         # and perform quantile normalization
         dat.input <- lapply(dat, function(i) {
             i[,input]
-        }) %>% quant.normalize.elements(.)
+        }) %>% QuantNormalizeElements(.)
 
         # The list with only the non-input markers
         dat.rest <- lapply(dat, function(i) {
@@ -289,7 +289,7 @@ process.multiple.files <- function(files,
 #'     package = "Sconify")
 #' splitFile(file, input.markers = input.markers)
 #' @export
-splitFile <- function(file,
+SplitFile <- function(file,
                       transform = "asinh",
                       numcells = 10000,
                       norm = FALSE,
@@ -300,13 +300,13 @@ splitFile <- function(file,
         stop("Please use only a single file as input")
     }
 
-    total.unstim <- process.multiple.files(files = file,
-                                           numcells = numcells,
-                                           transform = transform,
-                                           norm = norm,
-                                           scale = scale,
-                                           input = input.markers,
-                                           name.multiple.donors = FALSE)
+    total.unstim <- ProcessMultipleFiles(files = file,
+                                         numcells = numcells,
+                                         transform = transform,
+                                         norm = norm,
+                                         scale = scale,
+                                         input = input.markers,
+                                         ßname.multiple.donors = FALSE)
 
     cell.rows <- 1:nrow(total.unstim)
 
@@ -335,7 +335,7 @@ splitFile <- function(file,
 #' @examples
 #' meaning.of.life()
 #' @export
-meaning.of.life <- function() {
+MeaningOfLife <- function() {
     exist
 }
 
