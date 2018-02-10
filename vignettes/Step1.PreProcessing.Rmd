@@ -41,7 +41,7 @@ basal <- system.file('extdata',
 
 # Run this, and check your directory for "markers.csv"
 markers <- get.marker.names(basal)
-write.csv(markers, "markers.csv")
+write.csv(markers, "markers.csv", row.names = FALSE)
 
 # Turn this into two columns, one for surface markers, and one for phosphos
 # Label the two columns accoridngly. Save to csv. You'll read this modified
