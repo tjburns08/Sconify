@@ -23,12 +23,11 @@ utils::globalVariables(c("exist", "."))
 #' and functional markers, produce two columns, naming them respectively.
 #'
 #' @param file the fcs file of interest
-#' @return the list of markers of interest, as a csv
+#' @return the list of markers of interest. This is to be written as a csv
 #' @export
 get.marker.names <- function(file) {
     cells <- fcs.to.tibble(file)
     result <- colnames(cells)
-    write.csv(result, "markers.csv", row.names = FALSE)
     return(result)
 }
 
