@@ -80,15 +80,15 @@ run.statistics <- function(basal,
 
     # Mann-Whitney U test or T test
     if(stat.test == "mwu") {
-        qvalue <- sapply(1:ncol(basal), function(j) {
+        qvalue <- vapply(1:ncol(basal), function(j) {
             p <- wilcox.test(basal[[j]], stim[[j]])$p.value
             return(p)
-        })
+        }, FUN.VALUE = double(1))
     } else if (stat.test == 't') {
-        qvalue <- sapply(1:ncol(basal), function(j) {
+        qvalue <- vapply(1:ncol(basal), function(j) {
             p <- t.test(basal[[j]], stim[[j]])$p.value
             return(p)
-        })
+        }, FUN.VALUE = double(1))
     } else {
         stop("please select either Mann-Whitney U test (mwu) or T test (t) for input")
         return()
@@ -146,9 +146,9 @@ multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
     # T testing (only if there's no NA in the dataset)
     if(nrow(na.omit(basal.stats)) == length(donors) & # Watch the newline here
        nrow(na.omit(stim.stats)) == length(donors)) {
-        result <- sapply(1:ncol(basal.stats), function(i) {
+        result <- vapply(1:ncol(basal.stats), function(i) {
             t.test(basal.stats[[i]], stim.stats[[i]])$p.value
-        })
+        }, FUN.VALUE = double(1))
     } else {
         result <- rep(NA, times = ncol(basal.stats))
     }
