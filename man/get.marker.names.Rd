@@ -10,7 +10,7 @@ get.marker.names(file)
 \item{file}{the fcs file of interest}
 }
 \value{
-the list of markers of interest, as a csv
+the list of markers of interest. This is to be written as a csv
 }
 \description{
 This is a quick way to get a list of preferred marker names.
