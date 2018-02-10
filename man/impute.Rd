@@ -11,7 +11,8 @@ impute(cells, input.markers, nn)
 
 \item{input.markers}{the markers the user wants to impute}
 
-\item{nn}{the matrix of k-nearest neighbors (derived perhaps NOT from the "input markers" above)}
+\item{nn}{the matrix of k-nearest neighbors
+(derived perhaps NOT from the "input markers" above)}
 }
 \value{
 a data frame of imputed cells for the "input markers" of interest

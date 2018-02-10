@@ -13,13 +13,15 @@ impute.testing(k.titration, cells, input.markers, test.markers)
 
 \item{input.markers}{markers to be used for the knn calculation}
 
-\item{test.markers}{the markers to be tested for imputation (either surface or scone)}
+\item{test.markers}{the markers to be tested for imputation
+(either surface or scone)}
 }
 \value{
 the median imputation error for each value k tested
 }
 \description{
-Tests the euclidean distance error for imputation using knn and markers of interest
+Tests the euclidean distance error for imputation using knn
+and markers of interest
 }
 \examples{
 impute.testing(k.titration = c(10, 20),

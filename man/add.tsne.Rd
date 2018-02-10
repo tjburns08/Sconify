@@ -18,6 +18,6 @@ result: dat, with tSNE1 and tSNE2 attached
 }
 \description{
 This function gives the user the option to add t-SNE to the
-final output, using the same input features used in KNN, eg. surface markers,
-as input for t-SNE.
+final output, using the same input features used in KNN, eg. surface
+markers, as input for t-SNE.
 }

@@ -7,11 +7,13 @@
 make.hist(dat, k, column.label, x.label)
 }
 \arguments{
-\item{dat}{tibble consisting both of original markers and the appended values from scone}
+\item{dat}{tibble consisting both of original markers and the appended
+values from scone}
 
 \item{k}{the binwidth, set to 1/k}
 
-\item{column.label}{the label in the tibble's columns the function will search for}
+\item{column.label}{the label in the tibble's columns the function will
+search for}
 
 \item{x.label}{the label that the x axis will be labeled as}
 }
