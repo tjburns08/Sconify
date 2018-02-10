@@ -23,13 +23,13 @@ markers.file <- system.file('extdata',
                         'markers.csv',
                         package = "Sconify")
 
-input <- parse.markers(markers.file)[[1]]
+input <- ParseMarkers(markers.file)[[1]]
 
 ################ THE TESTING ################
 
 # parse_markers
 test_that("Markers csv file is successfully imported", {
-    markers <- parse.markers(markers.file)
+    markers <- ParseMarkers(markers.file)
     expect_equal(length(markers), 2)
     expect_equal(length(markers[[1]]), 27)
     expect_equal(length(markers[[2]]), 16)
@@ -39,7 +39,7 @@ test_that("Markers csv file is successfully imported", {
 
 # fcs.to.tibble
 test_that("Fcs file gets converted into a tibble data structure", {
-    dat <- fcs.to.tibble(file = basal.file)
+    dat <- FcsToTibble(file = basal.file)
     expect_true(is.tibble(dat))
     expect_true(is.data.frame(dat))
     expect_false(is.matrix(dat))
@@ -47,17 +47,17 @@ test_that("Fcs file gets converted into a tibble data structure", {
 })
 
 test_that("The asinh transform command works", {
-    not.tr <- fcs.to.tibble(file = basal.file, transform = "none")
-    tr <- fcs.to.tibble(file = basal.file)
-    tr2 <- fcs.to.tibble(file = basal.file, transform = "asinh")
+    not.tr <- FcsToTibble(file = basal.file, transform = "none")
+    tr <- FcsToTibble(file = basal.file)
+    tr2 <- FcsToTibble(file = basal.file, transform = "asinh")
     expect_equal(tr[[3]], asinh(not.tr[[3]]/5))
     expect_equal(tr[[3]], tr2[[3]])
 })
 
 # Process.multiple.files
 test_that("Processing multiple files works on a single file", {
-    dat1 <- fcs.to.tibble(file = basal.file)
-    dat2 <- process.multiple.files(files = basal.file, input = input)
+    dat1 <- FcsToTibble(file = basal.file)
+    dat2 <- ProcessMultipleFiles(files = basal.file, input = input)
     expect_equal(dat1[,input], dat2[,input])
     expect_equal(length(dat1) + 1, length(dat2))
     expect_equal(length(unique(dat2[["condition"]])), 1)
@@ -71,21 +71,21 @@ test_that("Process multiple files effectively sub-samples", {
                  cell.number %/% 8)
 
     lapply(testing, function(i) {
-        curr <- process.multiple.files(files = basal.file, numcells = i,
+        curr <- ProcessMultipleFiles(files = basal.file, numcells = i,
                                        input = input)
         expect_equal(nrow(curr), i)
     })
 
-    expect_error(process.multiple.files(files = basal.file, numcells = 0,
+    expect_error(ProcessMultipleFiles(files = basal.file, numcells = 0,
                                         input = input))
 
-    expect_error(process.multiple.files(files = basal.file, numcells = -3,
+    expect_error(ProcessMultipleFiles(files = basal.file, numcells = -3,
                                         input = input))
 
-    expect_error(process.multiple.files(files = basal.file, numcells = 10.76,
+    expect_error(ProcessMultipleFiles(files = basal.file, numcells = 10.76,
                                         input = input))
 
-    expect_error(process.multiple.files(files = c(basal.file, stim.file), numcells = 1,
+    expect_error(ProcessMultipleFiles(files = c(basal.file, stim.file), numcells = 1,
                                         input = input))
 })
 
@@ -93,7 +93,7 @@ test_that("Process multiple files divdes the contribution of each file equally",
 
     testing <- c(100, 99, 2)
     lapply(testing, function(i) {
-        dat <- process.multiple.files(files = basal.file, numcells = 99,
+        dat <- ProcessMultipleFiles(files = basal.file, numcells = 99,
                                       input = input)
         cond.dat <- dat[["condition"]]
         conds <- unique(cond.dat)
@@ -110,30 +110,30 @@ test_that("Quantile normalization only happens with two or more files", {
 # Quantile normalization testing
 test_that("Simple quantile normalization case", {
     dat <- list(tibble(v1 = 1:10), tibble(v1 = 11:20))
-    q.dat <- quant.normalize.elements(dat)
+    q.dat <- QuantNormalizeElements(dat)
     expect_equal(q.dat[[1]], q.dat[[2]])
 
     dat <- list(tibble(v1 = 1:5), tibble(v2 = 2, 4, 6, 8, 10))
-    q.dat <- quant.normalize.elements(dat)
+    q.dat <- QuantNormalizeElements(dat)
     expect_equal(q.dat[[1]], q.dat[[2]])
 
     dat <- list(tibble(v1 = c(1, 3, 5, 7)), tibble(v2 = c(2, 4, 6, 8)))
-    q.dat <- quant.normalize.elements(dat)
+    q.dat <- QuantNormalizeElements(dat)
     expect_equal(q.dat[[1]], q.dat[[2]])
 })
 
 # Split file
 test_that("Split file returns two conditions", {
-    dat <- splitFile(basal.file, numcells = 10000, input.markers = input)
+    dat <- SplitFile(basal.file, numcells = 10000, input.markers = input)
     expect_equal(length(unique(dat$condition)), 2)
 })
 
 test_that("Split file can only be run on a single file", {
-    expect_error(splitFile(c(basal.file, stim.file), numcells = 10000, input.markers = input))
+    expect_error(SplitFile(c(basal.file, stim.file), numcells = 10000, input.markers = input))
 })
 
 test_that("Split file handles an odd number of cells", {
-    dat <- splitFile(basal.file, numcells = 99, input.markers = input)
+    dat <- SplitFile(basal.file, numcells = 99, input.markers = input)
     expect_equal(nrow(dat), 98)
 })
 
