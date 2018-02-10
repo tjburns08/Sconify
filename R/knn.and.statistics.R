@@ -51,8 +51,8 @@ fnn <- function(cell.df, input.markers, k = 100) {
 #' @param stim a tibble of cells corresponding to the stimulated condition
 #' @param fold a string that specifies the use of "median" or "mean" when
 #' calculating fold change
-#' @param stat.test a string that specifies Mann-Whitney U test (mwu) or T test (t)
-#' for q value calculation
+#' @param stat.test a string that specifies Mann-Whitney U test (mwu) or T test
+#' (t) for q value calculation
 #' @param stim.name a string corresponding to the name of the stim being tested
 #' compared to basal
 #' @return result: a named vector corresponding to the results of the
@@ -90,14 +90,17 @@ run.statistics <- function(basal,
             return(p)
         }, FUN.VALUE = double(1))
     } else {
-        stop("please select either Mann-Whitney U test (mwu) or T test (t) for input")
+        stop("please select Mann-Whitney U test (mwu) or T test (t) for input")
         return()
     }
 
     # Naming the vectors
-    names(qvalue) <- names(fold) # qvalue is not yet a named vector, so its named here
-    names(qvalue) <- paste(names(qvalue), stim.name, "qvalue", sep = ".") # specifying
-    names(fold) <- paste(names(fold), stim.name, "change", sep = ".") # specifying
+    # qvalue is not yet a named vector, so its named here
+    names(qvalue) <- names(fold)
+    # specifying
+    names(qvalue) <- paste(names(qvalue), stim.name, "qvalue", sep = ".")
+    # specifying
+    names(fold) <- paste(names(fold), stim.name, "change", sep = ".")
 
     # Get the unstim and stim thresholds done
     fraction.cond2 <- nrow(stim)/sum(nrow(basal), nrow(stim))
@@ -321,24 +324,36 @@ scone.values <- function(nn.matrix,
             # Index the nn matrix
             curr <- cell.data[nn.matrix[i,],]
             basal <- curr[curr$condition == unstim,] %>% .[,scone.markers]
-            stim <- curr[curr$condition == s,] %>% .[,scone.markers] # Change this to specify stim name
+            stim <- curr[curr$condition == s,] %>% .[,scone.markers]
 
-            # Fold change cmoparison and Mann-Whitney U test, along with "fraction condition 2"
+            # Fold change cmoparison and Mann-Whitney U test,
+            # along with "fraction condition 2"
             output <- run.statistics(basal, stim, fold, stat.test, s)
 
             # Note that this will overwrite the initial output (for now)
             if(multiple.donor.compare == TRUE) {
                 nn.donors <- unique(curr$donor)
 
-                # We want multiple donor testing only if all donors are in each knn
+                # Multiple donor testing used if all donors are in each knn
                 if(length(unique(nn.donors)) < length(donors)) {
-                    donor.output <- rep(NA, times = length(scone.markers)) # Check length
+                    # Check length
+                    donor.output <- rep(NA, times = length(scone.markers))
                 } else {
-                    basal.d <- curr[curr$condition == unstim,] %>% .[,c(scone.markers, "donor")]
-                    stim.d <- curr[curr$condition == s,] %>% .[,c(scone.markers, "donor")]
-                    donor.output <- multiple.donor.statistics(basal.d, stim.d, s, donors)
+                    basal.d <- curr[curr$condition == unstim,] %>%
+                        .[,c(scone.markers, "donor")]
+                    stim.d <- curr[curr$condition == s,] %>%
+                        .[,c(scone.markers, "donor")]
+                    donor.output <- multiple.donor.statistics(basal.d,
+                                                              stim.d,
+                                                              s,
+                                                              donors)
                 }
-                #names(donor.output) <- paste(scone, s, "donor.t.test.qvalue", sep = ".") # Name the donor t test vector
+                # Name the donor t test vector
+                # names(donor.output) <- paste(scone,
+                #                             s,
+                #                             "donor.t.test.qvalue",
+                #                             sep = ".")
+
                 output <- c(output, donor.output)
             }
 
@@ -353,7 +368,8 @@ scone.values <- function(nn.matrix,
         return(result)
     })
 
-    # Returning an error message for the Zunder dataset, but not the Wanderlust dataset
+    # Returning an error message for the Zunder dataset,
+    # but not the Wanderlust dataset
     final <- do.call(cbind, final) %>%
         as.tibble()
 
