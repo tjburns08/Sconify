@@ -109,11 +109,9 @@ markers <- system.file('extdata',
 markers <- read.csv(markers, stringsAsFactors = FALSE)
 surface <- markers$surface
 ```
-```{r, eval = FALSE}
+```{r}
 # Combining these. Note that default is sub-sampling to 10,000 cells, not normalizing, and not scaling
 wand.combined <- process.multiple.files(files = c(basal, il7), input = surface, numcells = 1000)
-```
-```{r}
 wand.combined
 unique(wand.combined$condition)
 
