@@ -65,7 +65,7 @@ ParseMarkers <- function(marker.file) {
 #' @examples
 #' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
 #'     package = "Sconify")
-#' fcs.to.tibble(file)
+#' FcsToTibble(file)
 #' @export
 FcsToTibble <- function(file, transform = "asinh") {
     # Read in the files and set the columns as human-named parameters
@@ -173,7 +173,7 @@ QuantNormalizeElements <- function(dat.list) {
 #'     package = "Sconify")
 #' file2 <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_IL7.fcs",
 #'     package = "Sconify")
-#' process.multiple.files(c(file1, file2), input = input.markers)
+#' ProcessMultipleFiles(c(file1, file2), input = input.markers)
 #' @export
 ProcessMultipleFiles <- function(files,
                                  transform = "asinh",
@@ -287,7 +287,7 @@ ProcessMultipleFiles <- function(files,
 #' @examples
 #' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
 #'     package = "Sconify")
-#' splitFile(file, input.markers = input.markers)
+#' SplitFile(file, input.markers = input.markers)
 #' @export
 SplitFile <- function(file,
                       transform = "asinh",
@@ -333,7 +333,7 @@ SplitFile <- function(file,
 #' @return A string containing a random musing
 #'
 #' @examples
-#' meaning.of.life()
+#' MeaningOfLife()
 #' @export
 MeaningOfLife <- function() {
     exist
