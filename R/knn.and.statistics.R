@@ -16,7 +16,7 @@ NULL
 #' @examples
 #' fnn(wand.combined, input.markers)
 #' @export
-fnn <- function(cell.df, input.markers, k = 100) {
+Fnn <- function(cell.df, input.markers, k = 100) {
     print("finding k-nearest neighbors")
 
     # Edge case (rflann with kd-tree doesn't have it)
@@ -57,7 +57,7 @@ fnn <- function(cell.df, input.markers, k = 100) {
 #' compared to basal
 #' @return result: a named vector corresponding to the results of the
 #' "fold change" and mann-whitney u test
-run.statistics <- function(basal,
+RunStatistics <- function(basal,
                            stim,
                            fold = "median",
                            stat.test = "mwu",
@@ -125,7 +125,7 @@ run.statistics <- function(basal,
 #' of the donors
 #' @return result: a named vector of p values (soon to be q values) from the
 #' t test done on each marker
-multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
+MultipleDonorStatistics <- function(basal, stim, stim.name, donors) {
     # get the means of all the donors
 
     basal.stats <- tibble()
@@ -175,7 +175,7 @@ multiple.donor.statistics <- function(basal, stim, stim.name, donors) {
 #' @param threshold a q value below which the change values will be reported
 #' for that cell for that param. If no change is desired, this is set to 1.
 #' @return inputted p values, adjusted and therefore described as "q values"
-q.correction.thresholding <- function(cells, threshold) {
+QCorrectionThresholding <- function(cells, threshold) {
     # Break apart the result
     fold <- cells[,grep("change$", colnames(cells))]
     qvalues <- cells[,grep("qvalue$", colnames(cells))]
@@ -214,7 +214,7 @@ q.correction.thresholding <- function(cells, threshold) {
 #' ex.knn <- fnn(wand.combined, input.markers, k = 30)
 #' get.knn.de(ex.knn)
 #' @export
-get.knn.de <- function(nn.matrix) {
+GetKnnDe <- function(nn.matrix) {
     # Distances
     nn.dist <- nn.matrix[[2]]
 
@@ -236,7 +236,7 @@ get.knn.de <- function(nn.matrix) {
 #' ex.knn <- fnn(wand.combined, input.markers, k = 30)
 #' knn.list <- make.knn.list(wand.combined, ex.knn)
 #' @export
-make.knn.list <- function(cell.data, nn.matrix) {
+MakeKnnList <- function(cell.data, nn.matrix) {
     # Unpack the KNN output
     nn.index <- nn.matrix[[1]]
 
@@ -247,7 +247,6 @@ make.knn.list <- function(cell.data, nn.matrix) {
 
     return(knn.list)
 }
-
 
 #' @title Master function for per-knn statistics functionality, integrating the
 #' other non-exported functions within this script.
@@ -275,7 +274,7 @@ make.knn.list <- function(cell.data, nn.matrix) {
 #' ex.nn <- fnn(wand.combined, input.markers)
 #' scone.values(ex.nn, wand.combined, funct.markers, "basal")
 #' @export
-scone.values <- function(nn.matrix,
+SconeValues <- function(nn.matrix,
                          cell.data,
                          scone.markers,
                          unstim,
@@ -343,17 +342,16 @@ scone.values <- function(nn.matrix,
                         .[,c(scone.markers, "donor")]
                     stim.d <- curr[curr$condition == s,] %>%
                         .[,c(scone.markers, "donor")]
-                    donor.output <- multiple.donor.statistics(basal.d,
-                                                              stim.d,
-                                                              s,
-                                                              donors)
+                    donor.output <- MultipleDonorStatistics(basal.d,
+                                                            stim.d,
+                                                            s,
+                                                            donors)
                 }
                 # Name the donor t test vector
                 # names(donor.output) <- paste(scone,
                 #                             s,
                 #                             "donor.t.test.qvalue",
                 #                             sep = ".")
-
                 output <- c(output, donor.output)
             }
 
@@ -364,7 +362,6 @@ scone.values <- function(nn.matrix,
         result <- do.call(rbind, result) %>%
             as.tibble()
 
-        # print(result[,grep("Stat3", colnames(result))])
         return(result)
     })
 
@@ -375,7 +372,7 @@ scone.values <- function(nn.matrix,
 
     # Do the p value correction, followed by thresholding if you're going to
     frac <- final[, grep("fraction", colnames(final))]
-    final <- q.correction.thresholding(final, threshold)
+    final <- QCorrectionThresholding(final, threshold)
     final <- bind_cols(final, frac)
 
     # Add the density estimation
