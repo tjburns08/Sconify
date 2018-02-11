@@ -6,10 +6,10 @@ library(testthat)
 context("Testing the functionality of the ideal k finder")
 
 k.titration <- c(5, 50, 500)
-test <- impute.testing(k.titration = k.titration,
-                       cells = wand.il7,
-                       input.markers = input.markers,
-                       test.markers = funct.markers)
+test <- ImputeTesting(k.titration = k.titration,
+                      cells = wand.il7,
+                      input.markers = input.markers,
+                      test.markers = funct.markers)
 
 test_that("High-level desired output from the impute testing function", {
     expect_equal(length(test), length(k.titration))
@@ -21,10 +21,10 @@ test_that("Convex loss function expected", {
 })
 
 test_that("Edge case for improper k selection", {
-    expect_error(impute.testing(k.titration = c(-4),
-                                cells = wand.il7,
-                                input.markers = input.markers,
-                                test.markers = funct.markers))
+    expect_error(ImputeTesting(k.titration = c(-4),
+                               cells = wand.il7,
+                               input.markers = input.markers,
+                               test.markers = funct.markers))
 })
 
 
