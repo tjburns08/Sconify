@@ -10,7 +10,10 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, 
+                      results = "markup", 
+                      message = FALSE, 
+                      warning = FALSE)
 ```
 
 ### TL:DR:  
@@ -53,7 +56,7 @@ write.csv(markers, "markers.csv", row.names = FALSE)
 ```
 
 
-```
+
 The markers.csv file, when opened in excel, looks like this (first 20 rows): 
 
 ```{r, out.width = "200px", eval = TRUE}
@@ -106,12 +109,16 @@ il7 <- system.file('extdata',
 markers <- system.file('extdata',
     'markers.csv',
     package = "Sconify")
-markers <- read.csv(markers, stringsAsFactors = FALSE)
-surface <- markers$surface
+markers <- ParseMarkers(markers)
+surface <- markers[[1]]
+surface
 ```
 ```{r}
-# Combining these. Note that default is sub-sampling to 10,000 cells, not normalizing, and not scaling
-wand.combined <- ProcessMultipleFiles(files = c(basal, il7), input = surface, numcells = 1000)
+# Combining these. Note that default is sub-sampling to 10,000 cells, 
+# not normalizing, and not scaling
+wand.combined <- ProcessMultipleFiles(files = c(basal, il7), 
+                                      input = surface, 
+                                      numcells = 1000)
 wand.combined
 unique(wand.combined$condition)
 
@@ -122,7 +129,10 @@ wand.combined.input
 
 ```{r}
 # We can do this on a single file as well. 
-wand.basal <- ProcessMultipleFiles(files = basal, numcells = 1000, scale = TRUE, input = surface)
+wand.basal <- ProcessMultipleFiles(files = basal, 
+                                   numcells = 1000, 
+                                   scale = TRUE, 
+                                   input = surface)
 wand.basal
 unique(wand.basal$condition)
 
@@ -142,7 +152,9 @@ markers <- read.csv(markers, stringsAsFactors = FALSE)
 surface <- markers$surface
 
 # The function
-split.data <- SplitFile(file = basal, input.markers = surface, numcells = 1000)
+split.data <- SplitFile(file = basal, 
+                        input.markers = surface, 
+                        numcells = 1000)
 split.data
 unique(split.data$condition)
 ```
