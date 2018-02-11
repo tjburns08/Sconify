@@ -14,7 +14,7 @@ NULL
 #' @return nn: list of 2, nn.index: index of knn (columns) for each cell (rows)
 #' nn.dist: euclidean distance of each k-nearest neighbor
 #' @examples
-#' fnn(wand.combined, input.markers)
+#' Fnn(wand.combined, input.markers)
 #' @export
 Fnn <- function(cell.df, input.markers, k = 100) {
     print("finding k-nearest neighbors")
@@ -211,8 +211,8 @@ QCorrectionThresholding <- function(cells, threshold) {
 #' @return a vector where each element is the KNN-DE for that given cell,
 #' ordered by row number, in the original input matrix of cells x features
 #' @examples
-#' ex.knn <- fnn(wand.combined, input.markers, k = 30)
-#' get.knn.de(ex.knn)
+#' ex.knn <- Fnn(wand.combined, input.markers, k = 30)
+#' GetKnnDe(ex.knn)
 #' @export
 GetKnnDe <- function(nn.matrix) {
     # Distances
@@ -233,8 +233,8 @@ GetKnnDe <- function(nn.matrix) {
 #' @return a list where each element is the cell number from the
 #' original cell.data tibble and a matrix of cells x feautures for its KNN
 #' @examples
-#' ex.knn <- fnn(wand.combined, input.markers, k = 30)
-#' knn.list <- make.knn.list(wand.combined, ex.knn)
+#' ex.knn <- Fnn(wand.combined, input.markers, k = 30)
+#' knn.list <- MakeKnnList(wand.combined, ex.knn)
 #' @export
 MakeKnnList <- function(cell.data, nn.matrix) {
     # Unpack the KNN output
@@ -271,8 +271,8 @@ MakeKnnList <- function(cell.data, nn.matrix) {
 #' @return result: tibble of raw changes and p values for each feature of
 #' interest, and fraction of cells with condition 2
 #' @examples
-#' ex.nn <- fnn(wand.combined, input.markers)
-#' scone.values(ex.nn, wand.combined, funct.markers, "basal")
+#' ex.nn <- Fnn(wand.combined, input.markers)
+#' SconeValues(ex.nn, wand.combined, funct.markers, "basal")
 #' @export
 SconeValues <- function(nn.matrix,
                          cell.data,

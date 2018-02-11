@@ -48,7 +48,7 @@ markers
 ```{r, eval = FALSE}
 # Turn this into two columns, one for surface markers, and one for phosphos
 # Label the two columns accoridngly. Save to csv. You'll read this modified
-# file in the process.multiple.files() function.
+# file in the ProcessMultipleFiles() function.
 write.csv(markers, "markers.csv", row.names = FALSE)
 ```
 
@@ -70,7 +70,7 @@ knitr::include_graphics("modified.markers.csv.example.png")
 
 
 ### From fcs file to data matrix (a general function):  
-Skip to "processing multiple files" section for the function that directly produces the data matrix for SCONE. Here, I provide here a general function that takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. For SCONE, you'll use process.multiple.files(), which has this function embedded inside it. I provide it as well for any instance where you simply want to read a fcs file into R. 
+Skip to "processing multiple files" section for the function that directly produces the data matrix for SCONE. Here, I provide here a general function that takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. For SCONE, you'll use ProcessMultipleFiles(), which has this function embedded inside it. I provide it as well for any instance where you simply want to read a fcs file into R. 
 
 
 ```{r}
@@ -122,7 +122,7 @@ wand.combined.input
 
 ```{r}
 # We can do this on a single file as well. 
-wand.basal <- process.multiple.files(files = basal, numcells = 1000, scale = TRUE, input = surface)
+wand.basal <- ProcessMultipleFiles(files = basal, numcells = 1000, scale = TRUE, input = surface)
 wand.basal
 unique(wand.basal$condition)
 
