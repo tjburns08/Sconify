@@ -13,7 +13,7 @@ NULL
 #' (derived perhaps NOT from the "input markers" above)
 #' @return a data frame of imputed cells for the "input markers" of interest
 Impute <- function(cells, input.markers, nn) {
-    result <- lapply(1:nrow(cells), function(i) {
+    result <- lapply(seq_len(nrow(cells)), function(i) {
         curr.nn <- cells[nn[i,],][,input.markers] %>% apply(., 2, mean)
     })
 
@@ -46,7 +46,7 @@ ImputeTesting <- function(k.titration, cells, input.markers, test.markers) {
 
         print(k)
         # Get a vector of euclidean distances
-        distance <- sapply(1:nrow(cells), function(i) {
+        distance <- sapply(seq_len(nrow(cells)), function(i) {
             dist(rbind(cells[,test.markers][i,], imputed.cells[i,]))
         })
     })
