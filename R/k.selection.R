@@ -12,7 +12,7 @@ NULL
 #' @param nn the matrix of k-nearest neighbors
 #' (derived perhaps NOT from the "input markers" above)
 #' @return a data frame of imputed cells for the "input markers" of interest
-impute <- function(cells, input.markers, nn) {
+Impute <- function(cells, input.markers, nn) {
     result <- lapply(1:nrow(cells), function(i) {
         curr.nn <- cells[nn[i,],][,input.markers] %>% apply(., 2, mean)
     })
@@ -38,10 +38,10 @@ impute <- function(cells, input.markers, nn) {
 #'   input.markers = input.markers,
 #'   test.markers = funct.markers)
 #' @export
-impute.testing <- function(k.titration, cells, input.markers, test.markers) {
+ImputeTesting <- function(k.titration, cells, input.markers, test.markers) {
     final.distances <- lapply(k.titration, function(k) {
-        nn <- fnn(cell.df = cells, input.markers = input.markers, k = k)[[1]]
-        imputed.cells <- impute(cells = cells, input.markers = test.markers,
+        nn <- Fnn(cell.df = cells, input.markers = input.markers, k = k)[[1]]
+        imputed.cells <- Impute(cells = cells, input.markers = test.markers,
                                 nn = nn)
 
         print(k)
