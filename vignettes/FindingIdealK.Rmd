@@ -10,7 +10,10 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, 
+                      results = "markup", 
+                      message = FALSE, 
+                      warning = FALSE)
 library(Sconify)
 library(dplyr)
 ```
@@ -19,8 +22,12 @@ library(dplyr)
 This vignette shows how to objectively determine the size of your k-nearest neighborhoods. As one might expect, this number can depend on the input dataset being analyzed. Given that Scone makes comparisons between functional markers across multiple biological conditions, we select our ideal k by determining how well KNN can impute these fuctional marker vales for a range of values of k. Our imputation error is the euclidean distance between an actual cell and imputed cell within "functional marker" space. We  provide a function to automate this process, and we provide a vector k.titration that includes a range of values k to try between 10 and 2000. For the example below, we use the Wanderlust dataset (see PreProcessing.Rmd "data" section). 
 
 ```{r, eval = FALSE}
-wand.k.titration <- 1:100 %>% .[. %% 10 == 0] # Multiples of 10 from 10 to 100, for dataset of 1000 cells
-wand.ideal.k <- ImputeTesting(k.titration = wand.k.titration, cells = wand.il7, input.markers = input.markers, test.markers = funct.markers)
+# Multiples of 10 from 10 to 100, for dataset of 1000 cells
+wand.k.titration <- 1:100 %>% .[. %% 10 == 0] 
+wand.ideal.k <- ImputeTesting(k.titration = wand.k.titration, 
+                              cells = wand.il7, 
+                              input.markers = input.markers, 
+                              test.markers = funct.markers)
 ```
 
 The output looks like this:
