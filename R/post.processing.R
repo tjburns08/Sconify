@@ -87,7 +87,7 @@ LogTransformQ <- function(dat, negative) {
 #' @export
 StringToNumbers <- function(strings) {
     elements <- unique(strings)
-    for(i in 1:length(elements)) {
+    for(i in seq_len(length(elements))) {
         strings <- ifelse(strings == elements[i], i, strings)
     }
     return(as.numeric(strings))
