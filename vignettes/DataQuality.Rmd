@@ -25,7 +25,7 @@ We can plot this as a distrubtion between 0 and 100%. We hypothesize that this d
 
 ```{r}
 # Visualization
-make.hist(wand.final, 30, "IL7.fraction.cond.2", "fraction IL7")
+MakeHist(wand.final, 30, "IL7.fraction.cond.2", "fraction IL7")
 
 # Characteristics of the visualization
 median(wand.final$IL7.fraction.cond.2)
@@ -38,7 +38,7 @@ We now compare to our coin flipping.
 ```{r}
 # Compare to a coin toss distribution
 # Flips a coin k number of times, n repetitions, and returns the vector containing the per-k percent heads 
-k.flip <- function(k, n) {
+KFlip <- function(k, n) {
   # The result 
   result <- sapply(1:n, function(i) {
     # Get the fraction heads for n flips
@@ -50,7 +50,7 @@ k.flip <- function(k, n) {
 
 
 coin.toss <- data.frame("binomial" = k.flip(30, 1000))
-make.hist(coin.toss, 30, "binomial", "fraction heads")
+MakeHist(coin.toss, 30, "binomial", "fraction heads")
 median(coin.toss$binomial)
 sd(coin.toss$binomial)
 ```
@@ -64,8 +64,8 @@ Given that the observed variation (sd = 0.108) is higher than that of our aforem
 ```{r}
 
 # Raw per-cell IgM levels
-tsne.vis(wand.final, "IgM(Eu153)Di", "Raw IgM expression")
-tsne.vis(wand.final, "IL7.fraction.cond.2", "Fraction cells in Il7 condition")
+TsneVis(wand.final, "IgM(Eu153)Di", "Raw IgM expression")
+TsneVis(wand.final, "IL7.fraction.cond.2", "Fraction cells in Il7 condition")
 
 
 ```
@@ -80,14 +80,14 @@ Below is the concatenated data of untreated cells and those treated with GM-CSF.
 ```{r}
 
 # Before normalization
-make.hist(bz.gmcsf.final, 100, "fraction.cond2", "fraction GM-CSF")
+MakeHist(bz.gmcsf.final, 100, "fraction.cond2", "fraction GM-CSF")
 
 # Characteristics of the visualization
 median(bz.gmcsf.final$fraction.cond2)
 sd(bz.gmcsf.final$fraction.cond2)
 
 # After normalization
-make.hist(bz.gmcsf.final.norm.scale, 100, "fraction.cond2", "fraction GM-CSF")
+MakeHist(bz.gmcsf.final.norm.scale, 100, "fraction.cond2", "fraction GM-CSF")
 
 # Characteristics of the visualization
 median(bz.gmcsf.final.norm.scale$fraction.cond2)
@@ -103,10 +103,10 @@ We observe that non-normalized data appears to have a global "drift" in the nort
 
 ```{r}
 # t-SNE map colored by KNN-based fraction GM-CSF
-tsne.vis(bz.gmcsf.final, "fraction.cond2", "Fraction GM-CSF")
+TsneVis(bz.gmcsf.final, "fraction.cond2", "Fraction GM-CSF")
 
 # t-SNE map colored by KNN-based fraction GM-CSF
-tsne.vis(bz.gmcsf.final.norm.scale, "fraction.cond2", "Fraction GM-CSF")
+TsneVis(bz.gmcsf.final.norm.scale, "fraction.cond2", "Fraction GM-CSF")
 ```
 
 
