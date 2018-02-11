@@ -327,7 +327,7 @@ SconeValues <- function(nn.matrix,
 
             # Fold change cmoparison and Mann-Whitney U test,
             # along with "fraction condition 2"
-            output <- run.statistics(basal, stim, fold, stat.test, s)
+            output <- RunStatistics(basal, stim, fold, stat.test, s)
 
             # Note that this will overwrite the initial output (for now)
             if(multiple.donor.compare == TRUE) {

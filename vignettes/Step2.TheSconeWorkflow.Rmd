@@ -20,7 +20,7 @@ We read in input.scone.csv, which is our file modified (and renamed) from the ge
 library(Sconify)
 # Markers from the user-generated excel file
 marker.file <- system.file('extdata', 'markers.csv', package = "Sconify")
-markers <- parse.markers(marker.file)
+markers <- ParseMarkers(marker.file)
 
 # How to convert your excel sheet into vector of static and functional markers
 markers
@@ -32,7 +32,7 @@ funct.markers <- markers[[2]]
 k <- 30
 
 # The built-in scone functions
-wand.nn <- fnn(cell.df = wand.combined, input.markers = input.markers, k = k)
+wand.nn <- Fnn(cell.df = wand.combined, input.markers = input.markers, k = k)
 # Cell identity is in rows, k-nearest neighbors are columns
 # List of 2 includes the cell identity of each nn, and the euclidean distance between
 #   itself and the cell of interest
@@ -52,7 +52,7 @@ This function iterates through each KNN, and performs a series of calculations. 
 
 
 ```{r}
-wand.scone <- scone.values(nn.matrix = wand.nn, 
+wand.scone <- SconeValues(nn.matrix = wand.nn, 
                       cell.data = wand.combined, 
                       scone.markers = funct.markers, 
                       unstim = "basal")
@@ -73,11 +73,11 @@ An individual with basic programming skills can iterate through these elements t
 
 ```{r}
 # Constructs KNN list, computes KNN density estimation
-wand.knn.list <- make.knn.list(cell.data = wand.combined, nn.matrix = wand.nn)
+wand.knn.list <- MakeKnnList(cell.data = wand.combined, nn.matrix = wand.nn)
 wand.knn.list[[8]]
 
 # Finds the KNN density estimation for each cell, ordered by column, in the original data matrix
-wand.knn.density <- get.knn.de(nn.matrix = wand.nn)
+wand.knn.density <- GetKnnDe(nn.matrix = wand.nn)
 str(wand.knn.density)
 ```
 
