@@ -118,11 +118,11 @@ PostProcessing <- function(scone.output,
                            log.transform.qvalue = TRUE) {
     # Generic pre-processing
     result <- bind_cols(cell.data, scone.output) %>% na.omit()
-    result$condition <- string.to.numbers(result$condition)
+    result$condition <- StringToNumbers(result$condition)
 
     # Adding two tSNE columns
     if(tsne == TRUE) {
-        result <- add.tsne(dat = result, input = input)
+        result <- AddTsne(dat = result, input = input)
     }
 
     # Doing an inverse log transformation of the q value
