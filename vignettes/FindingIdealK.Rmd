@@ -20,7 +20,7 @@ This vignette shows how to objectively determine the size of your k-nearest neig
 
 ```{r, eval = FALSE}
 wand.k.titration <- 1:100 %>% .[. %% 10 == 0] # Multiples of 10 from 10 to 100, for dataset of 1000 cells
-wand.ideal.k <- impute.testing(k.titration = wand.k.titration, cells = wand.il7, input.markers = input.markers, test.markers = funct.markers)
+wand.ideal.k <- ImputeTesting(k.titration = wand.k.titration, cells = wand.il7, input.markers = input.markers, test.markers = funct.markers)
 ```
 
 The output looks like this:
