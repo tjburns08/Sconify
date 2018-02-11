@@ -14,7 +14,7 @@ utils::globalVariables("..count..")
 #' @param input the features to be used as input for tSNE,usually the same
 #' for knn generation
 #' @return result: dat, with tSNE1 and tSNE2 attached
-add.tsne <- function(dat, input) {
+AddTsne <- function(dat, input) {
     result <- Rtsne(X = dat[,input],
                     dims = 2,
                     pca = FALSE,
@@ -40,9 +40,9 @@ add.tsne <- function(dat, input) {
 #' @examples
 #' subsample.and.tsne(wand.combined, input.markers, 500)
 #' @export
-subsample.and.tsne <- function(dat, input, numcells) {
+SubsampleAndTsne <- function(dat, input, numcells) {
     dat <- dat[sample(nrow(dat), numcells),]
-    dat <- add.tsne(dat, input)
+    dat <- AddTsne(dat, input)
     return(dat)
 }
 
@@ -57,7 +57,7 @@ subsample.and.tsne <- function(dat, input, numcells) {
 #' p values by -1
 #' @return result: tibble of cells x features with all p values log10
 #' transformed
-log.transform.q <- function(dat, negative) {
+LogTransformQ <- function(dat, negative) {
 
     # Split the input
     qvalue <- dat[,grep("qvalue$", colnames(dat))]
@@ -85,7 +85,7 @@ log.transform.q <- function(dat, negative) {
 #' ex.string <- c("unstim", "unstim", "stim", "stim", "stim")
 #' string.to.numbers(ex.string)
 #' @export
-string.to.numbers <- function(strings) {
+StringToNumbers <- function(strings) {
     elements <- unique(strings)
     for(i in 1:length(elements)) {
         strings <- ifelse(strings == elements[i], i, strings)
@@ -111,11 +111,11 @@ string.to.numbers <- function(strings) {
 #' @examples
 #' post.processing(wand.scone, wand.combined, input.markers, tsne = FALSE)
 #' @export
-post.processing <- function(scone.output,
-                            cell.data,
-                            input,
-                            tsne = TRUE,
-                            log.transform.qvalue = TRUE) {
+PostProcessing <- function(scone.output,
+                           cell.data,
+                           input,
+                           tsne = TRUE,
+                           log.transform.qvalue = TRUE) {
     # Generic pre-processing
     result <- bind_cols(cell.data, scone.output) %>% na.omit()
     result$condition <- string.to.numbers(result$condition)
@@ -127,7 +127,7 @@ post.processing <- function(scone.output,
 
     # Doing an inverse log transformation of the q value
     if(log.transform.qvalue == TRUE) {
-        result <- log.transform.q(dat = result, negative = TRUE)
+        result <- LogTransformQ(dat = result, negative = TRUE)
     }
 
     return(result)
@@ -148,7 +148,7 @@ post.processing <- function(scone.output,
 #' @examples
 #' make.hist(wand.final, 100, "IL7.fraction.cond.2", "fraction IL7")
 #' @export
-make.hist <- function(dat,
+MakeHist <- function(dat,
                       k,
                       column.label,
                       x.label) {
@@ -176,7 +176,7 @@ make.hist <- function(dat,
 #' @examples
 #' tsne.vis(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
 #' @export
-tsne.vis <- function(final, marker, label = marker) {
+TsneVis <- function(final, marker, label = marker) {
 
     # Edge case: make sure marker is in the column names of the final data
     if(is.na(match(marker, colnames(final)))) {
