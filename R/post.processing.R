@@ -38,7 +38,7 @@ AddTsne <- function(dat, input) {
 #' @param numcells the number of cells to be downsampled to
 #' @return a subsampled tibble that contains tSNE values
 #' @examples
-#' subsample.and.tsne(wand.combined, input.markers, 500)
+#' SubsampleAndTsne(wand.combined, input.markers, 500)
 #' @export
 SubsampleAndTsne <- function(dat, input, numcells) {
     dat <- dat[sample(nrow(dat), numcells),]
@@ -83,7 +83,7 @@ LogTransformQ <- function(dat, negative) {
 #' @return strings: same vector with each unique element converted to a number
 #' @examples
 #' ex.string <- c("unstim", "unstim", "stim", "stim", "stim")
-#' string.to.numbers(ex.string)
+#' StringToNumbers(ex.string)
 #' @export
 StringToNumbers <- function(strings) {
     elements <- unique(strings)
@@ -109,7 +109,7 @@ StringToNumbers <- function(strings) {
 #' data, with the option of the q values being inverse log10 transformed, and
 #' two additional tSNE columns being added to the data (from the Rtsne package)
 #' @examples
-#' post.processing(wand.scone, wand.combined, input.markers, tsne = FALSE)
+#' PostProcessing(wand.scone, wand.combined, input.markers, tsne = FALSE)
 #' @export
 PostProcessing <- function(scone.output,
                            cell.data,
@@ -146,7 +146,7 @@ PostProcessing <- function(scone.output,
 #' @param x.label the label that the x axis will be labeled as
 #' @return a histogram of said vector in ggplot2 form
 #' @examples
-#' make.hist(wand.final, 100, "IL7.fraction.cond.2", "fraction IL7")
+#' MakeHist(wand.final, 100, "IL7.fraction.cond.2", "fraction IL7")
 #' @export
 MakeHist <- function(dat,
                       k,
@@ -174,7 +174,7 @@ MakeHist <- function(dat,
 #' ensuing plot. Set to the marker string as default.
 #' @return A plot of bh-SNE1 x bh-SNE2 colored by the specified marker.
 #' @examples
-#' tsne.vis(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
+#' TsneVis(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
 #' @export
 TsneVis <- function(final, marker, label = marker) {
 
