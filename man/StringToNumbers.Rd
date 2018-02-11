@@ -19,5 +19,5 @@ in which case they are converted to numbers (1, 2)
 }
 \examples{
 ex.string <- c("unstim", "unstim", "stim", "stim", "stim")
-string.to.numbers(ex.string)
+StringToNumbers(ex.string)
 }

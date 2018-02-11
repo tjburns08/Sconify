@@ -24,5 +24,5 @@ along with k set to 100. Selection of K will vary based on the dataset.
 See k.selection.R.
 }
 \examples{
-fnn(wand.combined, input.markers)
+Fnn(wand.combined, input.markers)
 }

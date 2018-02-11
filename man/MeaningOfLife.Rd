@@ -13,5 +13,5 @@ A string containing a random musing
 Just a random musing
 }
 \examples{
-meaning.of.life()
+MeaningOfLife()
 }

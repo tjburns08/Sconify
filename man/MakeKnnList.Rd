@@ -21,6 +21,6 @@ Takes the KNN function output and the cell data, and
 makes list where each element is a matrix of cells in the KNN and features.
 }
 \examples{
-ex.knn <- fnn(wand.combined, input.markers, k = 30)
-knn.list <- make.knn.list(wand.combined, ex.knn)
+ex.knn <- Fnn(wand.combined, input.markers, k = 30)
+knn.list <- MakeKnnList(wand.combined, ex.knn)
 }

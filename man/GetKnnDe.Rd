@@ -19,6 +19,6 @@ Obtain a density estimation derived from the original manifold,
 avoiding the lossiness of lower dimensional embeddings
 }
 \examples{
-ex.knn <- fnn(wand.combined, input.markers, k = 30)
-get.knn.de(ex.knn)
+ex.knn <- Fnn(wand.combined, input.markers, k = 30)
+GetKnnDe(ex.knn)
 }

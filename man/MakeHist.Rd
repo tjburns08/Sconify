@@ -24,5 +24,5 @@ a histogram of said vector in ggplot2 form
 Makes a histogram of the data that is inputted
 }
 \examples{
-make.hist(wand.final, 100, "IL7.fraction.cond.2", "fraction IL7")
+MakeHist(wand.final, 100, "IL7.fraction.cond.2", "fraction IL7")
 }

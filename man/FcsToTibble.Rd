@@ -25,5 +25,5 @@ process.multiple.files
 \examples{
 file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
     package = "Sconify")
-fcs.to.tibble(file)
+FcsToTibble(file)
 }

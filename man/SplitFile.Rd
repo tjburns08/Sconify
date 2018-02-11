@@ -38,5 +38,5 @@ and compare the two halves.
 \examples{
 file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
     package = "Sconify")
-splitFile(file, input.markers = input.markers)
+SplitFile(file, input.markers = input.markers)
 }

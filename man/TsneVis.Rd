@@ -26,5 +26,5 @@ by markers from the post-processed file if tSNE was set to TRUE in
 the post-processing function.
 }
 \examples{
-tsne.vis(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
+TsneVis(wand.final, "pSTAT5(Nd150)Di.IL7.change", "pSTAT5 change")
 }

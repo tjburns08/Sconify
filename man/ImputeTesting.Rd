@@ -24,7 +24,7 @@ Tests the euclidean distance error for imputation using knn
 and markers of interest
 }
 \examples{
-impute.testing(k.titration = c(10, 20),
+ImputeTesting(k.titration = c(10, 20),
   cells = wand.combined,
   input.markers = input.markers,
   test.markers = funct.markers)

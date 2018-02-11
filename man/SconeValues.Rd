@@ -41,6 +41,6 @@ and respective cell grouping. The function also contains a progress ticker
 that allows one to determine how much time left in this function.
 }
 \examples{
-ex.nn <- fnn(wand.combined, input.markers)
-scone.values(ex.nn, wand.combined, funct.markers, "basal")
+ex.nn <- Fnn(wand.combined, input.markers)
+SconeValues(ex.nn, wand.combined, funct.markers, "basal")
 }
