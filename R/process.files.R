@@ -126,7 +126,7 @@ QuantNormalizeElements <- function(dat.list) {
 
     # Transpose the list such that it's now marker-by-marker,
     # and quantile normalize
-    new.list <- lapply(1:ncol(dat.list[[1]]), function(i){
+    new.list <- lapply(seq_len(ncol(dat.list[[1]])), function(i){
         curr <- lapply(dat.list, function(j) {
             slice <- j[,i]
         })
@@ -134,7 +134,7 @@ QuantNormalizeElements <- function(dat.list) {
     })
 
     # Transpose again, leading to the original list of tibbles
-    revert <- lapply(1:ncol(new.list[[1]]), function(i){
+    revert <- lapply(seq_len(ncol(new.list[[1]])), function(i){
         curr <- lapply(new.list, function(j) {
             slice <- j[,i]
         })
@@ -142,7 +142,7 @@ QuantNormalizeElements <- function(dat.list) {
     })
 
     # Loop through each element of the list and re-name the columns accordingly
-    for(i in 1:length(revert)) {
+    for(i in seq_len(length(revert))) {
         colnames(revert[[i]]) <- marker.names
     }
 
@@ -248,7 +248,7 @@ ProcessMultipleFiles <- function(files,
         })
 
         # Merge the two lists together again
-        dat <- lapply(1:length(dat), function(i) {
+        dat <- lapply(seq_len(length(dat)), function(i) {
             bind_cols(dat.input[[i]], dat.rest[[i]])
         })
     }
@@ -308,7 +308,7 @@ SplitFile <- function(file,
                                          input = input.markers,
                                          name.multiple.donors = FALSE)
 
-    cell.rows <- 1:nrow(total.unstim)
+    cell.rows <- seq_len(nrow(total.unstim))
 
     # If the number of cells is odd, get rid of the bottom cell in the matrix
     if(nrow(total.unstim) %% 2 != 0) {
