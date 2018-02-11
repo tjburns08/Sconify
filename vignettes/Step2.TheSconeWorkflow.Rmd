@@ -10,7 +10,10 @@ vignette: >
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = TRUE, 
+                      results = "markup", 
+                      message = FALSE, 
+                      warning = FALSE)
 ```
 
 ### K-nearest neighbors:
@@ -34,7 +37,8 @@ k <- 30
 # The built-in scone functions
 wand.nn <- Fnn(cell.df = wand.combined, input.markers = input.markers, k = k)
 # Cell identity is in rows, k-nearest neighbors are columns
-# List of 2 includes the cell identity of each nn, and the euclidean distance between
+# List of 2 includes the cell identity of each nn, 
+#   and the euclidean distance between
 #   itself and the cell of interest
 
 # Indices
