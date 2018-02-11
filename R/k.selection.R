@@ -33,7 +33,7 @@ Impute <- function(cells, input.markers, nn) {
 #' (either surface or scone)
 #' @return the median imputation error for each value k tested
 #' @examples
-#' impute.testing(k.titration = c(10, 20),
+#' ImputeTesting(k.titration = c(10, 20),
 #'   cells = wand.combined,
 #'   input.markers = input.markers,
 #'   test.markers = funct.markers)
