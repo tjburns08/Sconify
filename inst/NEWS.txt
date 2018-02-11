@@ -1,3 +1,0 @@
-News for the Sconify package
-
-Current version: 0.99.1
