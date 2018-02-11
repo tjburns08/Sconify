@@ -80,12 +80,12 @@ RunStatistics <- function(basal,
 
     # Mann-Whitney U test or T test
     if(stat.test == "mwu") {
-        qvalue <- vapply(1:ncol(basal), function(j) {
+        qvalue <- vapply(seq_len(ncol(basal)), function(j) {
             p <- wilcox.test(basal[[j]], stim[[j]])$p.value
             return(p)
         }, FUN.VALUE = double(1))
     } else if (stat.test == 't') {
-        qvalue <- vapply(1:ncol(basal), function(j) {
+        qvalue <- vapply(seq_len(ncol(basal)), function(j) {
             p <- t.test(basal[[j]], stim[[j]])$p.value
             return(p)
         }, FUN.VALUE = double(1))
@@ -149,7 +149,7 @@ MultipleDonorStatistics <- function(basal, stim, stim.name, donors) {
     # T testing (only if there's no NA in the dataset)
     if(nrow(na.omit(basal.stats)) == length(donors) & # Watch the newline here
        nrow(na.omit(stim.stats)) == length(donors)) {
-        result <- vapply(1:ncol(basal.stats), function(i) {
+        result <- vapply(seq_len(ncol(basal.stats)), function(i) {
             t.test(basal.stats[[i]], stim.stats[[i]])$p.value
         }, FUN.VALUE = double(1))
     } else {
@@ -190,7 +190,7 @@ QCorrectionThresholding <- function(cells, threshold) {
     # Thresholding the raw change
     if(threshold < 1) {
         names <- colnames(fold)
-        fold <- lapply(1:ncol(fold), function(i) {
+        fold <- lapply(seq_len(ncol(fold)), function(i) {
             curr <- fold[[i]]
             curr <- ifelse(qvalues[[i]] < threshold, curr, 0)
         }) %>% do.call(cbind, .) %>%
@@ -241,7 +241,7 @@ MakeKnnList <- function(cell.data, nn.matrix) {
     nn.index <- nn.matrix[[1]]
 
     # The list
-    knn.list <- lapply(1:nrow(nn.index), function(i) {
+    knn.list <- lapply(seq_len(nrow(nn.index)), function(i) {
         cell.data[nn.index[i,],]
     })
 
@@ -313,7 +313,7 @@ SconeValues <- function(nn.matrix,
         # Process each column in the nn matrix
         # This makes a list of vecors corresponding qvalue and fold change
         count <- 0
-        result <- lapply(1:nrow(nn.matrix), function(i) {
+        result <- lapply(seq_len(nrow(nn.matrix)), function(i) {
             # A tracker
             if(i %% percent == 0) {
                 count <<- count + 10
