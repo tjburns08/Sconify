@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, results = "markup", message = FALSE, warning 
 ```
 
 ### TL:DR:  
-You will use get.marker.names() to obtain properly named markers as a column in a csv saved to your computer. In this csv, you will make two columns, one for markers you want as input for knn, and one for markers you want to make your scone comparisons on. You will read this back into R to access these markers as vectors of strings. You'll then run process.multiple.files() to get your subsampled, concatenated matrix ready for KNN computation. 
+You will use GetMarkerNames() to obtain properly named markers as a column in a csv saved to your computer. In this csv, you will make two columns, one for markers you want as input for knn, and one for markers you want to make your scone comparisons on. You will read this back into R to access these markers as vectors of strings. You'll then run ProcessMultipleFiles() to get your subsampled, concatenated matrix ready for KNN computation. 
 
 ## ABOUT PRE-PROCESSING 
 
@@ -30,7 +30,7 @@ We will be using the Wanderlust dataset through this series of vignettes. (paper
 For general comparisons, your files need to take on the structure "name_condition.fcs." If you are comparing multiple donors, then your files need to take on the structure "name__donorID_condition.fcs."
 
 ### Getting the right markers out of your file:  
-I provide the function get.marker.names() to get the names of your parameters out of your data and modify them accordingly. This saves a list of marker names to a csv, as a single named column. Open this up in excel and delete the parameters you don't want. Then, make two named columns. One contains static markers to be used for KNN (typically surface markers). The second contains the markers to be used in the comparisons. Name these two columns what you like. You'll read in this csv and get these columns out as a vector of strings. 
+I provide the function GetMarkerNames() to get the names of your parameters out of your data and modify them accordingly. This saves a list of marker names to a csv, as a single named column. Open this up in excel and delete the parameters you don't want. Then, make two named columns. One contains static markers to be used for KNN (typically surface markers). The second contains the markers to be used in the comparisons. Name these two columns what you like. You'll read in this csv and get these columns out as a vector of strings. 
 
 
 ```{r}
