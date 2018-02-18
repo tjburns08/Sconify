@@ -22,7 +22,6 @@ to determine which markers are to be used as input for KNN and which markers
 are to be used for within-knn comparisons
 }
 \examples{
-file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
-    package = "Sconify")
-GetMarkerNames(file)
+file <- system.file("extdata", "markers.csv", package = "Sconify")
+ParseMarkers(file)
 }
