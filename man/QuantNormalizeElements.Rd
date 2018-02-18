@@ -20,3 +20,8 @@ The user assumes that the markers are distributed equally across tibbles,
 as quantile normalization forces these marker distributions to be the same
 per file
 }
+\examples{
+basal <- wand.combined[wand.combined$condition == "basal",][,1:10]
+il7 <- wand.combined[wand.combined$condition == "IL7",][,1:10]
+QuantNormalizeElements(list(basal, il7))
+}
