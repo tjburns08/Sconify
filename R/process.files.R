@@ -24,6 +24,10 @@ utils::globalVariables(c("exist", "."))
 #'
 #' @param file the fcs file of interest
 #' @return the list of markers of interest. This is to be written as a csv
+#' @examples
+#' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
+#'     package = "Sconify")
+#' GetMarkerNames(file)
 #' @export
 GetMarkerNames <- function(file) {
     cells <- FcsToTibble(file)
@@ -44,9 +48,8 @@ GetMarkerNames <- function(file) {
 #' is a vector KNN input markers. THe second slemenet, labeled "functional"
 #' are the markers to be used in the KNN based comparisons
 #' @examples
-#' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
-#'     package = "Sconify")
-#' GetMarkerNames(file)
+#' file <- system.file("extdata", "markers.csv", package = "Sconify")
+#' ParseMarkers(file)
 #' @export
 ParseMarkers <- function(marker.file) {
     markers <- read_csv(marker.file)
