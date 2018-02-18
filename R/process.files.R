@@ -43,6 +43,10 @@ GetMarkerNames <- function(file) {
 #' @return a list of 2 vectors of strings. The first element, labeled "input"
 #' is a vector KNN input markers. THe second slemenet, labeled "functional"
 #' are the markers to be used in the KNN based comparisons
+#' @examples
+#' file <- system.file("extdata", "Bendall_et_al_Cell_Sample_C_basal.fcs",
+#'     package = "Sconify")
+#' GetMarkerNames(file)
 #' @export
 ParseMarkers <- function(marker.file) {
     markers <- read_csv(marker.file)
