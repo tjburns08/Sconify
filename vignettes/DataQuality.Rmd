@@ -26,8 +26,10 @@ dimensional data in general). Here, we use our KNN as a proxy for variance
 across each cell in the manifold. In our case, we test two tubes that should 
 in theory be the same (eg. PBMCs from the same donor, with the same markers). 
 SCONE automatically outputs the per-knn percentage of cells in the non-baseline 
-condition, shown below. The dataset we use is the Wanderlust dataset (paper: https://www.ncbi.nlm.nih.gov/pubmed/24766814, dataset: https://www.c2b2.columbia.edu/danapeerlab/html/wanderlust-data.html), between 
-a single normal and IL-7 treated patient. 
+condition, shown below. The dataset we use is the Wanderlust dataset 
+(paper: https://www.ncbi.nlm.nih.gov/pubmed/24766814, 
+dataset: https://www.c2b2.columbia.edu/danapeerlab/html/wanderlust-data.html), 
+between a single normal and IL-7 treated patient. 
 
 ```{r}
 library(Sconify)
@@ -84,7 +86,8 @@ trials as the number of nearest neighbors used.
 
 Of note, we can approximate the standard deviation of the binomical 
 distribution with a probability of 0.5 for any value k by using the formula 
-sd = 0.5/sqrt(k). This is derived from the DeMoivre-Laplace theorem (https://en.wikipedia.org/wiki/De_Moivre%E2%80%93Laplace_theorem). This means 
+sd = 0.5/sqrt(k). This is derived from the DeMoivre-Laplace theorem 
+https://en.wikipedia.org/wiki/De_Moivre%E2%80%93Laplace_theorem. This means 
 one does not need to simulate a distibution of coin tosses every time the k in 
 the KNN is changed. I do it here just to show what it looks like. 
 
@@ -121,7 +124,8 @@ The following is an example where normalization would be appropriate. I provide
 per-marker quantile normalization and z score transformation as options, but 
 there are a number of normalization functions that could be performed on one's 
 data, after it is matrix form using fcs.to.tibble or process.multiple.files. I 
-introduce untreated and treated data from the initial Nolan Lab barcoding paper (https://www.ncbi.nlm.nih.gov/pubmed/22902532). This dataset was produced when 
+introduce untreated and treated data from the initial Nolan Lab barcoding paper 
+(https://www.ncbi.nlm.nih.gov/pubmed/22902532). This dataset was produced when 
 CyTOF was a very new technology, and therefore the data quality is considerably 
 less than what one would observe today. 
 
@@ -167,7 +171,8 @@ a different shape, becasue these are two separate runs.
 We observe that non-normalized data appears to have a global "drift" in the 
 northeast direction of the map. The data suggests that the shift we observe 
 between the untreated and treated manifold is not subset-specific. This dataset 
-as acquired on a CyTOF 1 Mass Cytometer prior to bead-based normalization (https://www.ncbi.nlm.nih.gov/pubmed/23512433), so we hypothesize that this 
+as acquired on a CyTOF 1 Mass Cytometer prior to bead-based normalization 
+(https://www.ncbi.nlm.nih.gov/pubmed/23512433), so we hypothesize that this 
 global drift could be the result of the mass cytometer acquisition performance 
 changes occurring while the data were being acquired. If this is true, then 
 this will luckily not be a problem for modern users. Nonetheless, our KNN-based 
