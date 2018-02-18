@@ -46,9 +46,9 @@ ImputeTesting <- function(k.titration, cells, input.markers, test.markers) {
 
         print(k)
         # Get a vector of euclidean distances
-        distance <- sapply(seq_len(nrow(cells)), function(i) {
+        distance <- lapply(seq_len(nrow(cells)), function(i) {
             dist(rbind(cells[,test.markers][i,], imputed.cells[i,]))
-        })
+        }) %>% unlist()
     })
 
     # Get final distances into tibble format
