@@ -17,23 +17,50 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 ### TL:DR:  
-You will use GetMarkerNames() to obtain properly named markers as a column in a csv saved to your computer. In this csv, you will make two columns, one for markers you want as input for knn, and one for markers you want to make your scone comparisons on. You will read this back into R to access these markers as vectors of strings. You'll then run ProcessMultipleFiles() to get your subsampled, concatenated matrix ready for KNN computation. 
+You will use GetMarkerNames() to obtain properly named markers as a column in a 
+csv saved to your computer. In this csv, you will make two columns, one for 
+markers you want as input for knn, and one for markers you want to make your 
+scone comparisons on. You will read this back into R to access these markers as 
+vectors of strings. You'll then run ProcessMultipleFiles() to get your 
+subsampled, concatenated matrix ready for KNN computation. 
 
 ## ABOUT PRE-PROCESSING 
 
 ### Introduction:  
-Fluorescence and mass cytometry data are routinely processed by an increasing array of software platforms. Many of these contain graphical user interfaces, and many of these are R packages. However, no two analyses are the same, and many cases may involve direct processing of files in R. The Sconify package provides a suite of functions to make this process simpler and more user-friendly, prior to the knn-centric analysis occurring downstream. In essence, these functions convert fcs files into data matrices, process these matrices, and can output said matrices into fcs files readable by additional software. Although the primary intent of these functions is to pre-process fcs files for use of k-nearest neighbor statistics and visualizations in the remainder of this package, they are intended also to be general use functions. 
+Fluorescence and mass cytometry data are routinely processed by an increasing 
+array of software platforms. Many of these contain graphical user interfaces, 
+and many of these are R packages. However, no two analyses are the same, and 
+many cases may involve direct processing of files in R. The Sconify package 
+provides a suite of functions to make this process simpler and more 
+user-friendly, prior to the knn-centric analysis occurring downstream. In 
+essence, these functions convert fcs files into data matrices, process these 
+matrices, and can output said matrices into fcs files readable by additional 
+software. Although the primary intent of these functions is to pre-process fcs 
+files for use of k-nearest neighbor statistics and visualizations in the 
+remainder of this package, they are intended also to be general use functions. 
 
 ### Data:   
-We will be using the Wanderlust dataset through this series of vignettes. (paper: https://www.ncbi.nlm.nih.gov/pubmed/24766814, dataset: https://www.c2b2.columbia.edu/danapeerlab/html/wanderlust-data.html). We show a particular donor (labeled Sample C), with B cell precursors at the basal state, and stimulated with IL-7. In the paper, this reveals a small subset of precursors elevating its levels of pSTAT5 in relation to the rest of the cells. 
+We will be using the Wanderlust dataset through this series of vignettes. 
+(paper: https://www.ncbi.nlm.nih.gov/pubmed/24766814, dataset: https://www.c2b2.columbia.edu/danapeerlab/html/wanderlust-data.html). We show a 
+particular donor (labeled Sample C), with B cell precursors at the basal state, 
+and stimulated with IL-7. In the paper, this reveals a small subset of 
+precursors elevating its levels of pSTAT5 in relation to the rest of the cells. 
 
 ## THE PROCEDURE
 
 ### The name of your file:   
-For general comparisons, your files need to take on the structure "name_condition.fcs." If you are comparing multiple donors, then your files need to take on the structure "name__donorID_condition.fcs."
+For general comparisons, your files need to take on the structure 
+"name_condition.fcs." If you are comparing multiple donors, then your files 
+need to take on the structure "name__donorID_condition.fcs."
 
 ### Getting the right markers out of your file:  
-I provide the function GetMarkerNames() to get the names of your parameters out of your data and modify them accordingly. This saves a list of marker names to a csv, as a single named column. Open this up in excel and delete the parameters you don't want. Then, make two named columns. One contains static markers to be used for KNN (typically surface markers). The second contains the markers to be used in the comparisons. Name these two columns what you like. You'll read in this csv and get these columns out as a vector of strings. 
+I provide the function GetMarkerNames() to get the names of your parameters out 
+of your data and modify them accordingly. This saves a list of marker names to 
+a csv, as a single named column. Open this up in excel and delete the 
+parameters you don't want. Then, make two named columns. One contains static 
+markers to be used for KNN (typically surface markers). The second contains the 
+markers to be used in the comparisons. Name these two columns what you like. 
+You'll read in this csv and get these columns out as a vector of strings. 
 
 
 ```{r}
@@ -64,7 +91,8 @@ knitr::include_graphics("original.markers.csv.example.png")
 
 ```
 
-You modify it by hand. In the case of this dataset, it looks like this (first 20 rows):
+You modify it by hand. In the case of this dataset, it looks like this (first 
+20 rows):
 
 ```{r, out.width = "200px"}
 knitr::include_graphics("modified.markers.csv.example.png")
@@ -73,7 +101,13 @@ knitr::include_graphics("modified.markers.csv.example.png")
 
 
 ### From fcs file to data matrix (a general function):  
-Skip to "processing multiple files" section for the function that directly produces the data matrix for SCONE. Here, I provide here a general function that takes a single fcs file as input, performs an asinh transformation with a scale argument of 5 (for CyTOF) if instructed to, and converts the final output into a tibble. For SCONE, you'll use ProcessMultipleFiles(), which has this function embedded inside it. I provide it as well for any instance where you simply want to read a fcs file into R. 
+Skip to "processing multiple files" section for the function that directly 
+produces the data matrix for SCONE. Here, I provide here a general function 
+that takes a single fcs file as input, performs an asinh transformation with a 
+scale argument of 5 (for CyTOF) if instructed to, and converts the final output 
+into a tibble. For SCONE, you'll use ProcessMultipleFiles(), which has this 
+function embedded inside it. I provide it as well for any instance where you 
+simply want to read a fcs file into R. 
 
 
 ```{r}
@@ -94,7 +128,14 @@ basal.asinh
 ```
 
 ### Processing multiple files:  
-This is the function that will be used as input for the rest of the SCONE pipeline. If multiple files are used, the data will be conatenated into a single labeled tibble with an additional column containing "condition" information for each cell (which file it came from). If multiple donors as used, an additional column can be added with this information as well (see MultipleDonorScone.Rmd). Per marker, the files can be quantile normalized (across files), or z score transformed. The files are downsampled evenly to the number specified by the user. We recommend 20,000. 
+This is the function that will be used as input for the rest of the SCONE 
+pipeline. If multiple files are used, the data will be conatenated into a 
+single labeled tibble with an additional column containing "condition" 
+information for each cell (which file it came from). If multiple donors as 
+used, an additional column can be added with this information as well (see 
+MultipleDonorScone.Rmd). Per marker, the files can be quantile normalized 
+(across files), or z score transformed. The files are downsampled evenly to the 
+number specified by the user. We recommend 20,000. 
 
 ```{r}
 # The FCS files (THEY NEED TO BE IN THE "....._condidtion.fcs" format")
@@ -139,7 +180,12 @@ unique(wand.basal$condition)
 ```
 
 ### (Optional) a control condition using a split single file:  
-For the type of condition versus basal analysis shown above, it may behoove the user to have a control containing two basal files being compared to each other (eg. with phospho-protein shifts across clusters). To this end, I developed a function called splitFile() that takes in a single file as input and splits it into two sub-matricies such that one group of cells can be the "treated" condition. 
+For the type of condition versus basal analysis shown above, it may behoove the 
+user to have a control containing two basal files being compared to each other 
+(eg. with phospho-protein shifts across clusters). To this end, I developed a 
+function called splitFile() that takes in a single file as input and splits it 
+into two sub-matricies such that one group of cells can be the "treated" 
+condition. 
 
 ```{r}
 # Using the aforementioned basal fcs file
