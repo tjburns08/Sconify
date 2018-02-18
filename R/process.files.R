@@ -123,6 +123,10 @@ QuantNormalize <- function(df){
 #'
 #' @param dat.list a list of tibbles
 #' @return the per-column quantile normalized list
+#' @examples
+#' basal <- wand.combined[wand.combined$condition == "basal",][,1:10]
+#' il7 <- wand.combined[wand.combined$condition == "IL7",][,1:10]
+#' QuantNormalizeElements(list(basal, il7))
 #' @export
 QuantNormalizeElements <- function(dat.list) {
     # Store the marker names for the re-naming when the list is reverted
