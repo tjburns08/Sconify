@@ -30,7 +30,7 @@ AddTsne <- function(dat, input) {
 #' @description  A wrapper for Rtsne that takes final SCONE output, and runs
 #' tSNE on it after subsampling. This is specifically for SCONE runs that
 #' contain large numbers of cells that tSNE would either be too time-consuming
-#' or messy for. Regarding the latter, tSNE typically begins to look less clean
+#' or messy for. Regarding the latter, tSNE typically appears less clean
 #' in the range of 10^5 cells
 #' @param dat tibble of original input data, and scone-based additions.
 #' @param input the markers used in the original knn computation, which are
