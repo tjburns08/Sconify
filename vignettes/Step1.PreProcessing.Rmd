@@ -41,7 +41,8 @@ remainder of this package, they are intended also to be general use functions.
 
 ### Data:   
 We will be using the Wanderlust dataset through this series of vignettes. 
-(paper: https://www.ncbi.nlm.nih.gov/pubmed/24766814, dataset: https://www.c2b2.columbia.edu/danapeerlab/html/wanderlust-data.html). We show a 
+(paper: https://www.ncbi.nlm.nih.gov/pubmed/24766814, dataset: 
+https://www.c2b2.columbia.edu/danapeerlab/html/wanderlust-data.html). We show a 
 particular donor (labeled Sample C), with B cell precursors at the basal state, 
 and stimulated with IL-7. In the paper, this reveals a small subset of 
 precursors elevating its levels of pSTAT5 in relation to the rest of the cells. 
