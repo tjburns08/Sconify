@@ -16,8 +16,7 @@ test_that("fnn function produces a list of two", {
     expect_equal(length(test.nn), 2)
 })
 
-test_that("fnn produces a matrix of n rows (number of cells) and k columns (
-          number of nearest neighbors", {
+test_that("fnn produces a matrix[n rows, k columns]", {
     tmp <- test.nn[[1]]
     expect_equal(ncol(tmp), k)
     expect_equal(nrow(tmp), nrow(wand.combined))
