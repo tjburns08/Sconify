@@ -85,11 +85,12 @@ test_that("Process multiple files effectively sub-samples", {
     expect_error(ProcessMultipleFiles(files = basal.file, numcells = 10.76,
                                         input = input))
 
-    expect_error(ProcessMultipleFiles(files = c(basal.file, stim.file), numcells = 1,
-                                        input = input))
+    expect_error(ProcessMultipleFiles(files = c(basal.file, stim.file),
+                                      numcells = 1,
+                                      input = input))
 })
 
-test_that("Process multiple files divdes the contribution of each file equally", {
+test_that("ProcessMultipleFiles divdes contribution of each file equally", {
 
     testing <- c(100, 99, 2)
     lapply(testing, function(i) {
@@ -104,7 +105,9 @@ test_that("Process multiple files divdes the contribution of each file equally",
 })
 
 test_that("Quantile normalization only happens with two or more files", {
-    expect_error(process.multiple.files(basal.file, input = input, norm = TRUE))
+    expect_error(process.multiple.files(basal.file,
+                                        input = input,
+                                        norm = TRUE))
 })
 
 # Quantile normalization testing
@@ -129,7 +132,9 @@ test_that("Split file returns two conditions", {
 })
 
 test_that("Split file can only be run on a single file", {
-    expect_error(SplitFile(c(basal.file, stim.file), numcells = 10000, input.markers = input))
+    expect_error(SplitFile(c(basal.file, stim.file),
+                           numcells = 10000,
+                           input.markers = input))
 })
 
 test_that("Split file handles an odd number of cells", {
