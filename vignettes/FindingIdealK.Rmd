@@ -25,9 +25,7 @@ being analyzed. Given that Scone makes comparisons between functional markers
 across multiple biological conditions, we select our ideal k by determining how 
 well KNN can impute these fuctional marker vales for a range of values of k. 
 Our imputation error is the euclidean distance between an actual cell and 
-imputed cell within "functional marker" space. We  provide a function to 
-automate this process, and we provide a vector k.titration that includes a 
-range of values k to try between 10 and 2000. For the example below, we use 
+imputed cell within "functional marker" space. For the example below, we use 
 the Wanderlust dataset (see PreProcessing.Rmd "data" section). 
 
 ```{r, eval = FALSE}
