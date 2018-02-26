@@ -156,8 +156,9 @@ surface <- markers[[1]]
 surface
 ```
 ```{r}
-# Combining these. Note that default is sub-sampling to 10,000 cells, 
-# not normalizing, and not scaling
+# Combining these. Note that default is sub-sampling to 10,000 cells.
+# Here, we subsample to 1000 cells to minimize processing time for the vignettes.
+# not normalizing, and not scaling.
 wand.combined <- ProcessMultipleFiles(files = c(basal, il7), 
                                       input = surface, 
                                       numcells = 1000)
