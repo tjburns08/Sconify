@@ -17,7 +17,7 @@ NULL
 #' Fnn(wand.combined, input.markers)
 #' @export
 Fnn <- function(cell.df, input.markers, k = 100) {
-    print("finding k-nearest neighbors")
+    message("finding k-nearest neighbors")
 
     # Edge case (rflann with kd-tree doesn't have it)
     if(k >= nrow(cell.df)) {
@@ -35,7 +35,7 @@ Fnn <- function(cell.df, input.markers, k = 100) {
     nn.index <- nn[[1]][,2:ncol(nn[[1]])]
     nn.dist <- nn[[2]][,2:ncol(nn[[2]])]
 
-    print("k-nearest neighbors complete")
+    message("k-nearest neighbors complete")
     return(list(nn.index = nn.index, nn.dist = nn.dist))
 }
 
@@ -283,7 +283,7 @@ SconeValues <- function(nn.matrix,
                          stat.test = "mwu",
                          multiple.donor.compare = FALSE) {
 
-    print("running per-knn statistics")
+    message("running per-knn statistics")
 
     # Get the donor names if you need it
     if(multiple.donor.compare == TRUE) {
@@ -317,7 +317,7 @@ SconeValues <- function(nn.matrix,
             # A tracker
             if(i %% percent == 0) {
                 count <<- count + 10
-                print(paste(count, "percent complete", sep = " "))
+                message(paste(count, "percent complete", sep = " "))
             }
 
             # Index the nn matrix
@@ -378,7 +378,7 @@ SconeValues <- function(nn.matrix,
     # Add the density estimation
     final$density <- knn.density
 
-    print("per-knn statistics complete")
+    message("per-knn statistics complete")
 
     # Change the only "character" column to a numeric column
     return(final)
