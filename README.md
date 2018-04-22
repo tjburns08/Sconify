@@ -28,4 +28,8 @@ This is the general schematic of Sconify. Concatenated data in high dimensional 
 
 ![Alt text](vignettes/sconify_proof_of_concept.png?raw=true "Title")
 
-This is an example of Sconify in use. Notice on the left there is an "untreated" and "IL7" t-SNE map, followed by a Sconify-enabled composite t-SNE map that shows the fold-change values. This is what you will be able to do using the Sconify package
+This is an example of Sconify in use. Notice on the left there is an "untreated" and "IL7" t-SNE map, followed by a Sconify-enabled composite t-SNE map that shows the fold-change values. The Sconify package can visualize fold change, p-values for t and Mann-Whitney U tests, and pvalue-thresholded fold change. Note that t-SNE can be run directly within Sconify, and the output can be read in, as a csv, to Cytobank or CYT for further visualization (aside from the ggplot-based visualization that Sconify provides. 
+
+## For those of you with little programming experience
+
+There is a lite version of Sconify under construction at www.sconify.org. It can currently handle small fcs files, and it will be updated soon. If you otherwise need help using this package, just let me know. I can be contacted at tyler.burns (at) drfz.de. Nonetheless, I think a visual tool like this is a great way to get some exposure to R programming (aside from enhancing your data analysis pipeline). 
