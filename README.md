@@ -21,3 +21,11 @@ library(Sconify)
 browseVignettes("Sconify")
 ```
 
+## Visual explanations
+![Alt text](vignettes/sconify_visual_explanation.png?raw=true "Title")
+
+This is the general schematic of Sconify. Concatenated data in high dimensional space is grouped with each cell's k-nearest neighbors. Statistics are performed within each neighborhood. This allows for dimension reduction maps, like t-SNE to have the "fold change functionality" that has been desired since t-SNE became a staple of CyTOF analysis pipelines. 
+
+![Alt text](vignettes/sconify_proof_of_concept.png?raw=true "Title")
+
+This is an example of Sconify in use. Notice on the left there is an "untreated" and "IL7" t-SNE map, followed by a Sconify-enabled composite t-SNE map that shows the fold-change values. This is what you will be able to do using the Sconify package
