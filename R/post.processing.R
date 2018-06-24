@@ -152,7 +152,7 @@ MakeHist <- function(dat,
                       k,
                       column.label,
                       x.label) {
-    ggplot(data = dat, aes(x = dat[,grep(column.label, colnames(dat))])) +
+    ggplot(data = dat, aes(x = dat[[grep(column.label, colnames(dat))]])) +
         geom_histogram(aes(y = ..count..), binwidth = 1/k) +
         xlim(c(0, 1)) +
         theme(text = element_text(size = 20)) +
