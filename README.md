@@ -5,7 +5,19 @@ In high-dimensional single cell data, comparing changes in functional markers be
 
 ## Installation
 
-The pacakge was recently accepted into BioConductor, so this section will contain new instructions shortly (though the content of the package will remain the same). For now, please install the package directly through GitHub as follows:
+The Sconify package is available on BioConductor. You can install it as 
+follows:
+
+```
+# Install the BioConductor manager from CRAN
+install.packages("BiocManager")
+
+# Install the Sconify package from BioConductor
+BiocManager::install("Sconify")
+```
+
+The development version of Sconify can be found on Github. You can install
+it as follows:
 
 ```
 library(devtools)
