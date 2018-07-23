@@ -1,4 +1,3 @@
-#' @import rflann
 #' @importFrom stats dist
 NULL
 

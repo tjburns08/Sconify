@@ -1,4 +1,3 @@
-#' @import rflann
 #' @importFrom stats t.test wilcox.test p.adjust median na.omit
 NULL
 
@@ -31,9 +30,11 @@ Fnn <- function(cell.df, input.markers, k = 100) {
     input <- cell.df[,input.markers]
 
     # Using the rflann package
-    nn <- Neighbour(query = input, ref = input, k = k + 1)
-    nn.index <- nn[[1]][,2:ncol(nn[[1]])]
-    nn.dist <- nn[[2]][,2:ncol(nn[[2]])]
+    #nn <- Neighbour(query = input, ref = input, k = k + 1)
+    # Using the FNN package
+    nn <- FNN::get.knn(data = input, k = k)
+    nn.index <- nn[[1]]
+    nn.dist <- nn[[2]]
 
     message("k-nearest neighbors complete")
     return(list(nn.index = nn.index, nn.dist = nn.dist))

@@ -1,4 +1,10 @@
 # Sconify 0.99.5
 
 * Added a `NEWS.md` file to track changes to the package.
-* Cleaned up the package code to the BioC review standard. 
+* Cleaned up the package code to the BioC review standard.
+
+# Sconify 1.1.3
+
+* Removed the rflann dependency as it was removed from CRAN. Now knn is found
+  using the FNN CRAN package.
+* Updated the code to work with the updated version of ggplot2.
