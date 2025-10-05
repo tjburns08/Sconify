@@ -4,10 +4,12 @@
 \name{wand.scone}
 \alias{wand.scone}
 \title{Wanderlust scone output}
-\format{A tibble of 1000 cells by 34 features. These features include
+\format{
+A tibble of 1000 cells by 34 features. These features include
 the KNN comparisons, KNN density estimation, and differential abundance.
 Note that this tibble gets concatenated with the original tibble, as well
-as two t-SNE dimensions in the post.processing() command of the pipeline.}
+as two t-SNE dimensions in the post.processing() command of the pipeline.
+}
 \usage{
 wand.scone
 }

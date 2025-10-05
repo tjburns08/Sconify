@@ -4,7 +4,9 @@
 \name{funct.markers}
 \alias{funct.markers}
 \title{Functional markers from the Wanderlust dataset.}
-\format{A vector of strings.}
+\format{
+A vector of strings.
+}
 \usage{
 funct.markers
 }

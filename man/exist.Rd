@@ -4,7 +4,9 @@
 \name{exist}
 \alias{exist}
 \title{Random musing}
-\format{a string}
+\format{
+a string
+}
 \usage{
 exist
 }

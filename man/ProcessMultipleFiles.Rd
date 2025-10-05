@@ -4,8 +4,15 @@
 \alias{ProcessMultipleFiles}
 \title{Converts multiple files into a concatenated data frame}
 \usage{
-ProcessMultipleFiles(files, transform = "asinh", numcells = 10000,
-  norm = FALSE, scale = FALSE, input, name.multiple.donors = FALSE)
+ProcessMultipleFiles(
+  files,
+  transform = "asinh",
+  numcells = 10000,
+  norm = FALSE,
+  scale = FALSE,
+  input,
+  name.multiple.donors = FALSE
+)
 }
 \arguments{
 \item{files}{a vector of file names (name = "anything_condition.fcs")}

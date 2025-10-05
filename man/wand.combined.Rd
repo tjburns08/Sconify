@@ -4,9 +4,11 @@
 \name{wand.combined}
 \alias{wand.combined}
 \title{Wanderlust data combined basal and IL7 cells}
-\format{A tibble of 1000 cells by 51 features, including all the input
+\format{
+A tibble of 1000 cells by 51 features, including all the input
 markers, Wanderlust values, and the condition. The first 500 rows
-are untreated cells and the last 500 rows are IL7 treated.}
+are untreated cells and the last 500 rows are IL7 treated.
+}
 \usage{
 wand.combined
 }

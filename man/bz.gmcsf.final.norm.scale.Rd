@@ -5,9 +5,11 @@
 \alias{bz.gmcsf.final.norm.scale}
 \title{Bodenmiller-Zunder GM-CSF post-SCONE final data, that's been quantile
 normalized and z scored.}
-\format{A tibble of 1000 cells by 69 features. This includes all the
+\format{
+A tibble of 1000 cells by 69 features. This includes all the
 original parameters, the KNN-generated comparisons, differential
-abundance ("fraction.cond.2), and two t-SNE coordinates.}
+abundance ("fraction.cond.2), and two t-SNE coordinates.
+}
 \usage{
 bz.gmcsf.final.norm.scale
 }

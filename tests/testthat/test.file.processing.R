@@ -40,7 +40,7 @@ test_that("Markers csv file is successfully imported", {
 # fcs.to.tibble
 test_that("Fcs file gets converted into a tibble data structure", {
     dat <- FcsToTibble(file = basal.file)
-    expect_true(is.tibble(dat))
+    expect_true(is_tibble(dat))
     expect_true(is.data.frame(dat))
     expect_false(is.matrix(dat))
     expect_true(is.atomic(dat[[1]]))

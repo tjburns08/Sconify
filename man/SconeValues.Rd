@@ -5,8 +5,16 @@
 \title{Master function for per-knn statistics functionality, integrating the
 other non-exported functions within this script.}
 \usage{
-SconeValues(nn.matrix, cell.data, scone.markers, unstim, threshold = 0.05,
-  fold = "median", stat.test = "mwu", multiple.donor.compare = FALSE)
+SconeValues(
+  nn.matrix,
+  cell.data,
+  scone.markers,
+  unstim,
+  threshold = 0.05,
+  fold = "median",
+  stat.test = "mwu",
+  multiple.donor.compare = FALSE
+)
 }
 \arguments{
 \item{nn.matrix}{a matrix of cell index by nearest neighbor index, with

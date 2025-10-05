@@ -4,9 +4,11 @@
 \name{wand.final}
 \alias{wand.final}
 \title{Post-scone output of the "combiend" Wanderlust data.}
-\format{A tibble of 1000 cells and 87 feaures, including the input
+\format{
+A tibble of 1000 cells and 87 feaures, including the input
 features, the SCONE-generated comparisons, differential abundance, and
-two t-SNE dimesnions}
+two t-SNE dimesnions
+}
 \usage{
 wand.final
 }

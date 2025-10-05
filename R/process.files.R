@@ -149,7 +149,7 @@ QuantNormalizeElements <- function(dat.list) {
         curr <- lapply(new.list, function(j) {
             slice <- j[,i]
         })
-        curr <- do.call(what = cbind, args = curr) %>% as.tibble()
+        curr <- do.call(what = cbind, args = curr) %>% as_tibble()
     })
 
     # Loop through each element of the list and re-name the columns accordingly
@@ -224,7 +224,7 @@ ProcessMultipleFiles <- function(files,
 
 
         if(scale == TRUE) {
-            curr.input <- apply(curr.input, 2, scale) %>% as.tibble()
+            curr.input <- apply(curr.input, 2, scale) %>% as_tibble()
             # takes care of scaling where all values are same
             curr.input <- replace(curr.input, is.na(curr.input), 1)
         }

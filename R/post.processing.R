@@ -152,11 +152,14 @@ MakeHist <- function(dat,
                       k,
                       column.label,
                       x.label) {
-    ggplot(data = dat, aes(x = dat[[grep(column.label, colnames(dat))]])) +
+    p <- ggplot(data = dat, aes(x = dat[[grep(column.label, colnames(dat))]])) +
         geom_histogram(aes(y = ..count..), binwidth = 1/k) +
         xlim(c(0, 1)) +
         theme(text = element_text(size = 20)) +
         xlab(x.label)
+
+    # New version of ggplot does not return list object here
+    return(list(plot = p))
 }
 
 #' @title Plot a tSNE map colored by a marker of interest
@@ -185,14 +188,21 @@ TsneVis <- function(final, marker, label = marker) {
     } else {
 
         # Set up the ggplot object
-        p <- qplot(final[["bh-SNE1"]],
-                   final[["bh-SNE2"]],
-                   color = final[[marker]],
-                   xlab = "bh-SNE1",
-                   ylab = "bh-SNE2") +
-            labs(color = paste(label)) +
+        # p <- qplot(final[["bh-SNE1"]],
+        #            final[["bh-SNE2"]],
+        #            color = final[[marker]],
+        #            xlab = "bh-SNE1",
+        #            ylab = "bh-SNE2") +
+        #     labs(color = paste(label)) +
+        #     scale_color_gradientn(colors = c("black", "yellow"))
+        
+        # Set up the updated ggplot object
+        p <- ggplot(final, aes(x = .data[["bh-SNE1"]], y = .data[["bh-SNE2"]], color = .data[[marker]])) + 
+            labs(x = "bh-SNE1", y = "bh-SNE2", color = paste(label)) +
             scale_color_gradientn(colors = c("black", "yellow"))
+
     }
-    return(p)
+    # New ggplot version does not return object recognized as list
+    return(list(plot = p))
 }
 

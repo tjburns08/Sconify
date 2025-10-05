@@ -4,7 +4,9 @@
 \name{markers}
 \alias{markers}
 \title{Markers for the Wanderlust dataset}
-\format{a tibble with two columns, "surface" and "fucntional."}
+\format{
+a tibble with two columns, "surface" and "fucntional."
+}
 \usage{
 markers
 }

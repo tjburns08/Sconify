@@ -4,8 +4,13 @@
 \alias{PostProcessing}
 \title{Post-processing for scone analysks.}
 \usage{
-PostProcessing(scone.output, cell.data, input, tsne = TRUE,
-  log.transform.qvalue = TRUE)
+PostProcessing(
+  scone.output,
+  cell.data,
+  input,
+  tsne = TRUE,
+  log.transform.qvalue = TRUE
+)
 }
 \arguments{
 \item{scone.output}{tibble of the output of the given scone analysis}

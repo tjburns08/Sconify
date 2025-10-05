@@ -4,9 +4,11 @@
 \name{bz.gmcsf.final}
 \alias{bz.gmcsf.final}
 \title{Bodenmiller-Zunder GM-CSF post-SCONE final data}
-\format{A tibble of 1000 cells by 69 features. This includes all the
+\format{
+A tibble of 1000 cells by 69 features. This includes all the
 original parameters, the KNN-generated comparisons, differential
-abundance ("fraction.cond.2), and two t-SNE coordinates.}
+abundance ("fraction.cond.2), and two t-SNE coordinates.
+}
 \usage{
 bz.gmcsf.final
 }

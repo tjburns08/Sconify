@@ -4,7 +4,9 @@
 \name{input.markers}
 \alias{input.markers}
 \title{Input markers for the Wanderlust dataset}
-\format{A vector of strings corresponding to the markers.}
+\format{
+A vector of strings corresponding to the markers.
+}
 \usage{
 input.markers
 }

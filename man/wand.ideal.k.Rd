@@ -5,8 +5,10 @@
 \alias{wand.ideal.k}
 \title{A named vector to help the user determine the ideal k
 for the Wanderlust dataset.}
-\format{A named vector, where the elements are averge imputation error
-and the names are the values of from a 10,000 cell dataset.}
+\format{
+A named vector, where the elements are averge imputation error
+and the names are the values of from a 10,000 cell dataset.
+}
 \usage{
 wand.ideal.k
 }

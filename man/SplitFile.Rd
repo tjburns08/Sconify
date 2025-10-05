@@ -5,8 +5,14 @@
 \title{Runs "process.multiple.files" on a single file, splits it randomly,
 and presends half of it is "unstim" and half of it is "stim"}
 \usage{
-SplitFile(file, transform = "asinh", numcells = 10000, norm = FALSE,
-  scale = FALSE, input.markers)
+SplitFile(
+  file,
+  transform = "asinh",
+  numcells = 10000,
+  norm = FALSE,
+  scale = FALSE,
+  input.markers
+)
 }
 \arguments{
 \item{file}{the file we're going to split}

@@ -4,10 +4,12 @@
 \name{wand.il7}
 \alias{wand.il7}
 \title{Wanderlust IL7 data}
-\format{A tibble of 1000 cells by 51 features. All markers in the
+\format{
+A tibble of 1000 cells by 51 features. All markers in the
 dataset, along with pre-calculated Wanderlust value and condition,
 which is a string that denotes that this is the "IL7" condition for
-each row. Important when this is concatenated with additional conditions}
+each row. Important when this is concatenated with additional conditions
+}
 \usage{
 wand.il7
 }
